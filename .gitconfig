@@ -1,0 +1,7 @@
+[user]
+	name = Alvin Heng
+	email = a1heng@ucsd.edu
+[core]
+	editor = gvim
+[merge]
+	tool = gvimdiff
