@@ -1,4 +1,6 @@
 .gitignore
+.gitconfig
+Makefile
 *.o
 *.swp
 *.exe
