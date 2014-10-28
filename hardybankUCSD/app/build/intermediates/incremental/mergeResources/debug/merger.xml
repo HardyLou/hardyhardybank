@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="main" >
+        <source path="D:\hardybankUCSD\app\src\main\res" >
+            <file
+                name="ic_launcher"
+                path="D:\hardybankUCSD\app\src\main\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi-v4"
+                type="drawable" />
+            <file
+                name="loginsignup"
+                path="D:\hardybankUCSD\app\src\main\res\layout\loginsignup.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="welcome"
+                path="D:\hardybankUCSD\app\src\main\res\layout\welcome.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="D:\hardybankUCSD\app\src\main\res\values\strings.xml"
+                qualifiers="" >
+                <string name="hello" >Welcome to Hardy Banking!
+                </string>
+                <string name="Password" >Password
+                </string>
+                <string name="LoginBtn" >Login
+                </string>
+                <string name="Welcome" >Welcome!
+                </string>
+                <string name="SignupBtn" >Sign Up
+                </string>
+                <string name="app_name" >Hardy Mobile Banking
+                </string>
+                <string name="LogoutBtn" >Log Out
+                </string>
+                <string name="Username" >Username
+                </string>
+            </file>
+        </source>
+        <source path="D:\hardybankUCSD\app\build\generated\res\rs\debug" />
+        <source path="D:\hardybankUCSD\app\build\generated\res\generated\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="D:\hardybankUCSD\app\src\debug\res" />
+    </dataSet>
+
+</merger>
