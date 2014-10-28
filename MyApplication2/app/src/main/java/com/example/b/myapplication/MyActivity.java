@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 
 public class MyActivity extends Activity {
 
@@ -13,6 +16,10 @@ public class MyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        Parse.initialize(this, "lfGdLfCAS8VzoDc6OVxCv6XgCTQb0hrb5puTTbkg", "BDDSrZjiTMNIFRDXf32devEnSCSNS1V3pxuJOXhg");
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("username", "password");
+        testObject.saveInBackground();
     }
 
 //    public void buttonOnClick(View v){
