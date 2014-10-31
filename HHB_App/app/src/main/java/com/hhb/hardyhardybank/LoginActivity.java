@@ -4,41 +4,25 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build.VERSION;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import java.util.ArrayList;
-import java.util.List;
-import android.content.Intent;
-import com.parse.Parse;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-import com.parse.*;
-import com.parse.ParseException;
-import android.util.Log;
 import android.widget.Toast;
-
+import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via username/password.
  */
 public class LoginActivity extends Activity {
     // UI references.
@@ -51,11 +35,6 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         // Connects app with Parse
         Parse.initialize(this, "G9sNy6cFAc2j1ZnKVGuYKhW5gHRQdUqPV3D3BOAm", "14vOkrgINnOVIS1fSG08tdJgIsvYi7OMlw8zTFuC");
-
-        // Test Parse
-        ParseObject testObject = new ParseObject("Account");
-        testObject.put("username", "asdf");
-        testObject.saveInBackground();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -74,6 +53,18 @@ public class LoginActivity extends Activity {
             }
         });
 
+        // Sends user to RegisterActivity Screen
+        TextView mRegisterLink = (TextView) findViewById(R.id.link_to_register);
+        mRegisterLink.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: send to RegisterActivity instead of SplashActivity
+                Intent i = new Intent(LoginActivity.this, SplashActivity.class);
+                startActivity(i);
+            }
+        });
+
+        // Activity once Sign In button is pressed
         Button mUserSignInButton = (Button) findViewById(R.id.user_sign_in_button);
         mUserSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -85,7 +76,6 @@ public class LoginActivity extends Activity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -111,22 +101,12 @@ public class LoginActivity extends Activity {
             cancel = true;
         }
 
+        // Check fi password has been entered.
         if (TextUtils.isEmpty(input_password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
         }
-
-        //TODO: check if user exists, check if password matches user
-        /*ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
-        if(query.whereContains("username", input_username) != null) {
-            cancel = false;
-        } else {
-            mUsernameView.setError(getString(R.string.error_incorrect_password));
-            focusView = mUsernameView;
-            cancel = true;
-            System.out.println("input_username = " + input_username + "\n");
-        }*/
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -136,20 +116,20 @@ public class LoginActivity extends Activity {
             ParseUser.logInInBackground(input_username, input_password, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
                     if (user != null) {
-                        // Successful Login, go to MainActivity
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(i);
-
                         // Show a progress spinner, and kick off a background task to
                         // perform the user login attempt.
                         showProgress(true);
 
+                        // Successful Login, go to MainActivity
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(i);
+
                         // Close this activity
                         finish();
                     } else {
-                        Toast.makeText(
-                            getApplicationContext(), "username and password do not match.",
-                                    Toast.LENGTH_LONG).show();
+                        // Notify user that sign in has failed.
+                        Toast.makeText(getApplicationContext(), "Wrong Credentials",
+                                       Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -192,6 +172,3 @@ public class LoginActivity extends Activity {
         }
     }
 }
-
-
-

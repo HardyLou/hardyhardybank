@@ -29,8 +29,10 @@
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="250dp"
                 android:orientation="vertical">
 
+                <!-- Username field -->
                 <AutoCompleteTextView
                     android:id="@+id/username"
                     android:layout_width="match_parent"
@@ -40,18 +42,20 @@
                     android:maxLines="1"
                     android:singleLine="true"/>
 
+                <!-- Password field -->
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeActionLabel="@string/action_sign_in"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"/>
 
+                <!-- Sign In Button -->
                 <Button
                     android:id="@+id/user_sign_in_button"
                     style="?android:textAppearanceSmall"
@@ -61,10 +65,19 @@
                     android:text="@string/action_sign_in"
                     android:textStyle="bold"/>
 
+                <!-- Link to Registration Screen -->
+                <TextView android:id="@+id/link_to_register"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginBottom="40dip"
+                    android:text="@string/action_to_register"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="#0b84aa"/>
+
             </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
-
-
 
