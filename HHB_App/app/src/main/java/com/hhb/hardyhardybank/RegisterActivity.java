@@ -77,11 +77,18 @@ public class RegisterActivity extends Activity {
         // Reset errors.
         mUsernameView.setError(null);
         mPasswordView.setError(null);
+        mName.setError(null);
+        mAddress.setError(null);
+        mEmail.setError(null);
+        mNumber.setError(null);
 
         // Store values at the time of the login attempt.
         String input_username = mUsernameView.getText().toString();
         String input_password = mPasswordView.getText().toString();
-
+        String input_Name =  mName.getText().toString();
+        String input_Address =  mAddress.getText().toString();
+        String input_Email =  mEmail.getText().toString();
+        String input_Number =  mNumber.getText().toString();
         boolean cancel = false;
         View focusView = null;
 
@@ -91,11 +98,31 @@ public class RegisterActivity extends Activity {
             focusView = mUsernameView;
             cancel = true;
         }
-
+        // Check if password has been entered.
         if (TextUtils.isEmpty(input_password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
+        }
+        // Check if name has been entered
+        if (TextUtils.isEmpty(input_Name))
+        {
+            mName.setError(getString(R.string.error_field_required));
+        }
+        // Check if address has been entered
+        if (TextUtils.isEmpty(input_Address))
+        {
+            mAddress.setError(getString(R.string.error_field_required));
+        }
+        // Check if email has been entered
+        if (TextUtils.isEmpty(input_Email))
+        {
+            mEmail.setError(getString(R.string.error_field_required));
+        }
+        // Check if account number was entered
+        if (TextUtils.isEmpty(input_Number))
+        {
+            mNumber.setError(getString(R.string.error_field_required));
         }
     }
 
