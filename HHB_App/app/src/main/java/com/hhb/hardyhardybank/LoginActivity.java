@@ -58,8 +58,7 @@ public class LoginActivity extends Activity {
         mRegisterLink.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: send to RegisterActivity instead of SplashActivity
-                Intent i = new Intent(LoginActivity.this, SplashActivity.class);
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(i);
             }
         });
