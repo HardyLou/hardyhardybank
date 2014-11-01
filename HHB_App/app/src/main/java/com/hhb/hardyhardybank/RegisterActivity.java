@@ -27,12 +27,12 @@ import com.parse.Parse;
  */
 public class RegisterActivity extends Activity {
     // UI references
-    private EditText mName;
-    private EditText mAddress;
-    private EditText mEmail;
+    private EditText mNameView;
+    private EditText mAddressView;
+    private EditText mEmailView;
     private EditText mUsernameView;
     private EditText mPasswordView;
-    private EditText mNumber;
+    private EditText mNumberView;
     private Spinner mAccount;
     private View mProgressView;
     private View mRegisterFormView;
@@ -46,12 +46,12 @@ public class RegisterActivity extends Activity {
         setContentView(R.layout.activity_register);
 
         // Set up the register form.
-        mName = (EditText) findViewById(R.id.name);
-        mAddress = (EditText) findViewById(R.id.address);
-        mEmail = (EditText) findViewById(R.id.email);
+        mNameView = (EditText) findViewById(R.id.name);
+        mAddressView = (EditText) findViewById(R.id.address);
+        mEmailView = (EditText) findViewById(R.id.email);
         mUsernameView = (EditText) findViewById(R.id.username);
         mPasswordView = (EditText) findViewById(R.id.password);
-        mNumber = (EditText) findViewById(R.id.number);
+        mNumberView = (EditText) findViewById(R.id.number);
         mAccount = (Spinner) findViewById(R.id.account_type);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.accounts_array, android.R.layout.simple_spinner_item);
@@ -63,6 +63,16 @@ public class RegisterActivity extends Activity {
             @Override
             public void onClick(View view) {
                 attemptRegister();
+            }
+        });
+
+        // Sends user to LoginActivity Screen
+        TextView loginButton = (TextView) findViewById(R.id.user_login_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(i);
             }
         });
 
@@ -78,18 +88,18 @@ public class RegisterActivity extends Activity {
         // Reset errors.
         mUsernameView.setError(null);
         mPasswordView.setError(null);
-        mName.setError(null);
-        mAddress.setError(null);
-        mEmail.setError(null);
-        mNumber.setError(null);
+        mNameView.setError(null);
+        mAddressView.setError(null);
+        mEmailView.setError(null);
+        mNumberView.setError(null);
 
         // Store values at the time of the login attempt.
         String input_username = mUsernameView.getText().toString();
         String input_password = mPasswordView.getText().toString();
-        String input_Name =  mName.getText().toString();
-        String input_Address =  mAddress.getText().toString();
-        String input_Email =  mEmail.getText().toString();
-        String input_Number =  mNumber.getText().toString();
+        String input_Name =  mNameView.getText().toString();
+        String input_Address =  mAddressView.getText().toString();
+        String input_Email =  mEmailView.getText().toString();
+        String input_Number =  mNumberView.getText().toString();
         boolean cancel = false;
         View focusView = null;
 
@@ -108,23 +118,33 @@ public class RegisterActivity extends Activity {
         // Check if name has been entered
         if (TextUtils.isEmpty(input_Name))
         {
-            mName.setError(getString(R.string.error_field_required));
+            mNameView.setError(getString(R.string.error_field_required));
+            focusView = mNameView;
+            cancel = true;
         }
         // Check if address has been entered
         if (TextUtils.isEmpty(input_Address))
         {
-            mAddress.setError(getString(R.string.error_field_required));
+            mAddressView.setError(getString(R.string.error_field_required));
+            focusView = mAddressView;
+            cancel = true;
         }
         // Check if email has been entered
         if (TextUtils.isEmpty(input_Email))
         {
-            mEmail.setError(getString(R.string.error_field_required));
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
         }
         // Check if account number was entered
         if (TextUtils.isEmpty(input_Number))
         {
-            mNumber.setError(getString(R.string.error_field_required));
+            mNumberView.setError(getString(R.string.error_field_required));
+            focusView = mNumberView;
+            cancel = true;
         }
+
+        //TODO: Register user in Parse
     }
 
     /**
