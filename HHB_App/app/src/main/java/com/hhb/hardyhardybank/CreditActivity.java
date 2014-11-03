@@ -9,8 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
+
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 /**
  *   Credit screen for users to credit their account
@@ -35,8 +37,8 @@ public class CreditActivity extends Activity {
         mDisplayBalance = (TextView) findViewById(R.id.available_balance);
 
         // Query Parse for account balance value
-        final ParseObject user_obj = new ParseObject("User");
-        balance = user_obj.getDouble("balance");
+        ParseObject currentUser = ParseUser.getCurrentUser();
+        balance = currentUser.getDouble("balance");
 
         // Format displayed balance
         DecimalFormat format = new DecimalFormat("#0.00");
@@ -48,14 +50,20 @@ public class CreditActivity extends Activity {
         mCreditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Query Parse for account balance value
+                ParseObject currentUser = ParseUser.getCurrentUser();
+                balance = currentUser.getDouble("balance");
+
                 // Adds inputted deposit amount to current balance
                 credit_amount =  Double.valueOf(mCreditAmount.getText().toString());
-                user_obj.increment("balance", credit_amount);
+                currentUser.increment("balance", credit_amount);
+                currentUser.saveEventually();
+
 
                 // TODO: Follow DRY
                 // Update the displayed balance to reflect new account balance
-                DecimalFormat format = new DecimalFormat("##.00");
-                String formatted_balance = format.format(user_obj.getDouble("balance"));
+                DecimalFormat format = new DecimalFormat("#0.00");
+                String formatted_balance = format.format(currentUser.getDouble("balance"));
                 mDisplayBalance.setText("$" + formatted_balance);
 
                 // Notifies user of successful deposit
