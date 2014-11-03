@@ -7,7 +7,12 @@ import android.view.MenuItem;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import android.widget.TextView;
+import android.widget.Button;
+import android.view.View;
+import android.content.Intent;
 
 import java.text.DecimalFormat;
 
@@ -34,13 +39,13 @@ public class MainActivity extends ActionBarActivity {
         //mCheckingBalance = (TextView) findViewById(R.id.checking_balance);
 
         // Query Parse for account balance value
-        final ParseObject user_obj_savings = new ParseObject("User");
+        final ParseObject user_obj_savings = ParseUser.getCurrentUser();
         //final ParseObject user_obj_checking = new ParseObject("User");
 
         // TODO separate checking & savings balances by query
         //ParseQuery<ParseObject> query = ParseQuery.whereExists("Saving");
         //user_obj_checking.
-        savings_balance = user_obj_savings.getDouble("Balance");
+        savings_balance = user_obj_savings.getDouble("balance");
         //checking_balance = user_obj_checking.getDouble("Balance");
 
         // Format savings balance
@@ -84,7 +89,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
