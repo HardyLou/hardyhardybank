@@ -6,4 +6,14 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never" />
+
+    <item android:id="@+id/action_debit"
+        android:title="@string/action_debit"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_credit"
+        android:title="@string/action_credit"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>
