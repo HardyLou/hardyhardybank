@@ -13,4 +13,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/savings_account"
+        android:id="@+id/savings_label"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/savings_balance"
+        android:layout_gravity="center_horizontal"
+        android:text="savings_balance" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/checking_account"
+        android:id="@+id/checking_label"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/checking_balance"
+        android:layout_gravity="center_horizontal"
+        android:text="checking_balance" />
+
 </RelativeLayout>
