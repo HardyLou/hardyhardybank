@@ -7,20 +7,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parse.SignUpCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 /**
  * A register screen for users to create an account
@@ -45,7 +44,7 @@ public class RegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Set up the register form.
+        // Set up the register form
         mNameView = (EditText) findViewById(R.id.name);
         mAddressView = (EditText) findViewById(R.id.address);
         mEmailView = (EditText) findViewById(R.id.email);
@@ -58,6 +57,8 @@ public class RegisterActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mAccount.setAdapter(adapter);
 
+
+        // Activity once Register button is pressed
         Button mUserSignInButton = (Button) findViewById(R.id.user_sign_in_button);
         mUserSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,12 +81,14 @@ public class RegisterActivity extends Activity {
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    /*
-     * Attempts to register the user with the
+    /**
+     * Attempts to sign in or register the account specified by the login form.
+     * If there are form errors (missing fields, etc.), the
+     * errors are presented and no actual login attempt is made.
      */
     public void attemptRegister()
     {
-        // Reset errors.
+        // Reset errors
         mUsernameView.setError(null);
         mPasswordView.setError(null);
         mNameView.setError(null);
@@ -93,23 +96,25 @@ public class RegisterActivity extends Activity {
         mEmailView.setError(null);
         mNumberView.setError(null);
 
-        // Store values at the time of the login attempt.
+        // Store values entered at the time of the login attempt
         String input_username = mUsernameView.getText().toString();
         String input_password = mPasswordView.getText().toString();
         String input_Name =  mNameView.getText().toString();
         String input_Address =  mAddressView.getText().toString();
         String input_Email =  mEmailView.getText().toString();
         String input_Number =  mNumberView.getText().toString();
+        String input_AccountType = mAccount.getSelectedItem().toString();
+
         boolean cancel = false;
         View focusView = null;
 
-        // Check if username has been entered.
+        // Check if username has been entered
         if (TextUtils.isEmpty(input_username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
         }
-        // Check if password has been entered.
+        // Check if password has been entered
         if (TextUtils.isEmpty(input_password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
@@ -144,7 +149,49 @@ public class RegisterActivity extends Activity {
             cancel = true;
         }
 
-        //TODO: Register user in Parse
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Enter values into Parse database
+            ParseUser user = new ParseUser();
+            user.setUsername(input_username);
+            user.setPassword(input_password);
+            user.setEmail(input_Email);
+            user.put("fullname", input_Name);
+            user.put("address", input_Address);
+            user.put("accountnumber", Integer.valueOf(input_Number));
+            user.put("accounttype", input_AccountType);
+            user.put("balance", 0.0);
+
+            // Check whether registration has succeeded or not
+            user.signUpInBackground(new SignUpCallback() {
+                public void done(ParseException e) {
+                    if (e == null) {
+                        // Show a progress spinner, and kick off a background task to
+                        // perform the user registration attempt
+                        showProgress(true);
+
+                        // Successful Registration, return to LoginActivity
+                        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(i);
+
+                        // Notify user registration has been successful
+                        Toast.makeText(getApplicationContext(), "Account has been registered.",
+                                Toast.LENGTH_LONG).show();
+
+                        // Close this activity
+                        finish();
+                    } else {
+                        // Sign up didn't succeed. Look at the ParseException
+                        // to figure out what went wrong
+                        Toast.makeText(getApplicationContext(), "Registration has failed.",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
     }
 
     /**
