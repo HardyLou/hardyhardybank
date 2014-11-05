@@ -48,8 +48,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter"
+        android:text="@string/Credit Account"
         android:id="@+id/action_credit"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="left" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Debit Account"
+        android:id="@+id/action_debit"
+        android:layout_gravity="right" />
 
 </LinearLayout>

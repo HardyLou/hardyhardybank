@@ -55,6 +55,11 @@
             android:label="@string/credit_account" >
         </activity>
 
+        <activity
+            android:name=".DebitAccount"
+            android:label="@string/debit_account" >
+        </activity>
+
 
     </application>
 
