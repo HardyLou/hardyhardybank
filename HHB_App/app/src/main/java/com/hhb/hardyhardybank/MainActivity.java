@@ -40,13 +40,13 @@ public class MainActivity extends ActionBarActivity {
 
         // Query Parse for account balance value
         final ParseObject user_obj_savings = ParseUser.getCurrentUser();
-        //final ParseObject user_obj_checking = new ParseObject("User");
+        //final ParseObject user_obj_checking = ParseUser.getCurrentUser();
 
         // TODO separate checking & savings balances by query
-        //ParseQuery<ParseObject> query = ParseQuery.whereExists("Saving");
+
         //user_obj_checking.
         savings_balance = user_obj_savings.getDouble("balance");
-        //checking_balance = user_obj_checking.getDouble("Balance");
+        //checking_balance = user_obj_checking.getDouble("balance");
 
         // Format savings balance
         DecimalFormat format_savings = new DecimalFormat("#0.00");
@@ -61,19 +61,19 @@ public class MainActivity extends ActionBarActivity {
         // TODO button to Savings account activity
         // TODO button to Checking account activity
 
-        // TODO button to debit activity
-        /**Button mDebitButton = (Button) findViewById(R.id.action_debit);
+        // Button to debit activity
+        Button mDebitButton = (Button) findViewById(R.id.action_debit);
         mDebitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Go to Credit Activity
+                // Go to Debit Activity
                 Intent i = new Intent(MainActivity.this, DebitActivity.class);
                 startActivity(i);
 
                 // Close this activity
                 finish();
             }
-        });*/
+        });
 
         // Button to credit activity
         Button mCreditButton = (Button) findViewById(R.id.action_credit);
