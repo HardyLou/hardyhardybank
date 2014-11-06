@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Enter Amount to Debit"
+        android:text="\n\nEnter Amount to Debit"
         android:id="@+id/enter_amount"
         android:layout_gravity="center_horizontal"
         android:paddingLeft="75dp"
