@@ -120,7 +120,7 @@ public class LoginActivity extends Activity {
                         showProgress(true);
 
                         // Successful Login, go to MainActivity
-                        Intent i = new Intent(LoginActivity.this, DebitAccount.class);
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
 
                         // Close this activity

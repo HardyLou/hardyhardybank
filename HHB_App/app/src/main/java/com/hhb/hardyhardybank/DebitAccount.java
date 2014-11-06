@@ -3,12 +3,14 @@ package com.hhb.hardyhardybank;
 import android.app.Activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
+
+import android.widget.TextView;
+import android.widget.Button;
+import android.view.View;
+import android.content.Intent;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -76,10 +78,19 @@ public class DebitAccount extends Activity {
                     Toast.makeText(getApplicationContext(), "Insufficient funds.",
                             Toast.LENGTH_LONG).show();
                 }
+            }
+        });
 
+        Button mDebitReturn = (Button) findViewById(R.id.debit_return_main);
+        mDebitReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to Main Activity
+                Intent i = new Intent(DebitAccount.this, MainActivity.class);
+                startActivity(i);
 
-
-
+                // Close this activity
+                finish();
             }
         });
     }
