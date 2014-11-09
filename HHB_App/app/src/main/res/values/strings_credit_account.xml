@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="credit_account">\n\nCredit Account</string>
+    <string name="checking_account">\n\nChecking Account</string>
+    <string name="savings_account">\n\nSavings Account</string>
+    <string name="enter_amount">\n\nEnter Amount to Credit</string>
+    <string name="enter">Enter</string>
+    <string name="credit_return_main">Return to Main</string>
+
+</resources>

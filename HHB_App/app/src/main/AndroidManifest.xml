@@ -49,6 +49,18 @@
             android:label="@string/app_name" >
         </activity>
 
+        <!-- Entry for Credit Account Screen -->
+        <activity
+            android:name=".CreditActivity"
+            android:label="@string/credit_account" >
+        </activity>
+
+        <activity
+            android:name=".DebitAccount"
+            android:label="@string/debit_account" >
+        </activity>
+
+
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
