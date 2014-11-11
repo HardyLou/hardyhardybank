@@ -50,13 +50,15 @@
         android:layout_height="wrap_content"
         android:text="@string/credit_account"
         android:id="@+id/action_credit"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:width="200dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/debit_account"
         android:id="@+id/action_debit"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:width="200dp" />
 
 </LinearLayout>
