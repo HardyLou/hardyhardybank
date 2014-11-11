@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseObject;
 import com.parse.SignUpCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -155,40 +156,45 @@ public class RegisterActivity extends Activity {
             focusView.requestFocus();
         } else {
             // Enter values into Parse database
-            ParseUser user = new ParseUser();
-            user.setUsername(input_username);
-            user.setPassword(input_password);
-            user.setEmail(input_Email);
-            user.put("fullname", input_Name);
-            user.put("address", input_Address);
-            user.put("accountnumber", Integer.valueOf(input_Number));
-            user.put("accounttype", input_AccountType);
-            user.put("balance", 0.0);
+            ParseUser user = new ParseUser();   // create new User object
+            user.setUsername(input_username);   // set username
+            user.setPassword(input_password);   // set password
+            user.setEmail(input_Email);         // set email
+            user.put("fullname", input_Name);   // set full name
+            user.put("address", input_Address); // set address
+            user.put("role", "customer");       // label new account as customer
+
+            ParseObject account = new ParseObject("Account");               // create new Account object
+            account.put("userID", input_username);                          // joins User table with Account table
+            account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
+            account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
+            account.put("balance", 0.0);                                    // initialize balance to $0
+            account.saveEventually();
 
             // Check whether registration has succeeded or not
             user.signUpInBackground(new SignUpCallback() {
                 public void done(ParseException e) {
-                    if (e == null) {
-                        // Show a progress spinner, and kick off a background task to
-                        // perform the user registration attempt
-                        showProgress(true);
+                if (e == null) {
+                    // Show a progress spinner, and kick off a background task to
+                    // perform the user registration attempt
+                    showProgress(true);
 
-                        // Successful Registration, return to LoginActivity
-                        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(i);
+                    // Successful Registration, return to LoginActivity
+                    Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(i);
 
-                        // Notify user registration has been successful
-                        Toast.makeText(getApplicationContext(), "Account has been registered.",
-                                Toast.LENGTH_LONG).show();
+                    // Notify user registration has been successful
+                    Toast.makeText(getApplicationContext(), "Account has been registered.",
+                                   Toast.LENGTH_LONG).show();
 
-                        // Close this activity
-                        finish();
-                    } else {
-                        // Sign up didn't succeed. Look at the ParseException
-                        // to figure out what went wrong
-                        Toast.makeText(getApplicationContext(), "Registration has failed.",
-                                Toast.LENGTH_LONG).show();
-                    }
+                    // Close this activity
+                    finish();
+                } else {
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                    Toast.makeText(getApplicationContext(), "Registration has failed.",
+                                   Toast.LENGTH_LONG).show();
+                }
                 }
             });
         }
