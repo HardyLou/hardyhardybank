@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hhb.hardyhardybank.LoginActivity">
+    tools:context="com.hhb.hardyhardybank.LoginActivity"
+    android:background="#2c2cc0ff">
 
     <!-- Login progress -->
     <ProgressBar
