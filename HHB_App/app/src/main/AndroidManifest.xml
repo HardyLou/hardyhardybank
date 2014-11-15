@@ -56,7 +56,7 @@
         </activity>
 
         <activity
-            android:name=".DebitAccount"
+            android:name=".DebitActivity"
             android:label="@string/debit_account" >
         </activity>
 
