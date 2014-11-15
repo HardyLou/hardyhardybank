@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scrollView"
+    android:layout_gravity="center" > -->
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+    android:layout_height="match_parent">
 
     <TextView
         android:text="@string/main_page"
@@ -15,19 +22,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/accounts"
-        android:id="@+id/accounts_label"
+        android:text="@string/actions"
+        android:id="@+id/actions_label"
         android:paddingLeft="100dp"
         android:paddingRight="100dp"
         android:layout_gravity="center"
         android:gravity="center" />
 
-    <Spinner
-        android:id="@+id/available_accounts"
+    <EditText
+        android:id="@+id/account_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
+        android:hint="@string/prompt_account"
+        android:imeActionId="@+id/login"
+        android:imeActionLabel="@string/action_sign_in"
+        android:imeOptions="actionUnspecified"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:singleLine="true"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -40,8 +52,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/account_summary"
-        android:id="@+id/action_summary"
+        android:text="@string/action_debit"
+        android:id="@+id/action_debit"
+        android:layout_gravity="center"
+        android:width="200dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_credit"
+        android:id="@+id/action_credit"
         android:layout_gravity="center"
         android:width="200dp" />
 
@@ -53,6 +73,15 @@
         android:layout_gravity="center"
         android:width="200dp" />
 
+    <!--    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/penalty_interest"
+            android:id="@+id/action_penalty_interest"
+            android:layout_gravity="center"
+            android:width="200dp" />
+            -->
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,3 +91,4 @@
         android:width="200dp" />
 
 </LinearLayout>
+<!-- </ScrollView> -->

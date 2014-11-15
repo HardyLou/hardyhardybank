@@ -49,6 +49,12 @@
             android:label="@string/app_name" >
         </activity>
 
+        <!-- Entry for Main Activity Screen for Tellers
+        <activity
+            android:name=".MainActivityTeller"
+            android:label="@string/app_name" >
+        </activity> -->
+
         <!-- Entry for Main Activity Screen for Users -->
         <activity
             android:name=".MainActivityUser"
