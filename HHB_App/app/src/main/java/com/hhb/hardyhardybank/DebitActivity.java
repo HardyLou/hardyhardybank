@@ -1,7 +1,7 @@
 package com.hhb.hardyhardybank;
 
 import android.app.Activity;
-
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,7 +19,7 @@ import com.parse.ParseUser;
 /**
  *   Credit screen for users to credit their account
  */
-public class DebitActivity extends Activity {
+public class DebitActivity extends ActionBarActivity {
     // UI references.
     private EditText mCreditAmount;
     private TextView mDisplayBalance;

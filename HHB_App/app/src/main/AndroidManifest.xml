@@ -43,11 +43,17 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
-        <!-- Entry for Main Account Screen -->
+        <!-- Entry for Main Activity Screen for Tellers -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
         </activity>
+
+        <!-- Entry for Main Activity Screen for Users -->
+        <activity
+            android:name=".MainActivityUser"
+            android:label="HBB App" >
+         </activity>
 
         <!-- Entry for Credit Account Screen -->
         <activity
@@ -55,6 +61,7 @@
             android:label="@string/credit_account" >
         </activity>
 
+        <!-- Entry for Debit Account Screen -->
         <activity
             android:name=".DebitActivity"
             android:label="@string/debit_account" >
