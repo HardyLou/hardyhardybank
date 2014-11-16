@@ -16,11 +16,11 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
- * User Info screen to display user information after registration
- * Created by Jared on 11/15/14.
+ * An account summary screen that displays the information registered on record.
  */
 public class DisplayUserInfoActivity extends Activity{
 
@@ -33,7 +33,6 @@ public class DisplayUserInfoActivity extends Activity{
     private TextView mAccountNumberView;
     private Button mCoolButton;
 
-
     private String fullName;
     private String address;
     private String email;
@@ -42,14 +41,12 @@ public class DisplayUserInfoActivity extends Activity{
     private String accountType;
     private double accountNumber;
 
-
     protected void onCreate(Bundle savedInstanceState) {
 
         // Connect App with Parse
         Parse.initialize(this, "G9sNy6cFAc2j1ZnKVGuYKhW5gHRQdUqPV3D3BOAm", "14vOkrgINnOVIS1fSG08tdJgIsvYi7OMlw8zTFuC");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accountinfo);
-
 
         // Set up the Account Information Form
         mNameView = (TextView) findViewById(R.id.name_retrieved);
@@ -67,26 +64,27 @@ public class DisplayUserInfoActivity extends Activity{
         address = currentUser.getString("address");
         email = currentUser.getString("email");
         userName = currentUser.getString("username");
+        role = currentUser.getString("role");
 
         // Retrieve user information from Parse database class -- Account
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
         query.whereEqualTo("userID", userName);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject accountInfo, ParseException e) {
-                if (accountInfo == null) {
-                    Log.d("accountInfo", "The getFirst request failed.");
-                } else {
-                    accountType = accountInfo.getString("accountType");
-                    accountNumber = accountInfo.getDouble("accountnumber");
-                    mAccountTypeView.setText(accountType);
-                    mAccountNumberView.setText("" + accountNumber);
-                }
+            if (accountInfo == null) {
+                Log.d("accountInfo", "The getFirst request failed.");
+            } else {
+                accountType = accountInfo.getString("accountType");
+                accountNumber = accountInfo.getDouble("accountnumber");
+                mAccountTypeView.setText(accountType);
+                DecimalFormat decimalFormat=new DecimalFormat("#.#");
+                mAccountNumberView.setText(decimalFormat.format(accountNumber));
+            }
             }
         });
 
         // Display user information
         displayAccountInfo();
-
     }
 
     public void displayAccountInfo() {
@@ -94,7 +92,7 @@ public class DisplayUserInfoActivity extends Activity{
         mAddressView.setText(address);
         mEmailView.setText(email);
         mUserName.setText(userName);
-
+        mRoleView.setText(role);
 
         mCoolButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,11 +101,5 @@ public class DisplayUserInfoActivity extends Activity{
                 startActivity(i);
             }
         });
-
-
     }
-
-
-
-
 }

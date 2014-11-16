@@ -43,7 +43,6 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
-<<<<<<< HEAD
         <!-- Entry for Register Information Screen -->
         <activity
             android:name=".DisplayUserInfoActivity"
@@ -51,10 +50,8 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
-        <!-- Entry for Main Account Screen -->
-=======
+
         <!-- Entry for Main Activity Screen for Tellers -->
->>>>>>> 1c87f31e775010605aa49c01389e53f1e6785084
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
