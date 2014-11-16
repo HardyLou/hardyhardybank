@@ -3,38 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-<TextView
-        android:text="@string/main_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/activity_horizontal_margin" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/savings_account"
-        android:id="@+id/savings_label"
-        android:layout_gravity="center_horizontal"
-        android:paddingLeft="100dp"
-        android:paddingRight="100dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/savings_balance"
-        android:layout_gravity="center_horizontal"
-        android:text="savings_balance" />
+        android:text="@string/credit_account"
+        android:id="@+id/credit_label"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/checking_account"
-        android:id="@+id/checking_label"
+        android:id="@+id/account_label"
         android:layout_gravity="center_horizontal"
         android:paddingLeft="100dp"
         android:paddingRight="100dp" />
@@ -43,24 +25,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/checking_balance"
+        android:id="@+id/available_balance"
         android:layout_gravity="center_horizontal"
-        android:text="$0.00\n" />
+        android:text="balance" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/enter_amount"
+        android:id="@+id/enter_amount"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="75dp"
+        android:paddingRight="75dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/credit_amount"
+        android:layout_gravity="center_horizontal"
+        android:hint="0.00"
+        android:paddingLeft="75dp"
+        android:paddingRight="75dp"
+        android:gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/credit_account"
-        android:id="@+id/action_credit"
-        android:layout_gravity="center"
-        android:width="200dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/debit_account"
-        android:id="@+id/action_debit"
-        android:layout_gravity="center"
-        android:width="200dp" />
+        android:text="@string/enter"
+        android:id="@+id/credit_enter"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

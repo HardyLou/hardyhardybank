@@ -43,6 +43,13 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
+        <!-- Entry for Register Information Screen -->
+        <activity
+            android:name=".DisplayUserInfoActivity"
+            android:label="User Info"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+
         <!-- Entry for Main Account Screen -->
         <activity
             android:name=".MainActivity"

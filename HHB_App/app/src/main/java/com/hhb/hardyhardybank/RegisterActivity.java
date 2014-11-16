@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.ParseObject;
 import com.parse.SignUpCallback;
 import com.parse.Parse;
@@ -98,7 +97,7 @@ public class RegisterActivity extends Activity {
         mNumberView.setError(null);
 
         // Store values entered at the time of the login attempt
-        String input_username = mUsernameView.getText().toString();
+        final String input_username = mUsernameView.getText().toString();
         String input_password = mPasswordView.getText().toString();
         String input_Name =  mNameView.getText().toString();
         String input_Address =  mAddressView.getText().toString();
@@ -180,13 +179,14 @@ public class RegisterActivity extends Activity {
                     showProgress(true);
 
                     // Successful Registration, return to LoginActivity
-                    Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                    Intent i = new Intent(RegisterActivity.this, DisplayUserInfoActivity.class);
                     startActivity(i);
 
                     // Notify user registration has been successful
                     Toast.makeText(getApplicationContext(), "Account has been registered.",
                                    Toast.LENGTH_LONG).show();
-
+ /*                   DisplayUserInfoActivity userForm = new DisplayUserInfoActivity();
+                    userForm.displayAccountInfo();*/
                     // Close this activity
                     finish();
                 } else {
@@ -236,3 +236,6 @@ public class RegisterActivity extends Activity {
         }
     }
 }
+
+
+

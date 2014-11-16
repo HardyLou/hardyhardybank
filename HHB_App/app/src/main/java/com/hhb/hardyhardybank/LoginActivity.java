@@ -55,7 +55,7 @@ public class LoginActivity extends Activity {
 
         // Sends user to RegisterActivity Screen
         TextView mRegisterLink = (TextView) findViewById(R.id.link_to_register);
-        mRegisterLink.setOnClickListener(new OnClickListener() {
+         mRegisterLink.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
