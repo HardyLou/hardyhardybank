@@ -9,8 +9,16 @@
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="error_field_required">This field is required</string>
-    <string name="action_debit">Debit Account</string>
-    <string name="action_credit">Credit Account</string>
+    <string name="action_debit">\nDebit Account\n</string>
+    <string name="action_credit">\nCredit Account\n</string>
+    <string name="accounts">Accounts</string>
+    <string name="actions">Actions</string>
+    <string name="prompt_account">Account Number</string>
+    <string name="show_balance">\nShow Balance\n</string>
+    <string name="account_summary">\nAccount Summary\n</string>
+    <string name="transfer_funds">\nTransfer Funds\n</string>
+    <string name="close_account">\nClose Account\n</string>
+    <string name="penalty_interest">\nCalculate Penalty\nor Interest\n</string>
 
     <string-array name="accounts_array">
         <item>Saving</item>

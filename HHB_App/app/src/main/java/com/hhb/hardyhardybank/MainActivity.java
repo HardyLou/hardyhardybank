@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 // Go to Debit Activity
-                Intent i = new Intent(MainActivity.this, DebitAccount.class);
+                Intent i = new Intent(MainActivity.this, DebitActivity.class);
                 startActivity(i);
 
                 // Close this activity

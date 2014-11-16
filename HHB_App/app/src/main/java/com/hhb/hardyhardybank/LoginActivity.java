@@ -16,10 +16,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.List;
 
 /**
  * A login screen that offers login via username/password.
@@ -114,18 +120,30 @@ public class LoginActivity extends Activity {
         } else {
             ParseUser.logInInBackground(input_username, input_password, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
-                    if (user != null) {
-                        // Show a progress spinner, and kick off a background task to
-                        // perform the user login attempt.
-                        showProgress(true);
+                if (user != null) {
+                    // Show a progress spinner, and kick off a background task to
+                    // perform the user login attempt.
+                    showProgress(true);
 
-                        // Successful Login, go to MainActivity
+                    ParseObject currentUser = ParseUser.getCurrentUser();
+                    if (currentUser.getString("role").equals("admin")) {
+                        // If user is an admin, send to admin home screen
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
-
-                        // Close this activity
-                        finish();
+                    } else if (currentUser.getString("role").equals("customer")) {
+                        // If user is a regular user, send to user home screen
+                        // TODO: change SplashActivity.class to MainActivityUser.class
+                        Intent i = new Intent(LoginActivity.this, SplashActivity.class);
+                        startActivity(i);
                     } else {
+                        // Account in database does not contain required fields
+                        Toast.makeText(getApplicationContext(), "Account is corrupted",
+                                       Toast.LENGTH_LONG).show();
+                    }
+
+                // Close this activity
+                finish();
+                } else {
                         // Notify user that sign in has failed.
                         Toast.makeText(getApplicationContext(), "Wrong Credentials",
                                        Toast.LENGTH_LONG).show();
