@@ -97,8 +97,17 @@ public class DisplayUserInfoActivity extends Activity{
         mCoolButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(DisplayUserInfoActivity.this, LoginActivity.class);
-                startActivity(i);
+                //Intent i = new Intent(DisplayUserInfoActivity.this, LoginActivity.class);
+                //startActivity(i);
+                if (ParseUser.getCurrentUser() == null) {
+
+                    Intent i = new Intent(DisplayUserInfoActivity.this, LoginActivity.class);
+                    startActivity(i);
+                }
+                else {
+                    Intent i = new Intent(DisplayUserInfoActivity.this, MainActivityUser.class);
+                    startActivity(i);
+                }
             }
         });
     }
