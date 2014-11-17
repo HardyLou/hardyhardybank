@@ -106,7 +106,7 @@ public class LoginActivity extends Activity {
             cancel = true;
         }
 
-        // Check fi password has been entered.
+        // Check if password has been entered.
         if (TextUtils.isEmpty(input_password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
@@ -128,12 +128,12 @@ public class LoginActivity extends Activity {
                     ParseObject currentUser = ParseUser.getCurrentUser();
                     if (currentUser.getString("role").equals("admin")) {
                         // If user is an admin, send to admin home screen
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        // TODO: change to MainActivityTeller after that class is made
+                        Intent i = new Intent(LoginActivity.this, MainActivityUser.class);
                         startActivity(i);
                     } else if (currentUser.getString("role").equals("customer")) {
                         // If user is a regular user, send to user home screen
-                        // TODO: change SplashActivity.class to MainActivityUser.class
-                        Intent i = new Intent(LoginActivity.this, SplashActivity.class);
+                        Intent i = new Intent(LoginActivity.this, MainActivityUser.class);
                         startActivity(i);
                     } else {
                         // Account in database does not contain required fields
