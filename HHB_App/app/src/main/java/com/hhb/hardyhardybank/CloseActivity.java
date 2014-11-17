@@ -47,7 +47,7 @@ public class CloseActivity extends Activity{
                 balance = currentUser.getDouble("balance");
                 address = currentUser.getString("address");
 
-                mAccount = (Spinner) findViewById(R.id.accounts_label);
+                mAccount = (Spinner) findViewById(R.id.available_accounts);
                 String toDelete = mAccount.getSelectedItem().toString(); // get account selected in spinner
                 //ParseObject accountUser = currentUser.getObjectId();
                 ParseObject.createWithoutData("Account", toDelete).deleteEventually();
