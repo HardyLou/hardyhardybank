@@ -29,9 +29,8 @@ public class MainActivityUser extends ActionBarActivity {
 
     // UI References
     private Spinner mAccounts;
-    private ArrayAdapter<CharSequence> adapter;
+    //private ArrayAdapter<String> adapter;
 
-    //double savings_balance; //, checking_balance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,22 +40,27 @@ public class MainActivityUser extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_user);
 
+
         // Set up Spinner item for available accounts
+        // temporary code to make spinner work (hardcoded account values)
+        mAccounts = (Spinner) findViewById(R.id.available_accounts);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.account_numbers_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mAccounts.setAdapter(adapter);
+
+        //List<String> account_numbers_array2 = new ArrayList<String>();
+
         //TODO fix this to dynamically populate accounts
+        //for each entry in accounts table
+        //if username == current user
+        //adapter.add("account number here");
+
         //mAccounts = (Spinner) findViewById(R.id.available_accounts);
         //adapter = new ArrayAdapter<String>(this,
-        //        android.R.layout.simple_spinner_item, array);
-
-
-        // Query Parse for account numbers and type
-        //final ParseObject user_obj_savings = ParseUser.getCurrentUser();
-        //adapter.add("String to insert into spinner");
-
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-        //        R.array.accounts_array, android.R.layout.simple_spinner_item);
+        //        android.R.layout.simple_spinner_item, account_numbers_array2);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //mAccounts.setAdapter(adapter);
-
 
         // Button to Show Balance
         Button mBalanceButton = (Button) findViewById(R.id.action_balance);
