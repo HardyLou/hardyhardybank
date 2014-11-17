@@ -105,7 +105,14 @@ public class MainActivityUser extends ActionBarActivity {
 
 
         // Button to Close Account
-        // TODO Mish add CloseActivity content here
+            Button closeUserAccount = (Button) findViewById(R.id.action_close);
+            closeUserAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivityUser.this, CloseActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
