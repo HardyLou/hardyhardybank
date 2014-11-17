@@ -165,6 +165,7 @@ public class RegisterActivity extends Activity {
 
             ParseObject account = new ParseObject("Account");               // create new Account object
             account.put("userID", input_username);                          // joins User table with Account table
+            account.put("userEmail", input_Email);                          // alternate way to join tables
             account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
             account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
             account.put("balance", 0.0);                                    // initialize balance to $0
