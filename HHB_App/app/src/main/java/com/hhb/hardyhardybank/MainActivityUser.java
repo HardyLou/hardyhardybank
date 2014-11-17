@@ -89,19 +89,16 @@ public class MainActivityUser extends ActionBarActivity {
         //});
 
         // Button to Transfer Funds
-        //Button mTransferButton = (Button) findViewById(R.id.action_transfer);
-        //mTransferButton.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View view) {
+        Button mTransferButton = (Button) findViewById(R.id.action_transfer);
+        mTransferButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
         // go to TransferActivity
-        //        Intent i = new Intent(MainActivityUser.this, TransferActivity.class);
-        //        startActivity(i);
-
-        // close this activity
-        //        finish();
-        //    }
-        //});
+                Intent i = new Intent(MainActivityUser.this, TransferActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         // Button to Close Account
