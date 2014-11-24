@@ -25,10 +25,6 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 /**
  * A login screen that offers login via username/password.
  */
@@ -38,8 +34,6 @@ public class LoginActivity extends Activity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    //int daysInPenalty;
-    //int monthsInPenalty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,13 +130,6 @@ public class LoginActivity extends Activity {
                         Intent i = new Intent(LoginActivity.this, MainActivityUser.class);
                         startActivity(i);
                     } else if (currentUser.getString("role").equals("customer")) {
-                        /*try {
-                            checkPenalty();
-                        } catch (ParseException e2){
-                            Toast.makeText(getApplicationContext(), "ERROR",
-                                    Toast.LENGTH_LONG).show();
-                        }*/
-
                         // If user is a regular user, send to user home screen
                         Intent i = new Intent(LoginActivity.this, MainActivityUser.class);
                         startActivity(i);
@@ -163,70 +150,6 @@ public class LoginActivity extends Activity {
             });
         }
     }
-
-    /*
-    // TODO: move somewhere else?
-    public void checkPenalty() throws ParseException {
-        // grabs all existing accounts (not specific to logged in user)
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
-        // ParseUser currentUser = ParseUser.getCurrentUser();
-        // query.whereEqualTo("userID", currentUser.getUsername());
-        // puts all the accounts into a List
-        List<ParseObject> accounts = query.find();
-        // iterate through the list of accounts
-        for (int i = 0; i < accounts.size(); i++) {
-            ParseObject currentAccount = accounts.get(i);
-            daysInPenalty = 0;
-
-            // if balance is less than $100
-            if (currentAccount.getDouble("balance") < 100) {
-                // today's date
-                Calendar currentDate = Calendar.getInstance();
-
-                // holds the date that the account was first under $100
-                Calendar startDate = Calendar.getInstance();
-                startDate.setTime(currentAccount.getDate("pDateCounter"));
-
-                // account has already been in penalty
-                if (currentAccount.getBoolean("inPenalty")) {
-                    // created to count number of days elapsed
-                    Calendar tempStartDate = Calendar.getInstance();
-                    tempStartDate.setTime(currentAccount.getDate("pDateCounter"));
-
-                    // finds the days elapsed since the account's balance was first under $100
-                    while(tempStartDate.before(currentDate)) {
-                        tempStartDate.add(Calendar.DAY_OF_MONTH, 1);
-                        daysInPenalty++;
-                    }
-
-                    // account has been in penalty for more than 30 days; else, do nothing
-                    if (daysInPenalty > 30) {
-                        monthsInPenalty = daysInPenalty / 30;
-                        Toast.makeText(getApplicationContext(), "startDate = " + startDate.getTime(),
-                                Toast.LENGTH_LONG).show();
-                        startDate.add(Calendar.DATE, 30 * monthsInPenalty);
-                        // subtract $25 from account balance
-                        currentAccount.put("balance", currentAccount.getDouble("balance") - 25 * monthsInPenalty);
-                        // update penalty date counter
-                        currentAccount.put("pDateCounter", startDate.getTime());
-                    }
-                }
-
-                // balance previously was NOT in penalty range
-                else {
-                    currentAccount.put("inPenalty", true);
-                    currentAccount.put("penaltyDateCounter", currentDate);
-                }
-            }
-
-            // if balance is $100 or more
-            else {
-                currentAccount.put("inPenalty", false);
-
-            }
-            currentAccount.saveInBackground();
-        }
-    }*/
 
     /**
      * Shows the progress UI and hides the login form.
