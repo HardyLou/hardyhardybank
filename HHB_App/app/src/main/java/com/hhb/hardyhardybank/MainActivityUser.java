@@ -74,7 +74,7 @@ public class MainActivityUser extends ActionBarActivity {
             public void onClick(View view) {
 
                 // go to BalanceActivity
-                Intent i = new Intent(MainActivityUser.this, BalanceActivity.class);
+                Intent i = new Intent(MainActivityUser.this, MainActivity.class);
                 startActivity(i);
 
                 // close this activity
@@ -106,6 +106,8 @@ public class MainActivityUser extends ActionBarActivity {
         // go to TransferActivity
                 Intent i = new Intent(MainActivityUser.this, TransferActivity.class);
                 startActivity(i);
+
+                finish();
             }
         });
 

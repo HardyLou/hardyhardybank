@@ -2,11 +2,15 @@ package com.hhb.hardyhardybank;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import android.widget.TextView;
@@ -22,9 +26,10 @@ import java.text.DecimalFormat;
 public class MainActivity extends ActionBarActivity {
     // UI References
     private TextView mSavingsBalance;
-    //private TextView mCheckingBalance;
+    private TextView mCheckingBalance;
 
-    double savings_balance; //, checking_balance;
+    double savings_balance, checking_balance;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,27 +41,66 @@ public class MainActivity extends ActionBarActivity {
 
         // Set up the Credit Account form
         mSavingsBalance = (TextView) findViewById(R.id.savings_balance);
-        //mCheckingBalance = (TextView) findViewById(R.id.checking_balance);
+        mCheckingBalance = (TextView) findViewById(R.id.checking_balance);
 
-        // Query Parse for account balance value
-        final ParseObject user_obj_savings = ParseUser.getCurrentUser();
+        // Query Parse for username
+        ParseObject currentUser = ParseUser.getCurrentUser();
         //final ParseObject user_obj_checking = ParseUser.getCurrentUser();
+        userName = currentUser.getString("username");
+
+        // Query Parse for checking balance
+        ParseQuery<ParseObject> queryChecking = ParseQuery.getQuery("Account");
+        queryChecking.whereEqualTo("userID", userName);
+        queryChecking.whereEqualTo("accountType", "Checking");
+        queryChecking.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject account, ParseException e) {
+                if (account == null) {
+                    Log.d("account", "The getFirst request failed.");
+                } else {
+                    //savings_balance = account.getDouble("balance");
+                    checking_balance = account.getDouble("balance");
+                    DecimalFormat format_checkings = new DecimalFormat("#0.00");
+                    final String formatted_balance_checkings = format_checkings.format(checking_balance);
+                    mCheckingBalance.setText("$" + formatted_balance_checkings);
+                }
+            }
+        });
+
+
+        // Query Parse for savings balance
+        ParseQuery<ParseObject> querySaving = ParseQuery.getQuery("Account");
+        querySaving.whereEqualTo("userID", userName);
+        querySaving.whereEqualTo("accountType", "Saving");
+        querySaving.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject account, ParseException e) {
+                if (account == null) {
+                    Log.d("account", "The getFirst request failed.");
+                } else {
+                    savings_balance = account.getDouble("balance");
+                    //checking_balance = account.getDouble("balance");
+                    DecimalFormat format_savings = new DecimalFormat("#0.00");
+                    final String formatted_balance_savings = format_savings.format(savings_balance);
+                    mSavingsBalance.setText("$" + formatted_balance_savings);
+                }
+            }
+        });
+
 
         // TODO separate checking & savings balances by query
 
         //user_obj_checking.
-        savings_balance = user_obj_savings.getDouble("balance");
+        //savings_balance = user_obj_savings.getDouble("balance");
         //checking_balance = user_obj_checking.getDouble("balance");
 
         // Format savings balance
-        DecimalFormat format_savings = new DecimalFormat("#0.00");
-        final String formatted_balance_savings = format_savings.format(savings_balance);
-        mSavingsBalance.setText("$" + formatted_balance_savings);
+        //DecimalFormat format_savings = new DecimalFormat("#0.00");
+        //final String formatted_balance_savings = format_savings.format(savings_balance);
+        //mSavingsBalance.setText("$" + formatted_balance_savings);
 
         // TODO Format checking balance
-        //DecimalFormat format_checking = new DecimalFormat("#0.00");
-        //final String formatted_balance_checking = format_checking.format(checking_balance);
-        //mCheckingBalance.setText("$" + formatted_balance_checking);
+//        DecimalFormat format_checking = new DecimalFormat("#0.00");
+  //      final String formatted_balance_checking = format_checking.format(checking_balance);
+    //    mCheckingBalance.setText("$" + formatted_balance_checking);
 
         // TODO button to Savings account activity
         // TODO button to Checking account activity
