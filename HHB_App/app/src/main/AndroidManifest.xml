@@ -92,6 +92,12 @@
             android:label="+@string/title_transfer_activity">
         </activity>
 
+        <!-- Entry for Add Account Activity -->
+        <activity
+            android:name=".AddAccountActivity"
+            android:label="@string/action_add" >
+        </activity>
+
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->

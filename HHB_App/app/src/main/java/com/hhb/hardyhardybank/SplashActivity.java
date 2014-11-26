@@ -82,6 +82,11 @@ public class SplashActivity extends Activity {
             ParseObject currentAccount = accounts.get(i);
             daysInPenalty = 0;
 
+            if ((currentAccount.get("inPenalty") == null) || (currentAccount.get("pDateCounter") == null)) {
+                currentAccount.put("inPenalty", true);
+                currentAccount.put("pDateCounter", currentDate.getTime());
+            }
+
             // if balance is less than $100
             if (currentAccount.getDouble("balance") < 100) {
                 // holds the date that the account was first under $100

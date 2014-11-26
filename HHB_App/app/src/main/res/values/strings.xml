@@ -18,6 +18,7 @@
     <string name="account_summary">\nAccount Summary\n</string>
     <string name="transfer_funds">\nTransfer Funds\n</string>
     <string name="close_account">\nClose Account\n</string>
+    <string name="logout_account">\nLog Out\n</string>
     <string name="penalty_interest">\nCalculate Penalty\nor Interest\n</string>
 
     <string-array name="accounts_array">
@@ -27,7 +28,7 @@
 
     <!-- temporary array to hardcode account numbers -->
     <string-array name="account_numbers_array">
-        <item>789456</item>
+        <item>1234567890</item>
     </string-array>
 
 </resources>

@@ -106,6 +106,25 @@ public class MainActivityUser extends ActionBarActivity {
         // go to TransferActivity
                 Intent i = new Intent(MainActivityUser.this, TransferActivity.class);
                 startActivity(i);
+
+                // close this activity
+                finish();
+            }
+        });
+
+
+        // Button to Add New Account
+        Button mAddAccountButton = (Button) findViewById(R.id.action_add_acct_main);
+        mAddAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // go to AddAccountActivity
+                Intent i = new Intent(MainActivityUser.this, AddAccountActivity.class);
+                startActivity(i);
+
+                // close this activity
+                finish();
             }
         });
 
@@ -157,6 +176,23 @@ public class MainActivityUser extends ActionBarActivity {
                 startActivity(i);
             }
         });
+
+
+        // Button to Log Out Account
+        Button mLogOutButton = (Button) findViewById(R.id.action_logout);
+        mLogOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // go to AddAccountActivity
+                Intent i = new Intent(MainActivityUser.this, LoginActivity.class);
+                startActivity(i);
+
+                // close this activity
+                finish();
+            }
+        });
+
 
     }
 

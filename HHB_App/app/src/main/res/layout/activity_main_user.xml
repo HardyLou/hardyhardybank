@@ -4,6 +4,18 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <ScrollView
+        android:id="@+id/main_activity_user_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/main_activity_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <TextView
         android:text="@string/main_page"
         android:layout_width="wrap_content"
@@ -55,10 +67,30 @@
 
     <Button
         android:layout_width="wrap_content"
+        android:layout_height="79dp"
+        android:text="@string/action_add"
+        android:id="@+id/action_add_acct_main"
+        android:layout_gravity="center"
+        android:width="200dp" />
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/close_account"
         android:id="@+id/action_close"
         android:layout_gravity="center"
         android:width="200dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout_account"
+        android:id="@+id/action_logout"
+        android:layout_gravity="center"
+        android:width="200dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

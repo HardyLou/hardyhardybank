@@ -1,0 +1,7 @@
+<resources>
+    <string name="title_activity_add">Add Account</string>
+
+    <!-- Strings related to adding accounts -->
+    <string name="action_add">Add Account</string>
+    <string name="action_cancel">Cancel</string>
+</resources>
