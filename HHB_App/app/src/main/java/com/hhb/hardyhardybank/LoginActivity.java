@@ -126,8 +126,8 @@ public class LoginActivity extends Activity {
                     ParseObject currentUser = ParseUser.getCurrentUser();
                     if (currentUser.getString("role").equals("admin")) {
                         // If user is an admin, send to admin home screen
-//                        Intent i = new Intent(LoginActivity.this, MainActivityTeller.class);
-//                        startActivity(i);
+                        Intent i = new Intent(LoginActivity.this, MainActivityTeller.class);
+                        startActivity(i);
                     } else if (currentUser.getString("role").equals("customer")) {
                         // If user is a regular user, send to user home screen
                         Intent i = new Intent(LoginActivity.this, MainActivityUser.class);
@@ -140,6 +140,7 @@ public class LoginActivity extends Activity {
 
                 // Close this activity
                 finish();
+
                 } else {
                         // Notify user that sign in has failed.
                         Toast.makeText(getApplicationContext(), "Wrong Credentials",

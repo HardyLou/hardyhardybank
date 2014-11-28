@@ -86,8 +86,20 @@ public class DebitActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 // Go to Main Activity
-                Intent i = new Intent(DebitActivity.this, MainActivity.class);
-                startActivity(i);
+                ParseObject currentUser = ParseUser.getCurrentUser();
+                if (currentUser.getString("role").equals("admin")) {
+                    // If user is an admin, send to admin home screen
+                    Intent i = new Intent(DebitActivity.this, MainActivityTeller.class);
+                    startActivity(i);
+                } else if (currentUser.getString("role").equals("customer")) {
+                    // If user is a regular user, send to user home screen
+                    Intent i = new Intent(DebitActivity.this, MainActivityUser.class);
+                    startActivity(i);
+                } else {
+                    // Account in database does not contain required fields
+                    Toast.makeText(getApplicationContext(), "Account is corrupted",
+                            Toast.LENGTH_LONG).show();
+                }
 
                 // Close this activity
                 finish();

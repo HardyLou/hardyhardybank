@@ -1,17 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/scrollView"
-    android:layout_gravity="center" > -->
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <ScrollView
+        android:id="@+id/main_activity_teller_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/main_activity_teller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
         android:text="@string/main_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,14 +33,12 @@
         android:gravity="center" />
 
     <EditText
-        android:id="@+id/account_number"
+        android:id="@+id/account_number_teller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/prompt_account"
-        android:imeActionId="@+id/login"
-        android:imeActionLabel="@string/action_sign_in"
         android:imeOptions="actionUnspecified"
-        android:inputType="textPassword"
+        android:inputType="numberSigned"
         android:maxLines="1"
         android:singleLine="true"/>
 
@@ -46,6 +47,14 @@
         android:layout_height="wrap_content"
         android:text="@string/show_balance"
         android:id="@+id/action_balance"
+        android:layout_gravity="center"
+        android:width="200dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account_summary"
+        android:id="@+id/action_summary"
         android:layout_gravity="center"
         android:width="200dp" />
 
@@ -90,5 +99,16 @@
         android:layout_gravity="center"
         android:width="200dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout_account"
+        android:id="@+id/action_logout"
+        android:layout_gravity="center"
+        android:width="200dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>
-<!-- </ScrollView> -->
