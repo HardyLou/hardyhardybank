@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
@@ -23,6 +25,7 @@ public class CreditActivity extends ActionBarActivity {
     // UI references.
     private EditText mCreditAmount;
     private TextView mDisplayBalance;
+    private static double cUserBalance = 0;
 
     double balance, credit_amount;
 
@@ -37,67 +40,86 @@ public class CreditActivity extends ActionBarActivity {
         // Set up the Credit Account form
         mCreditAmount = (EditText) findViewById(R.id.credit_amount);
         mDisplayBalance = (TextView) findViewById(R.id.available_balance);
-
-        // Query Parse for account balance value
-        ParseObject currentUser = ParseUser.getCurrentUser();
-        balance = currentUser.getDouble("balance");
-
-        // Format displayed balance
-        DecimalFormat format = new DecimalFormat("#0.00");
-        final String formatted_balance = format.format(balance);
-        mDisplayBalance.setText("$" + formatted_balance);
+        Button mCreditReturn = (Button) findViewById(R.id.credit_return_main);
 
         // Activity once Deposit button is pressed
         Button mCreditButton = (Button) findViewById(R.id.credit_enter);
         mCreditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Query Parse for account balance value
                 ParseObject currentUser = ParseUser.getCurrentUser();
-                balance = currentUser.getDouble("balance");
+                if (currentUser.get("role").toString().contentEquals("admin")) {
 
-                // Adds inputted deposit amount to current balance
-                credit_amount =  Double.valueOf(mCreditAmount.getText().toString());
-                currentUser.increment("balance", credit_amount);
-                currentUser.saveEventually();
+                    Bundle bundle = getIntent().getExtras();
+                    int accountNumber = Integer.valueOf(bundle.getString("accountnumber"));
 
 
-                // TODO: Follow DRY
-                // Update the displayed balance to reflect new account balance
-                DecimalFormat format = new DecimalFormat("#0.00");
-                String formatted_balance = format.format(currentUser.getDouble("balance"));
-                mDisplayBalance.setText("$" + formatted_balance);
+                    //Toast.makeText(getApplicationContext(), "ADMIN has Deposited into " + accountNumber + "'s Account!", Toast.LENGTH_LONG).show();
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+                    query.whereEqualTo("accountnumber", accountNumber);
+                    query.getFirstInBackground(new GetCallback<ParseObject>() {
+                        public void done(ParseObject accountInfo, com.parse.ParseException e) {
+                            if (accountInfo == null) {
+                                Toast.makeText(getApplicationContext(), "ADMIN could not find Account!", Toast.LENGTH_LONG).show();
+                            } else {
+                                accountInfo.increment("balance", Double.valueOf(mCreditAmount.getText().toString()));
 
-                // Notifies user of successful deposit
-                Toast.makeText(getApplicationContext(), "Deposited $" + format.format(credit_amount)
-                               + " to credit account.",
-                        Toast.LENGTH_LONG).show();
+                                accountInfo.saveEventually();
+
+                                Toast.makeText(getApplicationContext(), "ADMIN has Deposited into " + accountInfo.getString("userID") + "'s Account!", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                    });
+                }
+                
+                // DO NOT NEED FOR REQUIREMENTS OF PROJECT but it works
+//                else {
+//                    balance = currentUser.getDouble("balance");
+//
+//                    // Format displayed balance
+//                    DecimalFormat format = new DecimalFormat("#0.00");
+//                    String formatted_balance = format.format(balance);
+//                    mDisplayBalance.setText("$" + formatted_balance);
+//
+//
+//                    // Query Parse for account balance value
+//                    String username = currentUser.getString("username");
+//                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+//                    query.whereEqualTo("userID", username);
+//                    query.getFirstInBackground(new GetCallback<ParseObject>() {
+//                        public void done(ParseObject accountInfo, com.parse.ParseException e) {
+//                            if (accountInfo == null) {
+//                                Toast.makeText(getApplicationContext(), "Could not find Account!", Toast.LENGTH_LONG).show();
+//                            } else {
+//                                accountInfo.increment("balance", Double.valueOf(mCreditAmount.getText().toString()));
+//
+//                                accountInfo.saveEventually();
+//
+//                                // Notifies user of successful deposit
+//                                Toast.makeText(getApplicationContext(), "Deposited $" + credit_amount
+//                                                + " into your account.",
+//                                        Toast.LENGTH_LONG).show();
+//                            }
+//
+//                        }
+//
+//                    });
+//                }
             }
         });
+//        mCreditReturn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Go to Main Activity
+//                Intent i = new Intent(CreditActivity.this, MainActivity.class);
+//                startActivity(i);
+//
+//                // Close this activity
+//                finish();
+//            }
+//         });
 
-        Button mCreditReturn = (Button) findViewById(R.id.credit_return_main);
-        mCreditReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go to Main Activity
-                ParseObject currentUser = ParseUser.getCurrentUser();
-                if (currentUser.getString("role").equals("admin")) {
-                    // If user is an admin, send to admin home screen
-                    Intent i = new Intent(CreditActivity.this, MainActivityTeller.class);
-                    startActivity(i);
-                } else if (currentUser.getString("role").equals("customer")) {
-                    // If user is a regular user, send to user home screen
-                    Intent i = new Intent(CreditActivity.this, MainActivityUser.class);
-                    startActivity(i);
-                } else {
-                    // Account in database does not contain required fields
-                    Toast.makeText(getApplicationContext(), "Account is corrupted",
-                            Toast.LENGTH_LONG).show();
-                }
-
-                // Close this activity
-                finish();
             }
-         });
-    }
 }

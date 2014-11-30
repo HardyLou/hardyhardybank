@@ -25,6 +25,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.List;
+
 /**
  * A login screen that offers login via username/password.
  */
@@ -140,7 +142,6 @@ public class LoginActivity extends Activity {
 
                 // Close this activity
                 finish();
-
                 } else {
                         // Notify user that sign in has failed.
                         Toast.makeText(getApplicationContext(), "Wrong Credentials",
