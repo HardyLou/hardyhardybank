@@ -100,13 +100,16 @@ public class DisplayUserInfoActivity extends Activity{
                 //Intent i = new Intent(DisplayUserInfoActivity.this, LoginActivity.class);
                 //startActivity(i);
                 if (ParseUser.getCurrentUser() == null) {
-
                     Intent i = new Intent(DisplayUserInfoActivity.this, LoginActivity.class);
                     startActivity(i);
+
+                    finish();
                 }
                 else {
                     Intent i = new Intent(DisplayUserInfoActivity.this, MainActivityUser.class);
                     startActivity(i);
+
+                    finish();
                 }
             }
         });
