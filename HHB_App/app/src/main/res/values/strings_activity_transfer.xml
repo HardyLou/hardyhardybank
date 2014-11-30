@@ -5,6 +5,6 @@
     <string name="transfer_person">\nEnter Phone Number or Email to Transfer To</string>
     <string name="prompt_email_or_phone">Email or Phone Number</string>
     <string name="transfer_amount">\nEnter Amount to Transfer</string>
-
+    <string name="title_transfer_activity">Transfer Funds</string>
 
 </resources>

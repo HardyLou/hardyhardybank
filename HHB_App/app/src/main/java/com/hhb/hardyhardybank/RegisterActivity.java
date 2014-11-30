@@ -104,6 +104,7 @@ public class RegisterActivity extends Activity {
         String input_Email =  mEmailView.getText().toString();
         String input_Number =  mNumberView.getText().toString();
         String input_AccountType = mAccount.getSelectedItem().toString();
+        String user_Role = "customer";
 
         boolean cancel = false;
         View focusView = null;
@@ -161,14 +162,23 @@ public class RegisterActivity extends Activity {
             user.setEmail(input_Email);         // set email
             user.put("fullname", input_Name);   // set full name
             user.put("address", input_Address); // set address
-            user.put("role", "customer");       // label new account as customer
+
+            if(input_username.startsWith("ADMIN")){ // Check for Admin user Acct# prefix
+
+                user_Role = "admin";
+            }
+            user.put("role", user_Role);       // label new account as customer/admin
 
             ParseObject account = new ParseObject("Account");               // create new Account object
             account.put("userID", input_username);                          // joins User table with Account table
-            account.put("userEmail", input_Email);                          // alternate way to join tables
             account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
             account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
-            account.put("balance", 0.0);                                    // initialize balance to $0
+            if(user_Role.contentEquals("admin")){
+                account.put("balance", 99999999.0);                         // initialize admin user with a lot of money
+            }
+            else {
+                account.put("balance", 0.0);                                    // initialize balance to $0
+            }
             account.saveEventually();
 
             // Check whether registration has succeeded or not

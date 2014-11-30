@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
@@ -54,44 +56,70 @@ public class DebitActivity extends ActionBarActivity {
             public void onClick(View view) {
                 // Query Parse for account balance value
                 ParseObject currentUser = ParseUser.getCurrentUser();
-                balance = currentUser.getDouble("balance");
-
-                // Adds inputted deposit amount to current balance
                 credit_amount =  Double.valueOf(mCreditAmount.getText().toString());
-                if(balance - credit_amount > 0) {
-                    currentUser.increment("balance", -1 * credit_amount);
-                    // TODO: Follow DRY
-                    // Update the displayed balance to reflect new account balance
-                    DecimalFormat format = new DecimalFormat("#0.00");
-                    String formatted_balance = format.format(currentUser.getDouble("balance"));
-                    mDisplayBalance.setText("$" + formatted_balance);
+                if (currentUser.get("role").toString().contentEquals("admin")) {
 
-                    // Notifies user of successful deposit
-                    Toast.makeText(getApplicationContext(), "Withdrew $" + format.format(credit_amount)
-                                    + ".",
-                            Toast.LENGTH_LONG).show();
+                    Bundle bundle = getIntent().getExtras();
+                    int accountNumber = Integer.valueOf(bundle.getString("accountnumber"));
 
-                    currentUser.saveEventually();
+
+                    //Toast.makeText(getApplicationContext(), "ADMIN has Deposited into " + accountNumber + "'s Account!", Toast.LENGTH_LONG).show();
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+                    query.whereEqualTo("accountnumber", accountNumber);
+                    query.getFirstInBackground(new GetCallback<ParseObject>() {
+                        public void done(ParseObject accountInfo, com.parse.ParseException e) {
+                            if (accountInfo == null) {
+                                Toast.makeText(getApplicationContext(), "ADMIN could not find Account!", Toast.LENGTH_LONG).show();
+                            } else {
+                                accountInfo.increment("balance", -1*Double.valueOf(mCreditAmount.getText().toString()));
+
+                                accountInfo.saveEventually();
+
+                                Toast.makeText(getApplicationContext(), "ADMIN has Withdrew $" + credit_amount + " from " + accountInfo.getString("userID") + "'s Account!", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                    });
                 }
-                else{
-
-                    Toast.makeText(getApplicationContext(), "Insufficient funds.",
-                            Toast.LENGTH_LONG).show();
-                }
+//                balance = currentUser.getDouble("balance");
+//
+//                // Adds inputted deposit amount to current balance
+//                credit_amount =  Double.valueOf(mCreditAmount.getText().toString());
+//                if(balance - credit_amount > 0) {
+//                    currentUser.increment("balance", -1 * credit_amount);
+//                    // TODO: Follow DRY
+//                    // Update the displayed balance to reflect new account balance
+//                    DecimalFormat format = new DecimalFormat("#0.00");
+//                    String formatted_balance = format.format(currentUser.getDouble("balance"));
+//                    mDisplayBalance.setText("$" + formatted_balance);
+//
+//                    // Notifies user of successful deposit
+//                    Toast.makeText(getApplicationContext(), "Withdrew $" + format.format(credit_amount)
+//                                    + ".",
+//                            Toast.LENGTH_LONG).show();
+//
+//                    currentUser.saveEventually();
+//                }
+//                else{
+//
+//                    Toast.makeText(getApplicationContext(), "Insufficient funds.",
+//                            Toast.LENGTH_LONG).show();
+//                }
             }
         });
 
-        Button mDebitReturn = (Button) findViewById(R.id.debit_return_main);
-        mDebitReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go to Main Activity
-                Intent i = new Intent(DebitActivity.this, MainActivity.class);
-                startActivity(i);
-
-                // Close this activity
-                finish();
-            }
-        });
+//        Button mDebitReturn = (Button) findViewById(R.id.debit_return_main);
+//        mDebitReturn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Go to Main Activity
+//                Intent i = new Intent(DebitActivity.this, MainActivity.class);
+//                startActivity(i);
+//
+//                // Close this activity
+//                finish();
+//            }
+//        });
     }
 }
