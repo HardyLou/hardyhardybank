@@ -98,6 +98,11 @@
             android:name=".AddAccountActivity"
             android:label="@string/action_add" >
         </activity>
+        <!-- Entry for close Account Activity -->
+        <activity
+            android:name=".CloseActivity"
+            android:label="@string/close_account" >
+        </activity>
 
     </application>
 

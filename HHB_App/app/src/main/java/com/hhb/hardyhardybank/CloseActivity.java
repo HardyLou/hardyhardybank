@@ -30,75 +30,57 @@ public class CloseActivity extends Activity{
     String toDelete;
     private ParseObject cAccountInfo;
     private Spinner mAccount;
+    private EditText mAccountNumber;
+    private String accountNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Connects app with Parse
         Parse.initialize(this, "G9sNy6cFAc2j1ZnKVGuYKhW5gHRQdUqPV3D3BOAm", "14vOkrgINnOVIS1fSG08tdJgIsvYi7OMlw8zTFuC");
 
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_main_user); //???????what is this?
 
-        // TODO: Follow DRY
-        // Update the displayed balance to reflect new account balance
-        DecimalFormat format = new DecimalFormat("#0.00");
-        //String formatted_balance = format.format(currentUser.getDouble("balance"));
-        // mDisplayBalance.setText("$" + formatted_balance);*/
-
-
-        // Notifies user of successful deposit // NEED TO NOTIFY USER THAT REMAINING BALANCE WILL BE MAILED TO ADDRESS
-        /*Toast.makeText(getApplicationContext(), "The remaining " + format.format(balance)
-                        + " will be mailed to this address " + address,
-                Toast.LENGTH_LONG).show();*/
+        setContentView(R.layout.activity_close);
 
 
 
-        // Activity once Close button is pressed
-        Button mCloseButton = (Button) findViewById(R.id.action_close);
+        mAccountNumber = (EditText) findViewById(R.id.account_number_close);
+
+
+        // Activity once confirm button is pressed
+        Button mCloseButton = (Button) findViewById(R.id.action_confirm);
         mCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Query Parse for account balance value and user's address
                 final ParseObject currentUser = ParseUser.getCurrentUser();
-                balance = currentUser.getDouble("balance");
-                address = currentUser.getString("address");
-                Toast.makeText(getApplicationContext(), "The remaining balance"
-                                + " will be mailed to your address ",
-                        Toast.LENGTH_LONG).show();
 
-                // mAccount = (Spinner) findViewById(R.id.available_accounts);
-                //String toDelete = mAccount.getSelectedItem().toString(); // get account selected in spinner
-                //ParseObject accountUser = currentUser.getObjectId();
+
+
+
+                accountNumber = mAccountNumber.getText().toString();
+                int accountValue = Integer.parseInt(accountNumber);
                 ParseQuery<ParseObject> queryCurrentUser = ParseQuery.getQuery("Account");
-                queryCurrentUser.whereEqualTo("userID", currentUser.getString("username"));
+                queryCurrentUser.whereEqualTo("accountnumber", accountValue);
 
-                /*queryCurrentUser.getFirstInBackground(new GetCallback<ParseObject>() {
+                queryCurrentUser.getFirstInBackground(new GetCallback<ParseObject>() {
                     public void done(ParseObject cAccountInfo, com.parse.ParseException e) {
                         if (cAccountInfo == null) {
                             Toast.makeText(getApplicationContext(), "Could not find Account!", Toast.LENGTH_LONG).show();
                         } else {
 
-                            //cUserBalance = cAccountInfo.getDouble("balance");
-                            toDelete = "ZLpJPxkpOM";//cAccountInfo.getObjectId().toString();
+                            toDelete = cAccountInfo.getObjectId();
                             try {
+                                Toast.makeText(getApplicationContext(), "The remaining balance in this account"+
+                                                 " will be mailed to your address ",
+                                        Toast.LENGTH_LONG).show();
+
                                 ParseObject.createWithoutData("Account", toDelete).delete();
                             } catch (ParseException e1) {
                                 e1.printStackTrace();
                             }
                         }
                     }
-                });*/
-
-              /*  try {
-                    accountUser.deleteEventually();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }*/
-                // delete current user
-
-               /* // Adds inputted deposit amount to current balance
-                credit_amount =  Double.valueOf(mCreditAmount.getText().toString());
-                currentUser.increment("balance", credit_amount);
-                currentUser.saveEventually();*/
+                });
 
 
             } // End of OnClickView

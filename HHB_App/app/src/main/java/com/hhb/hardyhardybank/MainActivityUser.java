@@ -12,6 +12,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.ParseQueryAdapter;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -34,7 +35,8 @@ public class MainActivityUser extends ActionBarActivity {
 
     // UI References
     private Spinner mAccounts;
-    //private ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> adapter;
+    private ParseQueryAdapter<ParseObject> mainAdapter;
 
 
     @Override
@@ -48,11 +50,11 @@ public class MainActivityUser extends ActionBarActivity {
 
         // Set up Spinner item for available accounts
         // temporary code to make spinner work (hardcoded account values)
-        mAccounts = (Spinner) findViewById(R.id.available_accounts);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        // mAccounts = (Spinner) findViewById(R.id.available_accounts);
+        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.account_numbers_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mAccounts.setAdapter(adapter);
+        mAccounts.setAdapter(adapter);*/
 
         //List<String> account_numbers_array2 = new ArrayList<String>();
 
@@ -60,12 +62,39 @@ public class MainActivityUser extends ActionBarActivity {
         //for each entry in accounts table
         //if username == current user
         //adapter.add("account number here");
+       /* final ParseObject currentUser = ParseUser.getCurrentUser();
+        ParseQuery<ParseObject> queryCurrentUser = ParseQuery.getQuery("Account");
+        queryCurrentUser.whereEqualTo("userID", currentUser.getString("username"));
+        try {
+            int accountQuantity = queryCurrentUser.count();
+            List<ParseObject> objArray = queryCurrentUser.find();
+            ArrayList<String> accountNameArray = new ArrayList<String>();
+            for(int x = accountQuantity; x < 0; x--)
+            {
+                ParseObject accountObj = objArray.get(x);
+                String accountID = accountObj.getObjectId().toString();
+                accountNameArray.add(accountID);
+            }
+
+
+            mAccounts.setAdapter((android.widget.SpinnerAdapter) accountNameArray);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
 
         //mAccounts = (Spinner) findViewById(R.id.available_accounts);
         //adapter = new ArrayAdapter<String>(this,
         //        android.R.layout.simple_spinner_item, account_numbers_array2);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //mAccounts.setAdapter(adapter);
+        mainAdapter = new ParseQueryAdapter<ParseObject>(this,"Account");
+        mainAdapter.setTextKey("accountnumber");
+        mAccounts = (Spinner) findViewById(R.id.available_accounts);
+        mAccounts.setAdapter(mainAdapter);
+        mainAdapter.loadObjects();
+
+
+
 
         // Button to Show Balance
         Button mBalanceButton = (Button) findViewById(R.id.action_balance);
@@ -134,46 +163,10 @@ public class MainActivityUser extends ActionBarActivity {
             closeUserAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent i = new Intent(MainActivityUser.this, CloseActivity.class);
-                //startActivity(i);
-
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                // Find account associated with input email and assign to targetAccount
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
-                // TODO: change to query for the current account being viewed!
-                // currently grabs all the accounts under the user
-                query.whereEqualTo("userID", currentUser.getUsername());
-                query.getFirstInBackground(new GetCallback<ParseObject>() {
-                    public void done(ParseObject targetAccount, com.parse.ParseException e) {
-                        // Target account's email is not registered in database
-                        if (targetAccount == null) {
-                            Toast.makeText(getApplicationContext(), "Account to be closed does not exist.", Toast.LENGTH_LONG).show();
-                        } else {
-                            // Add transferred money to target account's balance
-                            targetAccount.deleteInBackground();
-                            Toast.makeText(getApplicationContext(), "Target account closed!", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-                // TODO: Remove after multiple account functionality is implemented!
-                // currently deletes entire user
-                currentUser.deleteInBackground(new DeleteCallback() {
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            Toast.makeText(getApplicationContext(), "User has been deleted.",
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "User deletion failed.",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-                // TODO: Remove after multiple account functionality is implemented!
-                // currently sends user back to login screen
-                Intent i = new Intent(MainActivityUser.this, LoginActivity.class);
+                Intent i = new Intent(MainActivityUser.this, CloseActivity.class);
                 startActivity(i);
+                finish();
+
             }
         });
 
