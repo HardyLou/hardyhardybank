@@ -112,6 +112,15 @@ public class SplashActivity extends Activity {
                         startDate.add(Calendar.DATE, 30 * monthsInPenalty);
                         // subtract $25 from account balance
                         currentAccount.put("balance", currentAccount.getDouble("balance") - 25 * monthsInPenalty);
+
+                        // documents the penalty
+                        ParseObject transaction = new ParseObject("Transaction");
+                        transaction.put("accountNumber", currentAccount.getInt("accountnumber"));
+                        transaction.put("action", "penalty");
+                        transaction.put("amount", -25 * monthsInPenalty);
+                        transaction.put("resultingBalance", currentAccount.getDouble("balance"));
+                        transaction.saveEventually();
+
                         // update penalty date counter
                         currentAccount.put("pDateCounter", startDate.getTime());
                     }
