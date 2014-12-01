@@ -25,7 +25,7 @@ public class MainActivityTeller extends  ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_teller);
 
-        mAccountNumber = (EditText) findViewById(R.id.account_number);
+        mAccountNumber = (EditText) findViewById(R.id.account_number_teller);
 
         Button mDebitButton = (Button) findViewById(R.id.action_debit);
         Button mBalanceButton = (Button) findViewById(R.id.action_balance);
