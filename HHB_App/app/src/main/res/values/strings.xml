@@ -9,6 +9,7 @@
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_account">Account does not exist</string>
     <string name="action_debit">\nDebit Account\n</string>
     <string name="action_credit">\nCredit Account\n</string>
     <string name="accounts">Accounts</string>
