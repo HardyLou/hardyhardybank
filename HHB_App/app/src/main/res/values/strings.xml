@@ -20,6 +20,7 @@
     <string name="transfer_funds">\nTransfer Funds\n</string>
     <string name="close_account">\nClose Account\n</string>
     <string name="logout_account">\nLog Out\n</string>
+    <string name="confirm_close">\nConfirm\n</string>
     <string name="penalty_interest">\nCalculate Penalty\nor Interest\n</string>
 
     <string-array name="accounts_array">
