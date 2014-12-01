@@ -48,10 +48,12 @@ public class CreditActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 ParseObject currentUser = ParseUser.getCurrentUser();
+                credit_amount =  Double.valueOf(mCreditAmount.getText().toString());
+
                 if (currentUser.get("role").toString().contentEquals("admin")) {
 
                     Bundle bundle = getIntent().getExtras();
-                    int accountNumber = Integer.valueOf(bundle.getString("accountnumber"));
+                    final int accountNumber = Integer.valueOf(bundle.getString("accountnumber"));
 
 
                     //Toast.makeText(getApplicationContext(), "ADMIN has Deposited into " + accountNumber + "'s Account!", Toast.LENGTH_LONG).show();
@@ -62,11 +64,21 @@ public class CreditActivity extends ActionBarActivity {
                             if (accountInfo == null) {
                                 Toast.makeText(getApplicationContext(), "ADMIN could not find Account!", Toast.LENGTH_LONG).show();
                             } else {
+                                // deposits money into balance
                                 accountInfo.increment("balance", Double.valueOf(mCreditAmount.getText().toString()));
-
                                 accountInfo.saveEventually();
 
-                                Toast.makeText(getApplicationContext(), "ADMIN has Deposited into " + accountInfo.getString("userID") + "'s Account!", Toast.LENGTH_LONG).show();
+                                // documents the transaction
+                                ParseObject transaction = new ParseObject("Transaction");
+                                transaction.put("accountNumber", accountNumber);
+                                transaction.put("action", "credit");
+                                transaction.put("amount", Double.valueOf(mCreditAmount.getText().toString()));
+                                transaction.put("resultingBalance", accountInfo.getDouble("balance"));
+                                transaction.saveEventually();
+
+                                Toast.makeText(getApplicationContext(), "ADMIN has deposited $" +
+                                        credit_amount + " into " + accountInfo.getString("userID") +
+                                        "'s Account!", Toast.LENGTH_LONG).show();
                             }
 
                         }
@@ -109,17 +121,20 @@ public class CreditActivity extends ActionBarActivity {
 //                }
             }
         });
-//        mCreditReturn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Go to Main Activity
-//                Intent i = new Intent(CreditActivity.this, MainActivity.class);
-//                startActivity(i);
-//
-//                // Close this activity
-//                finish();
-//            }
-//         });
 
+
+        // Activity when "Return to Main" button is pressed
+        mCreditReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to ADMIN Main Activity
+                Intent i = new Intent(CreditActivity.this, MainActivityTeller.class);
+                startActivity(i);
+
+                // Close this activity
+                finish();
             }
+         });
+
+    }
 }
