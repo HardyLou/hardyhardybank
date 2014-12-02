@@ -22,4 +22,7 @@ import com.parse.ParseUser;
 public class BalanceActivity extends ActionBarActivity {
 
     // placeholder
+
+    //note: include "BACK" button which just does finish();
+    //ask Dan for clarification
 }

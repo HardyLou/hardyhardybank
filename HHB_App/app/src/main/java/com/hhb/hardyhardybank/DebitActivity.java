@@ -24,8 +24,6 @@ import com.parse.ParseUser;
 public class DebitActivity extends ActionBarActivity {
     // UI references.
     private EditText mDebitAmount;
-    private TextView mDisplayBalance;
-
     double balance, debit_amount;
 
     @Override
@@ -38,16 +36,29 @@ public class DebitActivity extends ActionBarActivity {
 
         // Set up the Debit Account form
         mDebitAmount = (EditText) findViewById(R.id.debit_amount);
-        mDisplayBalance = (TextView) findViewById(R.id.available_balance);
+        Button mDebitBalance = (Button) findViewById(R.id.debit_balance);
+
+        // Button to Show Balance activity
+        mDebitBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to Balance Activity
+                Intent i = new Intent(DebitActivity.this, BalanceActivity.class);
+                startActivity(i);
+
+                // DO NOT close this activity!
+            }
+        });
+
 
         // Query Parse for account balance value
-        ParseObject currentUser = ParseUser.getCurrentUser();
-        balance = currentUser.getDouble("balance");
+//        ParseObject currentUser = ParseUser.getCurrentUser();
+//        balance = currentUser.getDouble("balance");
 
         // Format displayed balance
-        DecimalFormat format = new DecimalFormat("#0.00");
-        final String formatted_balance = format.format(balance);
-        mDisplayBalance.setText("$" + formatted_balance);
+//        DecimalFormat format = new DecimalFormat("#0.00");
+//        final String formatted_balance = format.format(balance);
+//        mDisplayBalance.setText("$" + formatted_balance);
 
         // Activity once Deposit button is pressed
         Button mDebitButton = (Button) findViewById(R.id.debit_enter);
