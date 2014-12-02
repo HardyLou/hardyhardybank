@@ -18,7 +18,7 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/accounts"
+        android:text="Accounts"
         android:id="@+id/accounts_label"
         android:paddingLeft="100dp"
         android:paddingRight="100dp"
@@ -30,7 +30,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/transfer_funds"
+        android:text="Transfer Funds"
         android:id="@+id/action_transfer"
         android:textSize="30sp" />
 
@@ -61,7 +61,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="79dp"
-        android:text="@string/action_add"
+        android:text="Add Account"
         android:id="@+id/action_add_acct_main"
         android:layout_gravity="center"
         android:width="200dp" />
@@ -69,7 +69,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/close_account"
+        android:text="Close Account"
         android:id="@+id/action_close"
         android:layout_gravity="center"
         android:width="200dp" />

@@ -134,7 +134,7 @@ public class LoginActivity extends Activity {
                         finish();
                     } else if (currentUser.getString("role").equals("customer")) {
                         // If user is a regular user, send to user home screen
-                        Intent i = new Intent(LoginActivity.this, MainActivityUser.class);
+                        Intent i = new Intent(LoginActivity.this, MainActivityCustomer.class);
                         startActivity(i);
 
                         finish();

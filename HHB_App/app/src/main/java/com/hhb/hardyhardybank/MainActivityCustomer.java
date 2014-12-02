@@ -31,6 +31,8 @@ import java.util.List;
  */
 public class MainActivityCustomer extends Activity {
 
+    private List<ParseObject> listViewData;
+
     protected void onCreate(Bundle SavedInstanceState) {
 
         // Connect app with Parse
@@ -38,6 +40,11 @@ public class MainActivityCustomer extends Activity {
 
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_main_customer);
+
+
+        MainActivityCustomerAdapter mainActivityCustomerAdapter = new MainActivityCustomerAdapter();
+        ListView showBalanceAndAccountType = (ListView)findViewById(R.id.listView);
+        showBalanceAndAccountType.setAdapter(mainActivityCustomerAdapter);
 
 
         // Button to Log Out Account
@@ -55,9 +62,6 @@ public class MainActivityCustomer extends Activity {
             }
         });
 
-        MainActivityCustomerAdapter mainActivityCustomerAdapter = new MainActivityCustomerAdapter();
-        ListView showBalanceAndAccountType = (ListView)findViewById(R.id.listView);
-        showBalanceAndAccountType.setAdapter(mainActivityCustomerAdapter);
 
 
         // Button to Transfer Funds
@@ -95,6 +99,7 @@ public class MainActivityCustomer extends Activity {
 
         public class MainActivityCustomerAdapter extends BaseAdapter {
 
+            private int numOfAccounts;
             @Override
             public int getCount() {
 
@@ -102,20 +107,21 @@ public class MainActivityCustomer extends Activity {
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 String userName = currentUser.getString("username");
 
-                final int[] numOfAccounts = new int[1];
+                //final int[] numOfAccounts = new int[1];
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
                 query.whereEqualTo("userID", userName);
                 query.findInBackground(new FindCallback<ParseObject>() {
                     public void done(List<ParseObject> accounts, ParseException e) {
                         if (e == null) {
-                            numOfAccounts[0] = accounts.size();
+                            //numOfAccounts[0] = accounts.size();
+                            numOfAccounts = accounts.size();
                         } else {
                             Log.d("score", "Error: " + e.getMessage());
                         }
                     }
                 });
 
-                return numOfAccounts[0];
+                return numOfAccounts;
             }
 
             @Override
@@ -192,6 +198,28 @@ public class MainActivityCustomer extends Activity {
 
         }
 
+    public List<ParseObject> getDataForListView() {
+
+        // Get current user
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        String userName = currentUser.getString("username");
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+        query.whereEqualTo("userID", userName);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> accounts, ParseException e) {
+                if (e == null) {
+                    //numOfAccounts[0] = accounts.size();
+                    numOfAccounts = accounts.size();
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+
+
+    }
 
 
 }
