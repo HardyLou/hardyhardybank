@@ -106,8 +106,8 @@ public class MainActivityUser extends ActionBarActivity {
                 Intent i = new Intent(MainActivityUser.this, BalanceActivity.class);
                 startActivity(i);
 
-                // close this activity
-                finish();
+                // DO NOT close this activity!
+                // finish();
             }
         });
 

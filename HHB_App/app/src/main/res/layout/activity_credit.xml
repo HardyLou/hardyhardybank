@@ -11,23 +11,12 @@
         android:id="@+id/credit_label"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/checking_account"
-        android:id="@+id/account_label"
-        android:layout_gravity="center_horizontal"
-        android:paddingLeft="100dp"
-        android:paddingRight="100dp" />
-
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/available_balance"
-        android:layout_gravity="center_horizontal"
-        android:text="balance" />
+        android:text="@string/show_balance"
+        android:id="@+id/credit_balance"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"

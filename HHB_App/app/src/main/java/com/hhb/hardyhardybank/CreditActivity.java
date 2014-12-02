@@ -24,9 +24,6 @@ import com.parse.ParseUser;
 public class CreditActivity extends ActionBarActivity {
     // UI references.
     private EditText mCreditAmount;
-    private TextView mDisplayBalance;
-    private static double cUserBalance = 0;
-
     double balance, credit_amount;
 
     @Override
@@ -39,8 +36,21 @@ public class CreditActivity extends ActionBarActivity {
 
         // Set up the Credit Account form
         mCreditAmount = (EditText) findViewById(R.id.credit_amount);
-        mDisplayBalance = (TextView) findViewById(R.id.available_balance);
         Button mCreditReturn = (Button) findViewById(R.id.credit_return_main);
+        Button mCreditBalance = (Button) findViewById(R.id.credit_balance);
+
+        // Button to Show Balance activity
+        mCreditBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Go to Balance Activity
+                Intent i = new Intent(CreditActivity.this, BalanceActivity.class);
+                startActivity(i);
+
+                // DO NOT close this activity!
+            }
+        });
+
 
         // Activity once Deposit button is pressed
         Button mCreditButton = (Button) findViewById(R.id.credit_enter);

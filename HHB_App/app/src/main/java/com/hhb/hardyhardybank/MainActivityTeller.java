@@ -41,7 +41,6 @@ public class MainActivityTeller extends  ActionBarActivity{
         Button mDebitButton = (Button) findViewById(R.id.action_debit);
         Button mBalanceButton = (Button) findViewById(R.id.action_balance);
         Button mCreditButton = (Button) findViewById(R.id.action_credit);
-        Button mTransferButton = (Button) findViewById(R.id.action_transfer);
         Button mCloseButton = (Button) findViewById(R.id.action_close);
         Button mLogoutButton = (Button) findViewById(R.id.action_logout);
 
@@ -55,8 +54,8 @@ public class MainActivityTeller extends  ActionBarActivity{
                 Intent i = new Intent(MainActivityTeller.this, BalanceActivity.class);
                 startActivity(i);
 
-                // Close this activity
-                finish();
+                // DO NOT close this activity!
+                //finish();
             }
         });
 
@@ -119,8 +118,6 @@ public class MainActivityTeller extends  ActionBarActivity{
             }
         });
 
-
-        //TODO: TRANSFER FUNDS
 
 
         //TODO: CLOSE ACCOUNT
