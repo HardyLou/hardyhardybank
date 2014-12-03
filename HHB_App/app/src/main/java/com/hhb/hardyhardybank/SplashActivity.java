@@ -18,6 +18,7 @@ import java.util.List;
 
 public class SplashActivity extends Activity {
     int daysInPenalty, monthsInPenalty;
+    double monthlyAverage, interest;
     // today's date
     Calendar currentDate = Calendar.getInstance();
 
@@ -32,6 +33,7 @@ public class SplashActivity extends Activity {
         // Makes sure all accounts are up to date
         try {
             checkPenalty();
+            checkInterest();
         } catch (ParseException e2){
             Toast.makeText(getApplicationContext(), "ERROR",
                     Toast.LENGTH_LONG).show();
@@ -139,6 +141,105 @@ public class SplashActivity extends Activity {
                 currentAccount.put("pDateCounter", currentDate.getTime());
 
             }
+
+            // saves updated information in Parse database
+            currentAccount.save();
+        }
+    }
+
+    // Checks average daily balance at the end of every month to determine if interest should be applied
+    public void checkInterest() throws ParseException {
+        // grabs all existing accounts
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+        // puts all the accounts into a List
+        List<ParseObject> accounts = query.find();
+
+        // iterate through the list of accounts
+        for (int i = 0; i < accounts.size(); i++) {
+            ParseObject currentAccount = accounts.get(i);
+            // checks if the total balance count has been updated for today's date
+            if (currentAccount.getInt("updatedICounterOn") != currentDate.get(Calendar.DAY_OF_MONTH)) {
+                // adds today's balance to total balance count
+                currentAccount.increment("interestCounter", currentAccount.getDouble("balance"));
+                // flag to show that the total balance has been updated today
+                currentAccount.put("updatedICounterOn", currentDate.get(Calendar.DAY_OF_MONTH));
+
+                // checks for interest on the last day of the month
+                if (currentDate.get(Calendar.DAY_OF_MONTH) == currentDate.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+                    // calculates daily average balance of the account over the last month
+                    monthlyAverage = currentAccount.getDouble("interestCounter") /
+                                     currentDate.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                    // for savings accounts
+                    if (currentAccount.getString("accountType").equals("Saving")) {
+                        // average balance was over $2000 and below $3000
+                        // 4% interest
+                        if (monthlyAverage > 3000) {
+                            interest = 0.04 * currentAccount.getDouble("balance");
+                        }
+
+                        // average balance was over $2000 and below $3000
+                        // 3% interest
+                        else if (monthlyAverage > 2000 && monthlyAverage <= 3000) {
+                            interest = 0.03 * currentAccount.getDouble("balance");
+                        }
+
+                        // average balance was over $1000 and below $2000
+                        // 2% interest
+                        else if (monthlyAverage > 1000 && monthlyAverage <= 2000) {
+                            interest = 0.02 * currentAccount.getDouble("balance");
+                        }
+
+                        // average balance was not eligible for any interest
+                        else {
+                            interest = 0;
+                        }
+                    }
+
+                    // for checking accounts
+                    else if (currentAccount.getString("accountType").equals("Checking")) {
+                        // average balance was over $3000
+                        // 3% interest
+                        if (monthlyAverage > 3000) {
+                            interest = 0.03 * currentAccount.getDouble("balance");
+                        }
+
+                        // average balance was over $2000 and below $3000
+                        // 2% interest
+                        else if (monthlyAverage > 2000 && monthlyAverage <= 3000) {
+                            interest = 0.02 * currentAccount.getDouble("balance");
+                        }
+
+                        // average balance was over $1000 and below $2000
+                        // 1% interest
+                        else if (monthlyAverage > 1000 && monthlyAverage <= 2000) {
+                            interest = 0.01 * currentAccount.getDouble("balance");
+                        }
+
+                        // average balance was not eligible for any interest
+                        else {
+                            interest = 0;
+                        }
+                    }
+
+                    // adds interest into account
+                    currentAccount.put("balance", interest + currentAccount.getDouble("balance"));
+                    // reset monthly total count
+                    currentAccount.put("interestCounter", 0);
+
+                    // documents the interest if applicable
+                    if (interest > 0) {
+                        ParseObject transaction = new ParseObject("Transaction");
+                        transaction.put("accountNumber", currentAccount.getInt("accountnumber"));
+                        transaction.put("action", "interest");
+                        transaction.put("amount", interest);
+                        transaction.put("resultingBalance", currentAccount.getDouble("balance"));
+                        transaction.saveEventually();
+                    }
+                }
+            }
+
+            // saves updated information in Parse database
             currentAccount.save();
         }
     }
