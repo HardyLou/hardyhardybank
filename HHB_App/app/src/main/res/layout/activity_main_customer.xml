@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:weightSum="1"
-    android:textAlignment="center" > -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -45,24 +37,6 @@
         android:layout_below="@+id/action_logout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-<!--
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/account_info"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.1" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/account_balance"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.05" />
--->
 
     <ListView
         android:layout_width="fill_parent"
