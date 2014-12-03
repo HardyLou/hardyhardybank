@@ -148,7 +148,7 @@ public class AddAccountActivity extends Activity {
 
 
             // Successful Registration, return to LoginActivity
-            Intent i = new Intent(AddAccountActivity.this, MainActivityUser.class);
+            Intent i = new Intent(AddAccountActivity.this, MainActivityCustomer.class);
             startActivity(i);
 
             // Notify user registration has been successful

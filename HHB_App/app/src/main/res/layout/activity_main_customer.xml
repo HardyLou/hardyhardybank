@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<!--<LinearLayout
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:weightSum="1"
-    android:textAlignment="center" >
+    android:textAlignment="center" > -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LOG OFF"
         android:id="@+id/action_logout"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="360dp"
@@ -25,14 +32,19 @@
         android:gravity="center"
         android:textSize="30sp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.001" />
+        android:layout_weight="0.001"
+        android:layout_above="@+id/action_transfer"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Transfer Funds"
         android:id="@+id/action_transfer"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_below="@+id/action_logout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 <!--
     <TextView
@@ -53,10 +65,11 @@
 -->
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="721dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/action_transfer" />
 
     <Button
         android:layout_width="wrap_content"
@@ -64,7 +77,9 @@
         android:text="Add Account"
         android:id="@+id/action_add_acct_main"
         android:layout_gravity="center"
-        android:width="200dp" />
+        android:width="200dp"
+        android:layout_below="@+id/listView"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,6 +87,8 @@
         android:text="Close Account"
         android:id="@+id/action_close"
         android:layout_gravity="center"
-        android:width="200dp" />
+        android:width="200dp"
+        android:layout_below="@+id/action_add_acct_main"
+        android:layout_centerHorizontal="true" />
 
-</LinearLayout>
+</RelativeLayout>

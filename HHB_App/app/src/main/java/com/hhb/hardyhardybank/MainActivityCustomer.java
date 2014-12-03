@@ -20,6 +20,7 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
 import java.text.DecimalFormat;
@@ -31,7 +32,10 @@ import java.util.List;
  */
 public class MainActivityCustomer extends Activity {
 
-    private List<ParseObject> listViewData;
+    private String userName;
+    private CustomAdapter mainActivityCustomerAdapter;
+    private TextView mAccountInfoView;
+    private TextView mBalanceView;
 
     protected void onCreate(Bundle SavedInstanceState) {
 
@@ -41,8 +45,23 @@ public class MainActivityCustomer extends Activity {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_main_customer);
 
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        userName = currentUser.getString("username");
 
-        MainActivityCustomerAdapter mainActivityCustomerAdapter = new MainActivityCustomerAdapter();
+        /*
+        ParseQueryAdapter.QueryFactory<ParseObject> factory =
+                new ParseQueryAdapter.QueryFactory<ParseObject>() {
+                    public ParseQuery create() {
+                        ParseQuery query = new ParseQuery("Account");
+                        query.whereEqualTo("userID", userName);
+                        return query;
+                    }
+                };
+        } */
+
+
+        mainActivityCustomerAdapter = new CustomAdapter(this);
+
         ListView showBalanceAndAccountType = (ListView)findViewById(R.id.listView);
         showBalanceAndAccountType.setAdapter(mainActivityCustomerAdapter);
 
@@ -96,7 +115,61 @@ public class MainActivityCustomer extends Activity {
         });
     }
 
+    public class CustomAdapter extends ParseQueryAdapter<ParseObject> {
 
+        public CustomAdapter(Context context) {
+            // Use the QueryFactory to construct a PQA
+            super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
+                public ParseQuery create() {
+                    ParseQuery query = new ParseQuery("Account");
+                    query.whereEqualTo("userID", userName);
+                    return query;
+                }
+            });
+        }
+
+
+        @Override
+        public View getItemView(ParseObject object, View v, ViewGroup parent) {
+            if (v == null) {
+                v = View.inflate(getContext(), R.layout.list_item, null);
+            }
+
+            // Take advantage of ParseQueryAdapter's getItemView logic
+            // The IDs in your custom layout must match what ParseQueryAdapter expects
+            super.getItemView(object, v, parent);
+
+            // Set up the listView item before returning the View.
+            mAccountInfoView = (TextView) v.findViewById(R.id.account_info);
+            mBalanceView = (TextView) v.findViewById(R.id.account_balance);
+
+            String accountType = object.getString("accountType");
+            double accountNumber = object.getDouble("accountnumber");
+            double balance = object.getDouble("balance");
+
+            DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
+            DecimalFormat balanceFormat = new DecimalFormat("#0.00");
+
+            mAccountInfoView.setText("HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")");
+            mBalanceView.setText("$" + balanceFormat.format(balance));
+
+            return v;
+        }
+    }
+/*
+    public View getNextPageView(View v, ViewGroup parent) {
+        if (v == null) {
+            // R.layout.adapter_next_page contains an ImageView with a custom graphic
+            // and a TextView.
+            v = View.inflate(getContext(), R.layout.adapter_next_page, null);
+        }
+        TextView textView = (TextView) v.findViewById(R.id.nextPageTextViewId);
+        textView.setText("Loaded " + getCount() + " rows. Get more!");
+        return v;
+    }
+*/
+
+/*
         public class MainActivityCustomerAdapter extends BaseAdapter {
 
             private int numOfAccounts;
@@ -193,11 +266,8 @@ public class MainActivityCustomer extends Activity {
 
             }
 
-
-
-
-        }
-
+        } */
+/*
     public List<ParseObject> getDataForListView() {
 
         // Get current user
@@ -221,5 +291,5 @@ public class MainActivityCustomer extends Activity {
 
     }
 
-
+*/
 }

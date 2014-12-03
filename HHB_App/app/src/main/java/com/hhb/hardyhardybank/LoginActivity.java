@@ -131,13 +131,11 @@ public class LoginActivity extends Activity {
                         Intent i = new Intent(LoginActivity.this, MainActivityTeller.class);
                         startActivity(i);
 
-                        finish();
                     } else if (currentUser.getString("role").equals("customer")) {
                         // If user is a regular user, send to user home screen
                         Intent i = new Intent(LoginActivity.this, MainActivityCustomer.class);
                         startActivity(i);
 
-                        finish();
                     } else {
                         // Account in database does not contain required fields
                         Toast.makeText(getApplicationContext(), "Account is corrupted",

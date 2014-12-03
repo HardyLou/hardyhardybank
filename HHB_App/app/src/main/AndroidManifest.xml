@@ -36,6 +36,13 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
+        <!-- Entry for Main Activity Customer Screen -->
+        <activity
+            android:name=".MainActivityCustomer"
+            android:label="Accounts"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+
         <!-- Entry for Register Screen -->
         <activity
             android:name=".RegisterActivity"

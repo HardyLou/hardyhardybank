@@ -103,8 +103,8 @@ public class TransferActivity extends Activity {
         mReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(TransferActivity.this, MainActivityUser.class);
-//                startActivity(i);
+                Intent i = new Intent(TransferActivity.this, MainActivityCustomer.class);
+                startActivity(i);
                 finish();
             }
         });
