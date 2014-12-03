@@ -40,8 +40,6 @@ public class TransferActivity extends Activity {
         double accountBalance = 0;
         final ParseObject currentUser = ParseUser.getCurrentUser();
 
-        //Toast.makeText(getApplicationContext(), "Transfer Success!" + " " + cUserBalance, Toast.LENGTH_LONG).show();
-
         // When Enter button is clicked
         Button mCreditButton = (Button) findViewById(R.id.credit_enter);
         mCreditButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +82,22 @@ public class TransferActivity extends Activity {
                                                     transferAmount + " was transferred to " +
                                                     targetAccount.getString("userID") + ".",
                                                     Toast.LENGTH_LONG).show();
+
+                                            // documents the transaction
+                                            // transaction log for sender
+                                            ParseObject sTransaction = new ParseObject("Transaction");
+                                            sTransaction.put("accountNumber", cAccountInfo.getInt("accountnumber"));
+                                            sTransaction.put("action", "transfer");
+                                            sTransaction.put("amount", -1 * transferAmount);
+                                            sTransaction.put("resultingBalance", cAccountInfo.getDouble("balance"));
+                                            sTransaction.saveEventually();
+                                            // transaction log for recipient
+                                            ParseObject rTransaction = new ParseObject("Transaction");
+                                            rTransaction.put("accountNumber", targetAccount.getInt("accountnumber"));
+                                            rTransaction.put("action", "transfer");
+                                            rTransaction.put("amount", transferAmount);
+                                            rTransaction.put("resultingBalance", targetAccount.getDouble("balance"));
+                                            rTransaction.saveEventually();
                                         }
                                     }
                                 });
