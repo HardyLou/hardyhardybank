@@ -1,68 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LOG OFF"
-        android:id="@+id/action_logout"
-        android:layout_gravity="right"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Accounts"
-        android:id="@+id/accounts_label"
-        android:paddingLeft="100dp"
-        android:paddingRight="100dp"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.001"
-        android:layout_above="@+id/action_transfer"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Transfer Funds"
-        android:id="@+id/action_transfer"
-        android:textSize="30sp"
-        android:layout_below="@+id/action_logout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ListView
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/action_transfer" />
+        android:layout_height="fill_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="79dp"
-        android:text="Add Account"
-        android:id="@+id/action_add_acct_main"
-        android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_below="@+id/listView"
-        android:layout_centerHorizontal="true" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOG OFF"
+                android:id="@+id/action_logout"
+                android:layout_gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Close Account"
-        android:id="@+id/action_close"
-        android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_below="@+id/action_add_acct_main"
-        android:layout_centerHorizontal="true" />
+            <TextView
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Accounts"
+                android:id="@+id/accounts_label"
+                android:paddingLeft="100dp"
+                android:paddingRight="100dp"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.001"
+                android:layout_above="@+id/action_transfer"
+                android:layout_centerHorizontal="true" />
 
-</RelativeLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transfer Funds"
+                android:id="@+id/action_transfer"
+                android:textSize="30sp"
+                android:layout_below="@+id/action_logout"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="280dp"
+                android:id="@+id/listView"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/action_transfer"
+                android:clickable="true" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="79dp"
+                android:text="Add Account"
+                android:id="@+id/action_add_acct_main"
+                android:layout_gravity="center"
+                android:width="200dp"
+                android:layout_below="@+id/listView"
+                android:layout_centerHorizontal="true" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close Account"
+                android:id="@+id/action_close"
+                android:layout_gravity="center"
+                android:width="200dp"
+                android:layout_below="@+id/action_add_acct_main"
+                android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+</ScrollView>
