@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -48,23 +50,11 @@ public class MainActivityCustomer extends Activity {
         ParseUser currentUser = ParseUser.getCurrentUser();
         userName = currentUser.getString("username");
 
-        /*
-        ParseQueryAdapter.QueryFactory<ParseObject> factory =
-                new ParseQueryAdapter.QueryFactory<ParseObject>() {
-                    public ParseQuery create() {
-                        ParseQuery query = new ParseQuery("Account");
-                        query.whereEqualTo("userID", userName);
-                        return query;
-                    }
-                };
-        } */
-
 
         mainActivityCustomerAdapter = new CustomAdapter(this);
 
         ListView showBalanceAndAccountType = (ListView)findViewById(R.id.listView);
         showBalanceAndAccountType.setAdapter(mainActivityCustomerAdapter);
-
 
         // Button to Log Out Account
         Button mLogOutButton = (Button) findViewById(R.id.action_logout);
@@ -117,6 +107,9 @@ public class MainActivityCustomer extends Activity {
 
     public class CustomAdapter extends ParseQueryAdapter<ParseObject> {
 
+        private String accountType;
+        private double accountNumber;
+
         public CustomAdapter(Context context) {
             // Use the QueryFactory to construct a PQA
             super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
@@ -127,7 +120,6 @@ public class MainActivityCustomer extends Activity {
                 }
             });
         }
-
 
         @Override
         public View getItemView(ParseObject object, View v, ViewGroup parent) {
@@ -143,8 +135,8 @@ public class MainActivityCustomer extends Activity {
             mAccountInfoView = (TextView) v.findViewById(R.id.account_info);
             mBalanceView = (TextView) v.findViewById(R.id.account_balance);
 
-            String accountType = object.getString("accountType");
-            double accountNumber = object.getDouble("accountnumber");
+            accountType = object.getString("accountType");
+            accountNumber = object.getDouble("accountnumber");
             double balance = object.getDouble("balance");
 
             DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
@@ -152,6 +144,19 @@ public class MainActivityCustomer extends Activity {
 
             mAccountInfoView.setText("HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")");
             mBalanceView.setText("$" + balanceFormat.format(balance));
+
+            v.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
+                    i.putExtra("accountType", accountType);
+                    i.putExtra("accountnumber", accountNumber);
+
+                    startActivity(i);
+                    finish();
+                }
+            });
 
             return v;
         }
