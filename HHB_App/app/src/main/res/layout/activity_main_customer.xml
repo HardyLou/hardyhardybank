@@ -17,9 +17,8 @@
                 android:layout_alignParentEnd="true" />
 
             <TextView
-                android:layout_width="360dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Accounts"
                 android:id="@+id/accounts_label"
                 android:paddingLeft="100dp"

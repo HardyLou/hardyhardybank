@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivityCustomer" >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOG OFF"
+        android:id="@+id/action_logout"
+        android:layout_gravity="right"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Accounts"
+        android:id="@+id/accounts_label"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:textSize="40sp"
+        android:layout_weight="0.001"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:id="@+id/all_accounts_list_view"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:focusable="false"
+        android:layout_below="@+id/action_logout">
+    </ListView>
+
+</RelativeLayout>
