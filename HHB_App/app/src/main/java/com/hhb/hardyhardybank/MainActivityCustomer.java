@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -36,9 +37,17 @@ import java.util.List;
 public class MainActivityCustomer extends Activity {
 
     private String userName;
-    private CustomAdapter mainActivityCustomerAdapter;
+
+    // Adapter for the Todos Parse Query
+    private ParseQueryAdapter<ParseObject> mainActivityCustomerAdapter;
+
+    private LayoutInflater inflater;
+
     private ListView lv;
 
+    private String accountType;
+    private double accountNumber;
+    private double balance;
 
     protected void onCreate(Bundle SavedInstanceState) {
 
@@ -51,9 +60,43 @@ public class MainActivityCustomer extends Activity {
         ParseUser currentUser = ParseUser.getCurrentUser();
         userName = currentUser.getString("username");
 
-        ListView lv = (ListView)findViewById(R.id.listView);
-        mainActivityCustomerAdapter = new CustomAdapter(this);
+
+        ParseQueryAdapter.QueryFactory<ParseObject> factory = new ParseQueryAdapter.QueryFactory<ParseObject>() {
+            public ParseQuery<ParseObject> create() {
+                ParseQuery<ParseObject> query = new ParseQuery("Account");
+                query.whereEqualTo("userID", userName);
+                return query;
+            }
+        };
+
+
+        inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mainActivityCustomerAdapter = new CustomAdapter(this, factory);
+
+        // Attach the query adapter to the view
+        lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(mainActivityCustomerAdapter);
+
+        lv.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                ParseObject object = mainActivityCustomerAdapter.getItem(position);
+                Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
+                accountType = object.getString("accountType");
+                accountNumber = object.getDouble("accountnumber");
+                balance = object.getDouble("balance");
+
+                i.putExtra("accountType", accountType);
+                i.putExtra("accountnumber", accountNumber);
+                i.putExtra("balance", balance);
+
+                startActivity(i);
+
+            }
+        });
+
 
         // Button to Log Out Account
         Button mLogOutButton = (Button) findViewById(R.id.action_logout);
@@ -110,26 +153,19 @@ public class MainActivityCustomer extends Activity {
         Context mContext;
         TextView mAccountInfoView;
         TextView mBalanceView;
-        String accountType;
-        double accountNumber;
 
-        public CustomAdapter(Context context) {
-            // Use the QueryFactory to construct a PQA
-            super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
-                public ParseQuery create() {
-                    ParseQuery query = new ParseQuery("Account");
-                    query.whereEqualTo("userID", userName);
-                    return query;
-                }
-            });
-
+        public CustomAdapter(Context context,
+                               ParseQueryAdapter.QueryFactory<ParseObject> queryFactory) {
+            super(context, queryFactory);
         }
+
+
 
         @Override
         public View getItemView(ParseObject object, View view, ViewGroup parent) {
 
             if (view == null) {
-                view = View.inflate(getContext(),R.layout.list_item, null);
+                view = inflater.inflate(R.layout.list_item, parent, false);
             }
 
             // Take advantage of ParseQueryAdapter's getItemView logic
@@ -137,52 +173,58 @@ public class MainActivityCustomer extends Activity {
             super.getItemView(object, view, parent);
 
             // Set up the listView item before returning the View.
-            mAccountInfoView = (TextView) view.findViewById(R.id.account_info);
-            mBalanceView = (TextView) view.findViewById(R.id.account_balance);
+            mAccountInfoView = (TextView) view.findViewById(R.id.item1);
+            mBalanceView = (TextView) view.findViewById(R.id.item2);
 
 
-            accountType = object.getString("accountType");
-            accountNumber = object.getDouble("accountnumber");
+            String accountType = object.getString("accountType");
+            double accountNumber = object.getDouble("accountnumber");
             double balance = object.getDouble("balance");
 
             DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
             DecimalFormat balanceFormat = new DecimalFormat("#0.00");
 
-            mAccountInfoView.setText("HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")");
-            mBalanceView.setText("$" + balanceFormat.format(balance));
+            final String accountInfo = "HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
+            final String accountBalance = "$" + balanceFormat.format(balance);
 
-            mAccountInfoView.setOnClickListener(new OnClickListener() {
+            mAccountInfoView.setText(accountInfo);
+            mBalanceView.setText(accountBalance);
+
+            /*mAccountInfoView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
+                    TextView textview = (TextView)view;
+
                     i.putExtra("accountType", accountType);
                     i.putExtra("accountnumber", accountNumber);
+                    i.putExtra("accountInfo", textview.getText());
+                    i.putExtra("accountBalance", textview.getText());
 
                     startActivity(i);
 
                     finish();
                 }
             });
-
-            mBalanceView.setOnClickListener(new OnClickListener() {
+*/
+            /*mBalanceView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
                     i.putExtra("accountType", accountType);
                     i.putExtra("accountnumber", accountNumber);
+                    i.putExtra("accountInfo", accountInfo);
+                    i.putExtra("accountBalance", accountBalance);
 
                     startActivity(i);
 
                     finish();
                 }
-            });
+            });&*/
 
             return view;
         }
     }
-
-
-
 }

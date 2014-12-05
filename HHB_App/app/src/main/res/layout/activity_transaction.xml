@@ -2,11 +2,21 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Button
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_gravity="center_horizontal" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Transactions"
+        android:id="@+id/transactions"
+        android:layout_gravity="center"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_weight="0.04"
+        android:autoText="false"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="30dp" />
 </LinearLayout>
