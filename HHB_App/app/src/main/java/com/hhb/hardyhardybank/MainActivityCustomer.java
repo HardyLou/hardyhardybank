@@ -1,34 +1,25 @@
 package com.hhb.hardyhardybank;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
 import com.parse.Parse;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 /**
  * Created by Xiaohan on 11/30/14.
@@ -46,6 +37,8 @@ public class MainActivityCustomer extends Activity {
     private ListView lv;
 
     private String accountType;
+
+
     private double accountNumber;
     private double balance;
 
@@ -88,9 +81,15 @@ public class MainActivityCustomer extends Activity {
                 accountNumber = object.getDouble("accountnumber");
                 balance = object.getDouble("balance");
 
-                i.putExtra("accountType", accountType);
+                DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
+                DecimalFormat balanceFormat = new DecimalFormat("#0.00");
+
+                final String accountInfo = "HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
+                final String accountBalance = "$" + balanceFormat.format(balance);
+
+                i.putExtra("accountInfo", accountInfo);
+                i.putExtra("accountBalance", accountBalance);
                 i.putExtra("accountnumber", accountNumber);
-                i.putExtra("balance", balance);
 
                 startActivity(i);
 
@@ -148,9 +147,8 @@ public class MainActivityCustomer extends Activity {
     }
 
 
-    public class CustomAdapter extends ParseQueryAdapter<ParseObject> {
+    private class CustomAdapter extends ParseQueryAdapter<ParseObject> {
 
-        Context mContext;
         TextView mAccountInfoView;
         TextView mBalanceView;
 
@@ -165,7 +163,7 @@ public class MainActivityCustomer extends Activity {
         public View getItemView(ParseObject object, View view, ViewGroup parent) {
 
             if (view == null) {
-                view = inflater.inflate(R.layout.list_item, parent, false);
+                view = inflater.inflate(R.layout.account_list_item, parent, false);
             }
 
             // Take advantage of ParseQueryAdapter's getItemView logic
