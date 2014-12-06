@@ -128,7 +128,7 @@ public class LoginActivity extends Activity {
                     ParseObject currentUser = ParseUser.getCurrentUser();
                     if (currentUser.getString("role").equals("admin")) {
                         // If user is an admin, send to admin home screen
-                        Intent i = new Intent(LoginActivity.this, MainActivityTeller.class);
+                        Intent i = new Intent(LoginActivity.this, MainActivityAdmin.class);
                         startActivity(i);
 
                     } else if (currentUser.getString("role").equals("customer")) {

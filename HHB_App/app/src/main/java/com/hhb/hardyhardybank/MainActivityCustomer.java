@@ -163,7 +163,7 @@ public class MainActivityCustomer extends Activity {
         public View getItemView(ParseObject object, View view, ViewGroup parent) {
 
             if (view == null) {
-                view = inflater.inflate(R.layout.account_list_item, parent, false);
+                view = inflater.inflate(R.layout.customer_list_item, parent, false);
             }
 
             // Take advantage of ParseQueryAdapter's getItemView logic
@@ -171,8 +171,8 @@ public class MainActivityCustomer extends Activity {
             super.getItemView(object, view, parent);
 
             // Set up the listView item before returning the View.
-            mAccountInfoView = (TextView) view.findViewById(R.id.item1);
-            mBalanceView = (TextView) view.findViewById(R.id.item2);
+            mAccountInfoView = (TextView) view.findViewById(R.id.customer_item1);
+            mBalanceView = (TextView) view.findViewById(R.id.customer_item2);
 
 
             String accountType = object.getString("accountType");

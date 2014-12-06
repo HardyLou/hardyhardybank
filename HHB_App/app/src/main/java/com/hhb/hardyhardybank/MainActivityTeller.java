@@ -39,10 +39,10 @@ public class MainActivityTeller extends  ActionBarActivity{
         mAccountNumber = (EditText) findViewById(R.id.account_number_teller);
 
         Button mDebitButton = (Button) findViewById(R.id.action_debit);
-        Button mBalanceButton = (Button) findViewById(R.id.action_balance);
         Button mCreditButton = (Button) findViewById(R.id.action_credit);
         Button mCloseButton = (Button) findViewById(R.id.action_close);
         Button mLogoutButton = (Button) findViewById(R.id.action_logout);
+        Button mBalanceButton = (Button) findViewById(R.id.action_balance);
 
 
         //TODO: SHOW BALANCE

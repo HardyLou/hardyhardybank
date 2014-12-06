@@ -6,8 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -29,10 +33,14 @@ public class MainActivityAdmin extends Activity {
 
         private LayoutInflater inflater;
 
+        /*private Button mDebitButton = (Button) findViewById(R.id.action_debit);
+        private Button mCreditButton = (Button) findViewById(R.id.action_credit);
+        private Button mCloseButton = (Button) findViewById(R.id.action_close);
+*/
+        private Button mLogoutButton;
         private ListView lv;
 
         private String accountType;
-
 
         private double accountNumber;
         private double balance;
@@ -45,14 +53,20 @@ public class MainActivityAdmin extends Activity {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_main_admin);
 
+
+       /* mDebitButton = (Button) findViewById(R.id.action_debit);
+        mCreditButton = (Button) findViewById(R.id.action_credit);
+        mCloseButton = (Button) findViewById(R.id.action_close);
+*/
+
         ParseUser currentUser = ParseUser.getCurrentUser();
         userName = currentUser.getString("username");
-
 
         ParseQueryAdapter.QueryFactory<ParseObject> factory = new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery<ParseObject> create() {
                 ParseQuery<ParseObject> query = new ParseQuery("Account");
                 //query.whereEqualTo("userID", userName);
+                query.orderByDescending("CreatedAt");
                 return query;
             }
         };
@@ -60,7 +74,7 @@ public class MainActivityAdmin extends Activity {
 
         inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mainActivityAdminAdapter = new ParseQueryAdapter<ParseObject>(this, factory);
+        mainActivityAdminAdapter = new AdminCustomAdapter(this, factory);
 
         // Attach the query adapter to the view
         lv = (ListView)findViewById(R.id.all_accounts_list_view);
@@ -71,7 +85,7 @@ public class MainActivityAdmin extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 ParseObject object = mainActivityAdminAdapter.getItem(position);
-                Intent i = new Intent(MainActivityAdmin.this, TransactionActivity.class);
+                Intent i = new Intent(MainActivityAdmin.this, MainActivityTeller.class);
                 accountType = object.getString("accountType");
                 accountNumber = object.getDouble("accountnumber");
                 balance = object.getDouble("balance");
@@ -91,6 +105,73 @@ public class MainActivityAdmin extends Activity {
             }
         });
 
+
+        // Button to log out user
+        mLogoutButton = (Button) findViewById(R.id.action_logout_admin);
+        mLogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                currentUser.logOut();
+
+                Toast.makeText(getApplicationContext(), "You have been logged out",
+                        Toast.LENGTH_LONG).show();
+
+                // Go to Login Page
+                Intent i = new Intent(MainActivityAdmin.this, LoginActivity.class);
+                startActivity(i);
+
+                // Close this activity
+                finish();
+            }
+        });
+
+
+    }
+
+    private class AdminCustomAdapter extends ParseQueryAdapter<ParseObject> {
+
+        TextView mAccountInfoView;
+        TextView mBalanceView;
+
+        public AdminCustomAdapter(Context context,
+                             ParseQueryAdapter.QueryFactory<ParseObject> queryFactory) {
+            super(context, queryFactory);
+        }
+
+
+
+        @Override
+        public View getItemView(ParseObject object, View view, ViewGroup parent) {
+
+            if (view == null) {
+                view = inflater.inflate(R.layout.admin_list_item, parent, false);
+            }
+
+            // Take advantage of ParseQueryAdapter's getItemView logic
+            // The IDs in your custom layout must match what ParseQueryAdapter expects
+            super.getItemView(object, view, parent);
+
+            // Set up the listView item before returning the View.
+            mAccountInfoView = (TextView) view.findViewById(R.id.admin_item1);
+            mBalanceView = (TextView) view.findViewById(R.id.admin_item2);
+
+
+            String accountType = object.getString("accountType");
+            double accountNumber = object.getDouble("accountnumber");
+            double balance = object.getDouble("balance");
+
+            DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
+            DecimalFormat balanceFormat = new DecimalFormat("#0.00");
+
+            final String accountInfo = "HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
+            final String accountBalance = "$" + balanceFormat.format(balance);
+
+            mAccountInfoView.setText(accountInfo);
+            mBalanceView.setText(accountBalance);
+
+            return view;
+        }
     }
 
 

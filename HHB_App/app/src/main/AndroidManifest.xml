@@ -43,6 +43,12 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
+        <activity
+            android:name=".MainActivityAdmin"
+            android:label="Accounts"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+
         <!-- Entry for Transaction Screen -->
         <activity
             android:name=".TransactionActivity"

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LOG OFF"
-        android:id="@+id/action_logout"
+        android:id="@+id/action_logout_admin"
         android:layout_gravity="right"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -36,7 +36,7 @@
         android:layout_gravity="center_horizontal"
         android:clickable="true"
         android:focusable="false"
-        android:layout_below="@+id/action_logout">
+        android:layout_below="@+id/action_logout_admin">
     </ListView>
 
 </RelativeLayout>

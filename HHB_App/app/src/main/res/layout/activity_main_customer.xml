@@ -41,7 +41,7 @@
 
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="500dp"
                 android:id="@+id/listView"
                 android:layout_gravity="center_horizontal"
                 android:layout_below="@+id/action_transfer"
