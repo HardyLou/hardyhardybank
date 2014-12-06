@@ -2,6 +2,8 @@
 
     <!-- Strings related to account balance -->
     <string name="account_balance">Account Balance</string>
+    <string name="display_balance">balance</string>
+    <string name="back">Back</string>
 
 
 
