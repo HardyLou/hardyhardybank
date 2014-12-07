@@ -15,7 +15,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.GetCallback;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SignUpCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -35,6 +38,15 @@ public class RegisterActivity extends Activity {
     private Spinner mAccount;
     private View mProgressView;
     private View mRegisterFormView;
+
+    private String input_username;
+    private String input_password;
+    private String input_Name;
+    private String input_Address;
+    private String input_Email;
+    private String input_Number;
+    private String input_AccountType;
+    private String user_Role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,14 +109,14 @@ public class RegisterActivity extends Activity {
         mNumberView.setError(null);
 
         // Store values entered at the time of the login attempt
-        final String input_username = mUsernameView.getText().toString();
-        String input_password = mPasswordView.getText().toString();
-        String input_Name =  mNameView.getText().toString();
-        String input_Address =  mAddressView.getText().toString();
-        String input_Email =  mEmailView.getText().toString();
-        String input_Number =  mNumberView.getText().toString();
-        String input_AccountType = mAccount.getSelectedItem().toString();
-        String user_Role = "customer";
+        input_username = mUsernameView.getText().toString();
+        input_password = mPasswordView.getText().toString();
+        input_Name =  mNameView.getText().toString();
+        input_Address =  mAddressView.getText().toString();
+        input_Email =  mEmailView.getText().toString();
+        input_Number =  mNumberView.getText().toString();
+        input_AccountType = mAccount.getSelectedItem().toString();
+        user_Role = "customer";
 
         boolean cancel = false;
         View focusView = null;
@@ -155,66 +167,86 @@ public class RegisterActivity extends Activity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Enter values into Parse database
-            ParseUser user = new ParseUser();   // create new User object
-            user.setUsername(input_username);   // set username
-            user.setPassword(input_password);   // set password
-            user.setEmail(input_Email);         // set email
-            user.put("fullname", input_Name);   // set full name
-            user.put("address", input_Address); // set address
 
-            if(input_username.startsWith("ADMIN")){ // Check for Admin user Acct# prefix
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Account");
+            query.whereEqualTo("accountnumber", Integer.valueOf(input_Number));
+            // Get the first account found for the user
+            query.getFirstInBackground(new GetCallback<ParseObject>() {
+                public void done(ParseObject cAccountInfo, com.parse.ParseException e) {
 
-                user_Role = "admin";
-            }
-            user.put("role", user_Role);       // label new account as customer/admin
 
-            ParseObject account = new ParseObject("Account");               // create new Account object
-            account.put("userID", input_username);                          // joins User table with Account table
-            account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
-            account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
-            if(user_Role.contentEquals("admin")){
-                account.put("balance", 99999999.0);                         // initialize admin user with a lot of money
-            }
-            else {
-                account.put("balance", 0.0);                                    // initialize balance to $0
-            }
-            account.saveEventually();
+                    if (cAccountInfo == null) {
 
-            // Check whether registration has succeeded or not
-            user.signUpInBackground(new SignUpCallback() {
-                public void done(ParseException e) {
-                if (e == null) {
-                    // Show a progress spinner, and kick off a background task to
-                    // perform the user registration attempt
-                    showProgress(true);
+                        ParseUser user = new ParseUser();   // create new User object
 
-                    // Successful Registration, return to LoginActivity
-                    Intent i = new Intent(RegisterActivity.this, DisplayUserInfoActivity.class);
-                    startActivity(i);
+                        // Enter values into Parse database
+                        user.setUsername(input_username);   // set username
+                        user.setPassword(input_password);   // set password
+                        user.setEmail(input_Email);         // set email
+                        user.put("fullname", input_Name);   // set full name
+                        user.put("address", input_Address); // set address
 
-                    // Notify user registration has been successful
-                    Toast.makeText(getApplicationContext(), "Account has been registered.",
-                                   Toast.LENGTH_LONG).show();
+                        if (input_username.startsWith("ADMIN")) { // Check for Admin user Acct# prefix
+
+                            user_Role = "admin";
+                        }
+                        user.put("role", user_Role);       // label new account as customer/admin
+
+                        ParseObject account = new ParseObject("Account");               // create new Account object
+                        account.put("userID", input_username);                          // joins User table with Account table
+                        account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
+                        account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
+                        if (user_Role.contentEquals("admin")) {
+                            account.put("balance", 99999999.0);                         // initialize admin user with a lot of money
+                        } else {
+                            account.put("balance", 0.0);                                    // initialize balance to $0
+                        }
+                        account.saveEventually();
+
+
+                        // Check whether registration has succeeded or not
+                        user.signUpInBackground(new SignUpCallback() {
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    // Show a progress spinner, and kick off a background task to
+                                    // perform the user registration attempt
+                                    showProgress(true);
+
+                                    // Successful Registration, return to LoginActivity
+                                    Intent i = new Intent(RegisterActivity.this, DisplayUserInfoActivity.class);
+                                    startActivity(i);
+
+                                    // Notify user registration has been successful
+                                    Toast.makeText(getApplicationContext(), "Account has been registered.",
+                                            Toast.LENGTH_LONG).show();
  /*                   DisplayUserInfoActivity userForm = new DisplayUserInfoActivity();
                     userForm.displayAccountInfo();*/
-                    // Close this activity
-                    finish();
-                } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
-                    Toast.makeText(getApplicationContext(), "Registration has failed.",
-                                   Toast.LENGTH_LONG).show();
-                }
+                                    // Close this activity
+                                    finish();
+                                } else {
+                                    // Sign up didn't succeed. Look at the ParseException
+                                    // to figure out what went wrong
+                                    Toast.makeText(getApplicationContext(), "Registration has failed.",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    } else {
+
+                        // Sign up didn't succeed because of duplicate accountnumber
+                        Toast.makeText(getApplicationContext(), "Registration has failed. The Account Number has been taken. ",
+                                            Toast.LENGTH_LONG).show();
+                    }
                 }
             });
+
         }
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+                        /**
+                         * Shows the progress UI and hides the login form.
+                         */
+            ///@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     public void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in

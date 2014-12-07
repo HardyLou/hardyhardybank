@@ -15,7 +15,10 @@ package com.hhb.hardyhardybank;
         import android.widget.Spinner;
         import android.widget.TextView;
         import android.widget.Toast;
+
+        import com.parse.GetCallback;
         import com.parse.ParseObject;
+        import com.parse.ParseQuery;
         import com.parse.SignUpCallback;
         import com.parse.Parse;
         import com.parse.ParseException;
@@ -38,6 +41,8 @@ public class AddAccountActivity extends Activity {
     private String UserAddress;
     private String UserEmail;
     private String UserUserName;
+    private String input_Number;
+    private String input_AccountType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +94,8 @@ public class AddAccountActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(AddAccountActivity.this, MainActivityUser.class);
-//                startActivity(i);
+                Intent i = new Intent(AddAccountActivity.this, MainActivityCustomer.class);
+                startActivity(i);
 
                 // Close this activity
                 finish();
@@ -104,9 +109,6 @@ public class AddAccountActivity extends Activity {
     public void attemptAdd()
     {
 
-        String UserUserName;
-        String UserEmail;
-
         // Query Parse for account info
         ParseObject currentUser = ParseUser.getCurrentUser();
         UserUserName = currentUser.getString("username");
@@ -117,8 +119,8 @@ public class AddAccountActivity extends Activity {
         mNumberView.setError(null);
 
         // Store values entered at the time of the login attempt
-        String input_Number =  mNumberView.getText().toString();
-        String input_AccountType = mAccount.getSelectedItem().toString();
+        input_Number =  mNumberView.getText().toString();
+        input_AccountType = mAccount.getSelectedItem().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -136,28 +138,45 @@ public class AddAccountActivity extends Activity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Enter values into Parse database
-            ParseObject account = new ParseObject("Account");               // create new Account object
-            account.put("userID", UserUserName);                            // joins User table with Account table
-            account.put("userEmail", UserEmail);                            // alternate way to join tables
-            account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
-            account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
-            account.put("balance", 0.0);                                    // initialize balance to $0
-            account.saveEventually();
+
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Account");
+            query.whereEqualTo("accountnumber", Integer.valueOf(input_Number));
+            // Get the first account found for the user
+            query.getFirstInBackground(new GetCallback<ParseObject>() {
+                public void done(ParseObject cAccountInfo, com.parse.ParseException e) {
 
 
+                    if (cAccountInfo == null) {
 
-            // Successful Registration, return to LoginActivity
-            Intent i = new Intent(AddAccountActivity.this, MainActivityCustomer.class);
-            startActivity(i);
 
-            // Notify user registration has been successful
-            Toast.makeText(getApplicationContext(), "Account has been added.",
-                Toast.LENGTH_LONG).show();
+                        // Enter values into Parse database
+                        ParseObject account = new ParseObject("Account");               // create new Account object
+                        account.put("userID", UserUserName);                            // joins User table with Account table
+                        account.put("userEmail", UserEmail);                            // alternate way to join tables
+                        account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
+                        account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
+                        account.put("balance", 0.0);                                    // initialize balance to $0
+                        account.saveEventually();
 
-            // Close this activity
-            finish();
 
+                        // Successful Registration, return to LoginActivity
+                        Intent i = new Intent(AddAccountActivity.this, MainActivityCustomer.class);
+                        startActivity(i);
+
+                        // Notify user registration has been successful
+                        Toast.makeText(getApplicationContext(), "Account has been added.",
+                                Toast.LENGTH_LONG).show();
+
+                        // Close this activity
+                        finish();
+                    } else {
+
+                        // Add account failed because of duplicate account number
+                        Toast.makeText(getApplicationContext(), "Registration has failed. The Account Number has been taken. ",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
 
     }

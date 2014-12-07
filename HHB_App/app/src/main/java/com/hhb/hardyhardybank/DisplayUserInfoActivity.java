@@ -106,7 +106,7 @@ public class DisplayUserInfoActivity extends Activity{
                     finish();
                 }
                 else {
-                    Intent i = new Intent(DisplayUserInfoActivity.this, MainActivityUser.class);
+                    Intent i = new Intent(DisplayUserInfoActivity.this, MainActivityCustomer.class);
                     startActivity(i);
 
                     finish();
