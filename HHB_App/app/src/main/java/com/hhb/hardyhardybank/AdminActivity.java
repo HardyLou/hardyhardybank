@@ -26,7 +26,7 @@ public class AdminActivity extends  ActionBarActivity{
   //  private EditText mAccountNumber;
     private String accountInfo;
     private String accountBalance;
-    private double accountNumber;
+    private int accountNumber;
     private Bundle bundle;
 
     boolean cancel = false;
@@ -47,7 +47,7 @@ public class AdminActivity extends  ActionBarActivity{
         bundle = getIntent().getExtras();
         accountInfo = bundle.getString("accountInfo");
         accountBalance = bundle.getString("accountBalance");
-        accountNumber = bundle.getDouble("accountnumber");
+        accountNumber = bundle.getInt("accountnumber");
 
 
         accountInfoView.setText(accountInfo);
@@ -98,6 +98,8 @@ public class AdminActivity extends  ActionBarActivity{
                     i.putExtra("accountInfo", accountInfo);
                     i.putExtra("accountBalance", accountBalance);
                     startActivity(i);
+
+                    finish();
 
                 }
             }
@@ -151,6 +153,7 @@ public class AdminActivity extends  ActionBarActivity{
                     i.putExtra("accountBalance", accountBalance);
                     startActivity(i);
 
+                    finish();
                 }
             }
         });

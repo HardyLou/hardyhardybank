@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter Amount to Debit"
-        android:id="@+id/enter_amount"
+        android:id="@+id/enter_amount_debit"
         android:layout_gravity="center_horizontal"
         android:textSize="25sp"
         android:paddingLeft="75dp"
@@ -81,15 +81,16 @@
         android:id="@+id/debit_enter"
         android:layout_gravity="center"
         android:width="200dp"
-        android:layout_below="@+id/enter_amount"
-        android:layout_alignLeft="@+id/debit_return_main"
-        android:layout_alignStart="@+id/debit_return_main" />
+        android:layout_below="@+id/enter_amount_debit"
+        android:layout_alignLeft="@+id/debit_return"
+        android:layout_alignStart="@+id/debit_return"
+        android:layout_alignParentEnd="false" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/debit_return_main"
-        android:id="@+id/debit_return_main"
+        android:text="Return"
+        android:id="@+id/debit_return"
         android:width="200dp"
         android:layout_gravity="center"
         android:layout_below="@+id/debit_enter"

@@ -15,6 +15,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 
 /**
  * Created by Xiaohan on 12/3/14.
@@ -32,7 +33,7 @@ public class TransactionActivity extends Activity {
     private ListView lv;
 
 
-    private double accountNumber;
+    private int accountNumber;
     private String accountInfo;
     private String accountBalance;
 
@@ -46,7 +47,7 @@ public class TransactionActivity extends Activity {
 
         // Get the data passed from the previous page
         Bundle bundle = getIntent().getExtras();
-        accountNumber = bundle.getDouble("accountnumber");
+        accountNumber = bundle.getInt("accountnumber");
         accountBalance = bundle.getString("accountBalance");
         accountInfo = bundle.getString("accountInfo");
 
@@ -106,6 +107,8 @@ public class TransactionActivity extends Activity {
 
         TextView transactionInfoView;
         TextView transactionAmountView;
+        TextView transactionDateView;
+
 
         public CustomAdapter(Context context,
                              ParseQueryAdapter.QueryFactory<ParseObject> queryFactory) {
@@ -127,10 +130,13 @@ public class TransactionActivity extends Activity {
             // Set up the listView item before returning the View.
             transactionInfoView = (TextView) view.findViewById(R.id.transaction_item1);
             transactionAmountView = (TextView) view.findViewById(R.id.transaction_item2);
+            transactionDateView = (TextView) view.findViewById(R.id.transaction_item3);
 
-            double accountNumber = object.getDouble("accountNumber");
+
+            int accountNumber = object.getInt("accountNumber");
             double amount = object.getDouble("amount");
             String action = object.getString("action");
+            Date date = object.getCreatedAt();
 
             DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
             DecimalFormat balanceFormat = new DecimalFormat("#0.00");
@@ -141,6 +147,7 @@ public class TransactionActivity extends Activity {
             final String transactionAmount = "$" + balanceFormat.format(amount);
 
             transactionInfoView.setText(transactionInfo);
+            transactionDateView.setText("" + date);
             transactionAmountView.setText(transactionAmount);
 
             return view;
