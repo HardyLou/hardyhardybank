@@ -89,7 +89,6 @@ public class TransferUserActivity extends Activity {
                             // Stores user's balance into cUserBalance
                             cUserBalance = cAccountInfo.getDouble("balance");
 
-                            // User has sufficient funds to transfer
 
                                 // Find account associated with targetAccount
                                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
@@ -106,7 +105,7 @@ public class TransferUserActivity extends Activity {
                                             Toast.makeText(getApplicationContext(), "Target account not registered!", Toast.LENGTH_LONG).show();
                                         } else {
 
-
+                                            // User has sufficient funds to transfer
                                             if (cUserBalance - transferAmount >= 0) {
                                                 // Subtract transfer amount from user balance
                                                 cAccountInfo.increment("balance", -1 * transferAmount);

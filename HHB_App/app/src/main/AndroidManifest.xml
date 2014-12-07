@@ -80,24 +80,11 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
-
-        <!-- Entry for Main Activity Screen for Tellers
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-        </activity>  -->
-
         <!-- Entry for Main Activity Screen for Tellers -->
         <activity
             android:name=".AdminActivity"
             android:label="@string/app_name" >
         </activity>
-
-        <!-- Entry for Main Activity Screen for Users -->
-        <activity
-            android:name=".MainActivityUser"
-            android:label="@string/app_name" >
-         </activity>
 
         <!-- Entry for Credit Account Screen -->
         <activity
@@ -109,12 +96,6 @@
         <activity
             android:name=".DebitActivity"
             android:label="@string/debit_account" >
-        </activity>
-
-        <!-- Entry for Account Balance Screen -->
-        <activity
-            android:name=".BalanceActivity"
-            android:label="@string/account_balance" >
         </activity>
 
         <!-- Entry for Transfer Activity -->

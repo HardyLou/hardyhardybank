@@ -25,8 +25,10 @@ public class TransferActivity extends Activity {
 
     private EditText mEmail;
     private EditText mTransferAmount;
-    private static double cUserBalance = 0;
-    private ParseObject cAccountInfo;
+    private double cUserBalance;
+
+    private int accountNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Connects app with Parse
@@ -35,9 +37,12 @@ public class TransferActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
 
+        Bundle bundle = getIntent().getExtras();
+        accountNumber = bundle.getInt("accountNumber");
+
         mEmail = (EditText) findViewById(R.id.transfer_amount1);
         mTransferAmount = (EditText) findViewById(R.id.transfer_amount);
-        double accountBalance = 0;
+        final double accountBalance = 0;
         final ParseObject currentUser = ParseUser.getCurrentUser();
 
         // When Enter button is clicked
@@ -48,9 +53,11 @@ public class TransferActivity extends Activity {
                 // stores transfer amount into variable transferAmount
                 final double transferAmount = Double.valueOf(mTransferAmount.getText().toString());
 
+
                 // queryCurrentUser holds the accounts of the logged in user
                 ParseQuery<ParseObject> queryCurrentUser = ParseQuery.getQuery("Account");
                 queryCurrentUser.whereEqualTo("userID", currentUser.getString("username"));
+                queryCurrentUser.whereEqualTo("accountnumber", accountNumber);
                 // Get the first account found for the user
                 queryCurrentUser.getFirstInBackground(new GetCallback<ParseObject>() {
                     public void done(final ParseObject cAccountInfo, com.parse.ParseException e) {
@@ -62,9 +69,7 @@ public class TransferActivity extends Activity {
 
                             // User has sufficient funds to transfer
                             if (cUserBalance - transferAmount >= 0) {
-                                // Subtract transfer amount from user balance
-                                cAccountInfo.increment("balance", -1 * transferAmount);
-                                cAccountInfo.saveEventually();
+
 
                                 // Find account associated with input email and assign to targetAccount
                                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
@@ -75,6 +80,11 @@ public class TransferActivity extends Activity {
                                         if (targetAccount == null) {
                                             Toast.makeText(getApplicationContext(), "Target email not registered!", Toast.LENGTH_LONG).show();
                                         } else {
+
+                                            // Subtract transfer amount from user balance
+                                            cAccountInfo.increment("balance", -1 * transferAmount);
+                                            cAccountInfo.saveEventually();
+
                                             // Add transferred money to target account's balance
                                             targetAccount.increment("balance", transferAmount);
                                             targetAccount.saveEventually();
@@ -117,8 +127,8 @@ public class TransferActivity extends Activity {
         mReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(TransferActivity.this, MainActivityCustomer.class);
-//                startActivity(i);
+                Intent i = new Intent(TransferActivity.this, MainActivityCustomer.class);
+                startActivity(i);
                 finish();
             }
         });

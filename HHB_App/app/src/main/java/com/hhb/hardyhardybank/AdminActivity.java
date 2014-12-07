@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class AdminActivity extends  ActionBarActivity{
 
-  //  private EditText mAccountNumber;
+
     private String accountInfo;
     private String accountBalance;
     private int accountNumber;

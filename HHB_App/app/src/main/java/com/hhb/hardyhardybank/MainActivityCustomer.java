@@ -38,6 +38,7 @@ public class MainActivityCustomer extends Activity {
 
     private String accountType;
 
+    private ParseUser currentUser;
 
     private int accountNumber;
     private double balance;
@@ -50,7 +51,7 @@ public class MainActivityCustomer extends Activity {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_main_customer);
 
-        final ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser = ParseUser.getCurrentUser();
         userName = currentUser.getString("username");
 
 
@@ -87,7 +88,8 @@ public class MainActivityCustomer extends Activity {
                 DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
                 DecimalFormat balanceFormat = new DecimalFormat("#0.00");
 
-                final String accountInfo = "HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
+                final String accountInfo = currentUser.getString("fullname") + "'s HARDY " + accountType
+                                            + " (" + accountNumberFormat.format(accountNumber) + ")";
                 final String accountBalance = "$" + balanceFormat.format(balance);
 
                 i.putExtra("accountInfo", accountInfo);
@@ -95,6 +97,8 @@ public class MainActivityCustomer extends Activity {
                 i.putExtra("accountnumber", accountNumber);
 
                 startActivity(i);
+
+                finish();
 
             }
         });
@@ -182,7 +186,7 @@ public class MainActivityCustomer extends Activity {
             DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
             DecimalFormat balanceFormat = new DecimalFormat("#0.00");
 
-            final String accountInfo = "HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
+            final String accountInfo = currentUser.getString("fullname") + "'s HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
             final String accountBalance = "$" + balanceFormat.format(balance);
 
             mAccountInfoView.setText(accountInfo);

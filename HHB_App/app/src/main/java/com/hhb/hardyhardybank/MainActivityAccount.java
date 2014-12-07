@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -26,20 +27,14 @@ import java.text.DecimalFormat;
  */
 public class MainActivityAccount extends Activity {
 
-    private String userName;
-
-    // Adapter for the Todos Parse Query
-    private ParseQueryAdapter<ParseObject> mainActivityCustomerAdapter;
-
-    private LayoutInflater inflater;
-
-    private ListView lv;
-
-    private String accountType;
-
-
+    private String accountInfo;
+    private String currentBalance;
     private int accountNumber;
     private double balance;
+    private Bundle bundle;
+
+    private TextView accountInfoView;
+    private TextView accountBalanceView;
 
     protected void onCreate(Bundle SavedInstanceState) {
 
@@ -49,10 +44,35 @@ public class MainActivityAccount extends Activity {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_main_account);
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        userName = currentUser.getString("username");
+
+        // Set up text view on the top to show the account info and balance
+        accountInfoView = (TextView)findViewById(R.id.account_activity_customer_item1);
+        accountBalanceView = (TextView)findViewById(R.id.account_activity_customer_item2);
+
+        bundle = getIntent().getExtras();
+        accountInfo = bundle.getString("accountInfo");
+        accountNumber = bundle.getInt("accountnumber");
 
 
+        // Update the balance textview
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+        query.whereEqualTo("accountnumber", accountNumber);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+                                       public void done(ParseObject account, com.parse.ParseException e) {
+                                           balance = account.getDouble("balance");
+
+                                           // Update the balance textview
+                                           DecimalFormat balanceFormat = new DecimalFormat("#0.00");
+                                           currentBalance = "$" + balanceFormat.format(balance);
+                                           accountInfoView.setText(accountInfo);
+                                           accountBalanceView.setText(currentBalance);
+                                       }
+                                   });
+
+
+
+
+/*
         ParseQueryAdapter.QueryFactory<ParseObject> factory = new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery<ParseObject> create() {
                 ParseQuery<ParseObject> query = new ParseQuery("Account");
@@ -70,7 +90,7 @@ public class MainActivityAccount extends Activity {
         lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(mainActivityCustomerAdapter);
 
-
+*/
         // Button to view transaction log for current account
         Button mTransLogButton = (Button) findViewById(R.id.action_transaction_log);
         mTransLogButton.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +103,11 @@ public class MainActivityAccount extends Activity {
 
                 // passes along the bundle
                 Bundle bundle = getIntent().getExtras();
-                i.putExtras(bundle);
+                i.putExtra("accountnumber",accountNumber);
+                i.putExtra("accountInfo",accountInfo);
+
+                // Pass the updated accountBalance
+                i.putExtra("accountBalance",currentBalance);
 
                 startActivity(i);
 
@@ -135,7 +159,7 @@ public class MainActivityAccount extends Activity {
             }
         });
     }
-
+/*
 
     private class CustomAdapter extends ParseQueryAdapter<ParseObject> {
 
@@ -181,4 +205,6 @@ public class MainActivityAccount extends Activity {
             return view;
         }
     }
+*/
+
 }
