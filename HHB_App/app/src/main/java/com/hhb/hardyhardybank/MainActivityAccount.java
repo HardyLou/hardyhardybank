@@ -1,24 +1,16 @@
 package com.hhb.hardyhardybank;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
-import com.parse.ParseUser;
 
 import java.text.DecimalFormat;
 
@@ -106,7 +98,7 @@ public class MainActivityAccount extends Activity {
                 i.putExtra("accountInfo",accountInfo);
 
                 // Pass the updated accountBalance
-                i.putExtra("accountBalance",currentBalance);
+                i.putExtra("accountBalance", currentBalance);
 
                 startActivity(i);
 
@@ -115,8 +107,8 @@ public class MainActivityAccount extends Activity {
 
 
         // Button to Transfer Funds to another user
-        Button mTransferButton = (Button) findViewById(R.id.action_transfer);
-        mTransferButton.setOnClickListener(new View.OnClickListener() {
+        Button mTransferToAnotherButton = (Button) findViewById(R.id.action_transfer_to_another);
+        mTransferToAnotherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -129,6 +121,20 @@ public class MainActivityAccount extends Activity {
                 // Pass the updated accountBalance
                 i.putExtra("accountBalance",currentBalance);
 
+                startActivity(i);
+
+            }
+        });
+
+        // Button to Transfer Funds
+        Button mTransferButton = (Button) findViewById(R.id.action_transfer_to_yourself);
+        mTransferButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // go to TransferActivity
+                Intent i;
+                i = new Intent(MainActivityAccount.this, TransferUserActivity.class);
                 startActivity(i);
 
             }

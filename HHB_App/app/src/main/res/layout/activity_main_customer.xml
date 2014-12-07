@@ -26,27 +26,16 @@
                 android:textSize="35sp"
                 android:layout_weight="0.001"
                 android:layout_centerHorizontal="true"
-                android:gravity="center_vertical|center_horizontal"
-                android:layout_above="@+id/action_transfer" />
+                android:gravity="center_vertical|center_horizontal" />
 
-            <Button
+    <ListView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Transfer Funds"
-                android:id="@+id/action_transfer"
-                android:textSize="30sp"
-                android:layout_below="@+id/action_logout"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="fill_parent"
                 android:id="@+id/listView"
                 android:layout_gravity="center_horizontal"
-                android:layout_below="@+id/action_transfer"
                 android:clickable="true"
-                android:focusable="false">
+                android:focusable="false"
+                android:layout_below="@+id/action_logout">
             </ListView>
 <!--
             <Button

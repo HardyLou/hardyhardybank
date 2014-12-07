@@ -21,6 +21,10 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.List;
 
+
+/**
+ * Transfer funds to another user
+ */
 public class TransferActivity extends Activity {
 
     private EditText mEmail;

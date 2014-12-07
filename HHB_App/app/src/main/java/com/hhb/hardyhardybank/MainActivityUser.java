@@ -5,26 +5,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.parse.DeleteCallback;
-import com.parse.GetCallback;
 import com.parse.Parse;
-import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 import com.parse.ParseQueryAdapter;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 /**
@@ -127,7 +116,7 @@ public class MainActivityUser extends ActionBarActivity {
         });
 
         // Button to Transfer Funds
-        Button mTransferButton = (Button) findViewById(R.id.action_transfer);
+        Button mTransferButton = (Button) findViewById(R.id.action_transfer_to_another);
         mTransferButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

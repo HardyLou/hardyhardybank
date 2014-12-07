@@ -35,7 +35,7 @@
             android:gravity="center_vertical"
             android:textSize="20sp"
             android:paddingLeft="50dp"
-            android:layout_below="@+id/action_transfer" />
+            android:layout_below="@+id/action_transfer_to_yourself" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:focusable="false"
             android:text="Transfer Funds To Another User"
-            android:id="@+id/action_transfer"
+            android:id="@+id/action_transfer_to_another"
             android:layout_gravity="center"
             android:width="200dp"
             android:layout_below="@+id/accounts_label"
@@ -101,5 +101,15 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:textSize="30sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transfer Funds To Your Account"
+            android:id="@+id/action_transfer_to_yourself"
+            android:textSize="30sp"
+            android:layout_below="@+id/action_transfer_to_another"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </ScrollView>

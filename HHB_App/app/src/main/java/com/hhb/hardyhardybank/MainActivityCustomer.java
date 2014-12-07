@@ -123,21 +123,6 @@ public class MainActivityCustomer extends Activity {
 
 
 
-        // Button to Transfer Funds
-        Button mTransferButton = (Button) findViewById(R.id.action_transfer);
-        mTransferButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // go to TransferActivity
-                Intent i;
-                i = new Intent(MainActivityCustomer.this, TransferUserActivity.class);
-                startActivity(i);
-
-            }
-        });
-
-
         // Button to Add New Account
         Button mAddAccountButton = (Button) findViewById(R.id.action_add_acct_main);
         mAddAccountButton.setOnClickListener(new View.OnClickListener() {
