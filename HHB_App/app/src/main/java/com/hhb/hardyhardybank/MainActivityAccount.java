@@ -102,7 +102,6 @@ public class MainActivityAccount extends Activity {
                 i = new Intent(MainActivityAccount.this, TransactionActivity.class);
 
                 // passes along the bundle
-                Bundle bundle = getIntent().getExtras();
                 i.putExtra("accountnumber",accountNumber);
                 i.putExtra("accountInfo",accountInfo);
 
@@ -124,6 +123,12 @@ public class MainActivityAccount extends Activity {
                 // go to TransferActivity
                 Intent i;
                 i = new Intent(MainActivityAccount.this, TransferActivity.class);
+                i.putExtra("accountnumber",accountNumber);
+                i.putExtra("accountInfo",accountInfo);
+
+                // Pass the updated accountBalance
+                i.putExtra("accountBalance",currentBalance);
+
                 startActivity(i);
 
             }
