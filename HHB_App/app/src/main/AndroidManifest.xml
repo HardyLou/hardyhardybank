@@ -114,6 +114,12 @@
             android:label="@string/title_transfer_activity">
         </activity>
 
+        <!-- Entry for Transfer User Activity -->
+        <activity
+            android:name=".TransferUserActivity"
+            android:label="@string/title_transfer_activity">
+        </activity>
+
         <!-- Entry for Add Account Activity -->
         <activity
             android:name=".AddAccountActivity"

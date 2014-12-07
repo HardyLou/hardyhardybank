@@ -122,7 +122,7 @@ public class MainActivityCustomer extends Activity {
 
                 // go to TransferActivity
                 Intent i;
-                i = new Intent(MainActivityCustomer.this, TransferActivity.class);
+                i = new Intent(MainActivityCustomer.this, TransferUserActivity.class);
                 startActivity(i);
 
             }

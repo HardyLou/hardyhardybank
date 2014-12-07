@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,33 +17,56 @@ import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.List;
 
-public class TransferActivity extends Activity {
+public class TransferUserActivity extends Activity {
 
-    private EditText mEmail;
+//    private EditText mEmail;
     private EditText mTransferAmount;
     private static double cUserBalance = 0;
-    private ParseObject cAccountInfo;
+    private Spinner mAccounts;
+    private Spinner mAccounts2;
+    private ParseQueryAdapter<ParseObject> mainAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Connects app with Parse
         Parse.initialize(this, "G9sNy6cFAc2j1ZnKVGuYKhW5gHRQdUqPV3D3BOAm", "14vOkrgINnOVIS1fSG08tdJgIsvYi7OMlw8zTFuC");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transfer);
+        setContentView(R.layout.activity_transfer_user);
 
-        mEmail = (EditText) findViewById(R.id.transfer_amount1);
+//        mEmail = (EditText) findViewById(R.id.transfer_amount1);
         mTransferAmount = (EditText) findViewById(R.id.transfer_amount);
-        double accountBalance = 0;
         final ParseObject currentUser = ParseUser.getCurrentUser();
 
+        // Set up spinners with accounts
+        mainAdapter = new ParseQueryAdapter<ParseObject>(this, new ParseQueryAdapter.QueryFactory<ParseObject>() {
+                    public ParseQuery<ParseObject> create() {
+                        // Here we can configure a ParseQuery to our heart's desire.
+                        ParseQuery query = new ParseQuery("Account");
+                        query.whereEqualTo("userID", currentUser.getString("username"));
+                        return query;
+                    }
+                });
+        mainAdapter.setTextKey("accountnumber");
+        mAccounts = (Spinner) findViewById(R.id.transfer_from_accounts);
+        mAccounts.setAdapter(mainAdapter);
+        mainAdapter.loadObjects();
+
+        mAccounts2 = (Spinner) findViewById(R.id.transfer_to_accounts);
+        mAccounts2.setAdapter(mainAdapter);
+        mainAdapter.loadObjects();
+
+
         // When Enter button is clicked
-        Button mCreditButton = (Button) findViewById(R.id.credit_enter);
+        Button mCreditButton = (Button) findViewById(R.id.transfer_enter);
         mCreditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,7 +75,7 @@ public class TransferActivity extends Activity {
 
                 // queryCurrentUser holds the accounts of the logged in user
                 ParseQuery<ParseObject> queryCurrentUser = ParseQuery.getQuery("Account");
-                queryCurrentUser.whereEqualTo("userID", currentUser.getString("username"));
+                queryCurrentUser.whereEqualTo("accountnumber", mAccounts.getSelectedItem().toString());
                 // Get the first account found for the user
                 queryCurrentUser.getFirstInBackground(new GetCallback<ParseObject>() {
                     public void done(final ParseObject cAccountInfo, com.parse.ParseException e) {
@@ -66,21 +91,21 @@ public class TransferActivity extends Activity {
                                 cAccountInfo.increment("balance", -1 * transferAmount);
                                 cAccountInfo.saveEventually();
 
-                                // Find account associated with input email and assign to targetAccount
+                                // Find account associated with targetAccount
                                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
-                                query.whereEqualTo("userEmail", mEmail.getText().toString());
+                                query.whereEqualTo("accountnumber", mAccounts2.getSelectedItem().toString());
                                 query.getFirstInBackground(new GetCallback<ParseObject>() {
                                     public void done(ParseObject targetAccount, com.parse.ParseException e) {
                                         // Target account's email is not registered in database
                                         if (targetAccount == null) {
-                                            Toast.makeText(getApplicationContext(), "Target email not registered!", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Target account not registered!", Toast.LENGTH_LONG).show();
                                         } else {
                                             // Add transferred money to target account's balance
                                             targetAccount.increment("balance", transferAmount);
                                             targetAccount.saveEventually();
                                             Toast.makeText(getApplicationContext(), "Success! $" +
-                                                    transferAmount + " was transferred to " +
-                                                    targetAccount.getString("userID") + ".",
+                                                            transferAmount + " was transferred to " +
+                                                            targetAccount.getString("userID") + ".",
                                                     Toast.LENGTH_LONG).show();
 
                                             // documents the transaction
@@ -113,11 +138,11 @@ public class TransferActivity extends Activity {
         });
 
         // Return to Main button sends user back to main menu
-        Button mReturnButton = (Button) findViewById(R.id.credit_return_main);
+        Button mReturnButton = (Button) findViewById(R.id.transfer_return_main);
         mReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(TransferActivity.this, MainActivityCustomer.class);
+//                Intent i = new Intent(TransferUserActivity.this, MainActivityCustomer.class);
 //                startActivity(i);
                 finish();
             }
