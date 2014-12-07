@@ -38,7 +38,7 @@ public class TransferActivity extends Activity {
         setContentView(R.layout.activity_transfer);
 
         Bundle bundle = getIntent().getExtras();
-        accountNumber = bundle.getInt("accountNumber");
+        accountNumber = bundle.getInt("accountnumber");
 
         mEmail = (EditText) findViewById(R.id.transfer_amount1);
         mTransferAmount = (EditText) findViewById(R.id.transfer_amount);
