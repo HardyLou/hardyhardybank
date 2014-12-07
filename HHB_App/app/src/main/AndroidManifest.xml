@@ -36,6 +36,13 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
+        <!-- Entry for Main Activity Admin Screen -->
+        <activity
+            android:name=".MainActivityAdmin"
+            android:label="Accounts"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+
         <!-- Entry for Main Activity Customer Screen -->
         <activity
             android:name=".MainActivityCustomer"
@@ -43,11 +50,13 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
+        <!-- Entry for Main Activity Account Screen -->
         <activity
-            android:name=".MainActivityAdmin"
+            android:name=".MainActivityAccount"
             android:label="Accounts"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+
 
         <!-- Entry for Transaction Screen -->
         <activity
