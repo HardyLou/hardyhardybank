@@ -3,6 +3,7 @@ package com.hhb.hardyhardybank;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.widget.Button;
@@ -15,13 +16,21 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.text.DecimalFormat;
+
 /**
  *   Debit screen for users to debit their account
  */
 public class DebitActivity extends ActionBarActivity {
     // UI references.
     private EditText mDebitAmount;
-    double balance, debit_amount;
+    private TextView mAccountInfoView;
+    private TextView mBalanceView;
+
+    private double accountNumber;
+    private String accountInfo;
+    private String accountBalance;
+    private double balance, debit_amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,21 +42,38 @@ public class DebitActivity extends ActionBarActivity {
 
         // Set up the Debit Account form
         mDebitAmount = (EditText) findViewById(R.id.debit_amount);
-        Button mDebitBalance = (Button) findViewById(R.id.debit_balance);
+        Button mDebitButton = (Button) findViewById(R.id.debit_enter);
 
-        // Button to Show Balance activity
-        mDebitBalance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go to Balance Activity
-                Intent i = new Intent(DebitActivity.this, BalanceActivity.class);
-                startActivity(i);
+        // Set up the account info and account balance before returning the View.
+        mAccountInfoView = (TextView)findViewById(R.id.debit_activity_account_info);
+        mBalanceView = (TextView)findViewById(R.id.debit_activity_account_balance);
 
-                // DO NOT close this activity!
+        Bundle bundle = getIntent().getExtras();
+        accountNumber = Double.valueOf(bundle.getDouble("accountnumber"));
+        accountInfo = bundle.getString("accountInfo");
+        accountBalance = bundle.getString("accountBalance");
+
+
+        mAccountInfoView.setText(accountInfo);
+        mBalanceView.setText(accountBalance);
+/*
+        // get the current balance of the account number
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
+        query.whereEqualTo("accountnumber", accountNumber);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject account, com.parse.ParseException e) {
+                balance = account.getDouble("balance");
             }
+
         });
 
+        DecimalFormat balanceFormat = new DecimalFormat("#0.00");
 
+        final String initialAccountBalance = "$" + balanceFormat.format(balance);
+
+        mAccountInfoView.setText(accountInfo);
+        mBalanceView.setText(initialAccountBalance);
+*/
         // Query Parse for account balance value
 //        ParseObject currentUser = ParseUser.getCurrentUser();
 //        balance = currentUser.getDouble("balance");
@@ -58,7 +84,6 @@ public class DebitActivity extends ActionBarActivity {
 //        mDisplayBalance.setText("$" + formatted_balance);
 
         // Activity once Deposit button is pressed
-        Button mDebitButton = (Button) findViewById(R.id.debit_enter);
         mDebitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,31 +92,37 @@ public class DebitActivity extends ActionBarActivity {
                 debit_amount =  Double.valueOf(mDebitAmount.getText().toString());
                 if (currentUser.get("role").toString().contentEquals("admin")) {
 
-                    Bundle bundle = getIntent().getExtras();
-                    final int accountNumber = Integer.valueOf(bundle.getString("accountnumber"));
+                    //final int accountNumber = Integer.valueOf(bundle.getString("accountnumber"));
 
 
                     //Toast.makeText(getApplicationContext(), "ADMIN has Deposited into " + accountNumber + "'s Account!", Toast.LENGTH_LONG).show();
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
                     query.whereEqualTo("accountnumber", accountNumber);
                     query.getFirstInBackground(new GetCallback<ParseObject>() {
-                        public void done(ParseObject accountInfo, com.parse.ParseException e) {
-                            if (accountInfo == null) {
+                        public void done(ParseObject account, com.parse.ParseException e) {
+                            if (account== null) {
                                 Toast.makeText(getApplicationContext(), "ADMIN could not find Account!", Toast.LENGTH_LONG).show();
                             } else {
-                                accountInfo.increment("balance", -1*Double.valueOf(mDebitAmount.getText().toString()));
-                                accountInfo.saveEventually();
+
+                                balance = account.getDouble("balance") - 1*Double.valueOf(debit_amount);
+                                account.increment("balance", -1*Double.valueOf(debit_amount));
+                                account.saveEventually();
+
+                                // Update the balance textview
+                                DecimalFormat balanceFormat = new DecimalFormat("#0.00");
+                                final String currentBalance = "$" + balanceFormat.format(balance);
+                                mBalanceView.setText(currentBalance);
 
                                 // documents the transaction
                                 ParseObject transaction = new ParseObject("Transaction");
                                 transaction.put("accountNumber", accountNumber);
                                 transaction.put("action", "debit");
                                 transaction.put("amount", -1*Double.valueOf(mDebitAmount.getText().toString()));
-                                transaction.put("resultingBalance", accountInfo.getDouble("balance"));
+                                transaction.put("resultingBalance", account.getDouble("balance"));
                                 transaction.saveEventually();
 
                                 Toast.makeText(getApplicationContext(), "ADMIN has withdrawn $" +
-                                        debit_amount + " from " + accountInfo.getString("userID") +
+                                        debit_amount + " from " + account.getString("userID") +
                                         "'s Account!", Toast.LENGTH_LONG).show();
                             }
 

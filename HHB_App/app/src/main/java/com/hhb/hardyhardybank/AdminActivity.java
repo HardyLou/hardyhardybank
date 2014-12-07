@@ -24,9 +24,9 @@ import java.util.List;
 public class AdminActivity extends  ActionBarActivity{
 
   //  private EditText mAccountNumber;
-    private String input_account;
     private String accountInfo;
     private String accountBalance;
+    private double accountNumber;
     private Bundle bundle;
 
     boolean cancel = false;
@@ -47,7 +47,7 @@ public class AdminActivity extends  ActionBarActivity{
         bundle = getIntent().getExtras();
         accountInfo = bundle.getString("accountInfo");
         accountBalance = bundle.getString("accountBalance");
-        input_account = "" + bundle.getDouble("accountnumber");
+        accountNumber = bundle.getDouble("accountnumber");
 
 
         accountInfoView.setText(accountInfo);
@@ -94,7 +94,9 @@ public class AdminActivity extends  ActionBarActivity{
                 } else {
                     // Go to Debit Activity
                     Intent i = new Intent(AdminActivity.this, DebitActivity.class);
-                    i.putExtra("accountnumber", input_account);
+                    i.putExtra("accountnumber", accountNumber);
+                    i.putExtra("accountInfo", accountInfo);
+                    i.putExtra("accountBalance", accountBalance);
                     startActivity(i);
 
                 }
@@ -117,7 +119,7 @@ public class AdminActivity extends  ActionBarActivity{
                 } else {
                     // Go to Credit Activity
                     Intent i = new Intent(AdminActivity.this, TransactionActivity.class);
-                    i.putExtra("accountnumber", bundle.getDouble("accountnumber"));
+                    i.putExtra("accountnumber", accountNumber);
                     i.putExtra("accountInfo", accountInfo);
                     i.putExtra("accountBalance", accountBalance);
                     startActivity(i);
@@ -144,7 +146,9 @@ public class AdminActivity extends  ActionBarActivity{
                 } else {
                     // Go to Credit Activity
                     Intent i = new Intent(AdminActivity.this, CreditActivity.class);
-                    i.putExtra("accountnumber", input_account);
+                    i.putExtra("accountnumber", accountNumber);
+                    i.putExtra("accountInfo", accountInfo);
+                    i.putExtra("accountBalance", accountBalance);
                     startActivity(i);
 
                 }

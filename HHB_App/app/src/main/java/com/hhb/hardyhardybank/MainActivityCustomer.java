@@ -154,8 +154,6 @@ public class MainActivityCustomer extends Activity {
             super(context, queryFactory);
         }
 
-
-
         @Override
         public View getItemView(ParseObject object, View view, ViewGroup parent) {
 

@@ -1,35 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/debit_account"
+        android:text="Debit Account"
         android:id="@+id/debit_label"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_balance"
-        android:id="@+id/debit_balance"
-        android:layout_gravity="center_horizontal" />
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:textSize="40sp"
+        android:layout_weight="0.001"
+        android:gravity="center|center_vertical|center_horizontal"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="\n\nEnter Amount to Debit"
+        android:id="@+id/debit_activity_account_info"
+        android:layout_gravity="center"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_weight="0.04"
+        android:textSize="30sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/debit_label" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/debit_activity_account_balance"
+        android:layout_gravity="center"
+        android:layout_below="@+id/debit_activity_account_info"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_weight="0.04"
+        android:textSize="40sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Amount to Debit"
         android:id="@+id/enter_amount"
         android:layout_gravity="center_horizontal"
+        android:textSize="25sp"
         android:paddingLeft="75dp"
-        android:paddingRight="75dp"/>
+        android:paddingRight="75dp"
+        android:layout_below="@+id/debit_activity_account_balance"
+        android:layout_alignRight="@+id/debit_enter"
+        android:layout_alignEnd="@+id/debit_enter"
+        android:layout_alignBottom="@+id/debit_amount" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
@@ -38,20 +69,29 @@
         android:hint="0.00"
         android:paddingLeft="75dp"
         android:paddingRight="75dp"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/debit_activity_account_balance"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter"
         android:id="@+id/debit_enter"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center"
+        android:width="200dp"
+        android:layout_below="@+id/enter_amount"
+        android:layout_alignLeft="@+id/debit_return_main"
+        android:layout_alignStart="@+id/debit_return_main" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/debit_return_main"
         android:id="@+id/debit_return_main"
-        android:layout_gravity="center_horizontal" />
-
-</LinearLayout>
+        android:width="200dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/debit_enter"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
