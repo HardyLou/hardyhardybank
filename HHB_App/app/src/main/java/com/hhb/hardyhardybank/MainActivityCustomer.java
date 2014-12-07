@@ -39,7 +39,7 @@ public class MainActivityCustomer extends Activity {
     private String accountType;
 
 
-    private double accountNumber;
+    private int accountNumber;
     private double balance;
 
     protected void onCreate(Bundle SavedInstanceState) {
@@ -78,7 +78,7 @@ public class MainActivityCustomer extends Activity {
                 ParseObject object = mainActivityCustomerAdapter.getItem(position);
                 Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
                 accountType = object.getString("accountType");
-                accountNumber = object.getDouble("accountnumber");
+                accountNumber = object.getInt("accountnumber");
                 balance = object.getDouble("balance");
 
                 DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
@@ -171,7 +171,7 @@ public class MainActivityCustomer extends Activity {
 
 
             String accountType = object.getString("accountType");
-            double accountNumber = object.getDouble("accountnumber");
+            int accountNumber = object.getInt("accountnumber");
             double balance = object.getDouble("balance");
 
             DecimalFormat accountNumberFormat = new DecimalFormat("#.#");

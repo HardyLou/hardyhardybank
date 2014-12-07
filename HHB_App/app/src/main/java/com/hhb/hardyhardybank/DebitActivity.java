@@ -27,9 +27,10 @@ public class DebitActivity extends ActionBarActivity {
     private TextView mAccountInfoView;
     private TextView mBalanceView;
 
-    private double accountNumber;
+    private int accountNumber;
     private String accountInfo;
     private String accountBalance;
+    private String currentBalance;
     private double balance, debit_amount;
 
     @Override
@@ -49,11 +50,11 @@ public class DebitActivity extends ActionBarActivity {
         mBalanceView = (TextView)findViewById(R.id.debit_activity_account_balance);
 
         Bundle bundle = getIntent().getExtras();
-        accountNumber = Double.valueOf(bundle.getDouble("accountnumber"));
+        accountNumber = bundle.getInt("accountnumber");
         accountInfo = bundle.getString("accountInfo");
         accountBalance = bundle.getString("accountBalance");
 
-
+        // Set up the accountInfoView and accountBalanceView
         mAccountInfoView.setText(accountInfo);
         mBalanceView.setText(accountBalance);
 /*
@@ -104,13 +105,13 @@ public class DebitActivity extends ActionBarActivity {
                                 Toast.makeText(getApplicationContext(), "ADMIN could not find Account!", Toast.LENGTH_LONG).show();
                             } else {
 
-                                balance = account.getDouble("balance") - 1*Double.valueOf(debit_amount);
-                                account.increment("balance", -1*Double.valueOf(debit_amount));
+                                balance = account.getDouble("balance") - debit_amount;
+                                account.increment("balance", -debit_amount);
                                 account.saveEventually();
 
                                 // Update the balance textview
                                 DecimalFormat balanceFormat = new DecimalFormat("#0.00");
-                                final String currentBalance = "$" + balanceFormat.format(balance);
+                                currentBalance = "$" + balanceFormat.format(balance);
                                 mBalanceView.setText(currentBalance);
 
                                 // documents the transaction
@@ -160,12 +161,15 @@ public class DebitActivity extends ActionBarActivity {
 
 
         // Activity when "Return to Main" button is pressed
-        Button mDebitReturn = (Button) findViewById(R.id.debit_return_main);
+        Button mDebitReturn = (Button) findViewById(R.id.debit_return);
         mDebitReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Go to ADMIN Main Activity
-                Intent i = new Intent(DebitActivity.this, MainActivityAdmin.class);
+                Intent i = new Intent(DebitActivity.this, AdminActivity.class);
+                i.putExtra("accountnumber", accountNumber);
+                i.putExtra("accountInfo", accountInfo);
+                i.putExtra("accountBalance", currentBalance);
                 startActivity(i);
 
                 // Close this activity

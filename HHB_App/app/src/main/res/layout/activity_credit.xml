@@ -1,57 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Credit Account"
-        android:id="@+id/credit_label"
-        android:layout_gravity="center_horizontal" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_balance"
-        android:id="@+id/credit_balance"
-        android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/enter_amount"
-        android:id="@+id/enter_amount"
-        android:layout_gravity="center_horizontal"
-        android:paddingLeft="75dp"
-        android:paddingRight="75dp"/>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Credit Account"
+    android:id="@+id/credit_label"
+    android:paddingLeft="100dp"
+    android:paddingRight="100dp"
+    android:textSize="40sp"
+    android:layout_weight="0.001"
+    android:gravity="center|center_vertical|center_horizontal"
+    android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/credit_amount"
-        android:layout_gravity="center_horizontal"
-        android:hint="0.00"
-        android:paddingLeft="75dp"
-        android:paddingRight="75dp"
-        android:gravity="center_horizontal" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/credit_activity_account_info"
+    android:layout_gravity="center"
+    android:paddingLeft="100dp"
+    android:paddingRight="100dp"
+    android:layout_weight="0.04"
+    android:textSize="30sp"
+    android:gravity="center_vertical|center_horizontal"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentStart="true"
+    android:layout_below="@+id/credit_label" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enter"
-        android:id="@+id/credit_enter"
-        android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/credit_return_main"
-        android:id="@+id/credit_return_main"
-        android:layout_gravity="center_horizontal" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/credit_activity_account_balance"
+    android:layout_gravity="center"
+    android:layout_below="@+id/credit_activity_account_info"
+    android:paddingLeft="100dp"
+    android:paddingRight="100dp"
+    android:layout_weight="0.04"
+    android:textSize="40sp"
+    android:gravity="center_vertical|center_horizontal"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentStart="true" />
 
-</LinearLayout>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Enter Amount to Credit"
+    android:id="@+id/enter_amount_credit"
+    android:layout_gravity="center_horizontal"
+    android:textSize="25sp"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:layout_below="@+id/credit_activity_account_balance"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignBottom="@+id/credit_amount" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="numberDecimal"
+    android:ems="10"
+    android:id="@+id/credit_amount"
+    android:layout_gravity="center_horizontal"
+    android:hint="0.00"
+    android:paddingLeft="75dp"
+    android:paddingRight="75dp"
+    android:gravity="center_horizontal"
+    android:layout_below="@+id/credit_activity_account_balance"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="false" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/enter"
+    android:id="@+id/credit_enter"
+    android:layout_gravity="center"
+    android:width="200dp"
+    android:layout_below="@+id/enter_amount_credit"
+    android:layout_alignLeft="@+id/credit_return"
+    android:layout_alignStart="@+id/credit_return" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Return"
+    android:id="@+id/credit_return"
+    android:width="200dp"
+    android:layout_gravity="center"
+    android:layout_below="@+id/credit_enter"
+    android:layout_centerHorizontal="true" />
+</RelativeLayout>

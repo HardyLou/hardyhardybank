@@ -42,7 +42,7 @@ public class MainActivityAdmin extends Activity {
 
         private String accountType;
 
-        private double accountNumber;
+        private int accountNumber;
         private double balance;
 
     protected void onCreate(Bundle SavedInstanceState) {
@@ -87,7 +87,7 @@ public class MainActivityAdmin extends Activity {
                 ParseObject object = mainActivityAdminAdapter.getItem(position);
                 Intent i = new Intent(MainActivityAdmin.this, AdminActivity.class);
                 accountType = object.getString("accountType");
-                accountNumber = object.getDouble("accountnumber");
+                accountNumber = object.getInt("accountnumber");
                 balance = object.getDouble("balance");
 
                 DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
