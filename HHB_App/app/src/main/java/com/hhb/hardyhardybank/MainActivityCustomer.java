@@ -50,7 +50,7 @@ public class MainActivityCustomer extends Activity {
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_main_customer);
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        final ParseUser currentUser = ParseUser.getCurrentUser();
         userName = currentUser.getString("username");
 
 
@@ -76,7 +76,10 @@ public class MainActivityCustomer extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 ParseObject object = mainActivityCustomerAdapter.getItem(position);
-                Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
+                // if an account is clicked, go to MainActivityAccount
+                Intent i = new Intent(MainActivityCustomer.this, MainActivityAccount.class);
+
+                // bundles all the account information needed in the next screen(s)
                 accountType = object.getString("accountType");
                 accountNumber = object.getInt("accountnumber");
                 balance = object.getDouble("balance");
@@ -102,6 +105,8 @@ public class MainActivityCustomer extends Activity {
         mLogOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                currentUser.logOut();
 
                 // go to AddAccountActivity
                 Intent i = new Intent(MainActivityCustomer.this, LoginActivity.class);

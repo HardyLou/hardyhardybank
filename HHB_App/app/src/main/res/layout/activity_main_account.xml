@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/accounts_label"
+            android:text="@string/current_account"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="300dp"
+            android:id="@+id/listView"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/accounts_label"
+            android:clickable="true"
+            android:layout_alignParentEnd="false"
+            android:footerDividersEnabled="false"
+            android:focusable="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="Transaction Log"
+            android:id="@+id/action_transaction_log"
+            android:layout_gravity="center"
+            android:width="200dp"
+            android:layout_below="@+id/listView"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="Transfer Funds"
+            android:id="@+id/action_transfer"
+            android:layout_gravity="center"
+            android:width="200dp"
+            android:layout_below="@+id/action_transaction_log"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="Close Account"
+            android:id="@+id/action_close_acct"
+            android:layout_gravity="center"
+            android:width="200dp"
+            android:layout_below="@+id/action_transfer"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="Return to Main"
+            android:id="@+id/action_return"
+            android:layout_gravity="center"
+            android:width="200dp"
+            android:layout_below="@+id/action_close_acct"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</ScrollView>
