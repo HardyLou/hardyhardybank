@@ -124,8 +124,7 @@ public class MainActivityCustomer extends Activity {
                 Intent i;
                 i = new Intent(MainActivityCustomer.this, TransferActivity.class);
                 startActivity(i);
-                // close this activity
-                finish();
+
             }
         });
 
@@ -140,8 +139,6 @@ public class MainActivityCustomer extends Activity {
                 Intent i = new Intent(MainActivityCustomer.this, AddAccountActivity.class);
                 startActivity(i);
 
-                // close this activity
-                finish();
             }
         });
     }

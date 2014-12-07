@@ -85,7 +85,7 @@ public class MainActivityAdmin extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 ParseObject object = mainActivityAdminAdapter.getItem(position);
-                Intent i = new Intent(MainActivityAdmin.this, MainActivityTeller.class);
+                Intent i = new Intent(MainActivityAdmin.this, AdminActivity.class);
                 accountType = object.getString("accountType");
                 accountNumber = object.getDouble("accountnumber");
                 balance = object.getDouble("balance");

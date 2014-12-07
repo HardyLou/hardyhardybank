@@ -1,13 +1,10 @@
 package com.hhb.hardyhardybank;
 
-import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
-import java.text.DecimalFormat;
 
-import android.widget.TextView;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
@@ -138,7 +135,7 @@ public class CreditActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 // Go to ADMIN Main Activity
-                Intent i = new Intent(CreditActivity.this, MainActivityTeller.class);
+                Intent i = new Intent(CreditActivity.this, MainActivityAdmin.class);
                 startActivity(i);
 
                 // Close this activity
