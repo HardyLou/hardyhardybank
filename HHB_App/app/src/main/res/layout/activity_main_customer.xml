@@ -21,9 +21,9 @@
                 android:layout_height="wrap_content"
                 android:text="Accounts"
                 android:id="@+id/accounts_label"
-                android:paddingLeft="100dp"
+                android:paddingLeft="125dp"
                 android:paddingRight="100dp"
-                android:textSize="40sp"
+                android:textSize="35sp"
                 android:layout_weight="0.001"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_vertical|center_horizontal"
@@ -48,7 +48,7 @@
                 android:clickable="true"
                 android:focusable="false">
             </ListView>
-
+<!--
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,4 +70,14 @@
                 android:layout_alignParentTop="false"
                 android:layout_alignParentBottom="false"
                 android:layout_centerHorizontal="true" />
+-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Account"
+        android:id="@+id/action_add_acct_main"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
