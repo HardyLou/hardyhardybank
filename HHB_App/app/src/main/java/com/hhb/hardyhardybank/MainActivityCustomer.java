@@ -12,6 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -111,6 +112,10 @@ public class MainActivityCustomer extends Activity {
             public void onClick(View view) {
 
                 currentUser.logOut();
+
+                Toast.makeText(getApplicationContext(), "You have been logged out",
+                        Toast.LENGTH_LONG).show();
+
 
                 // go to AddAccountActivity
                 Intent i = new Intent(MainActivityCustomer.this, LoginActivity.class);
