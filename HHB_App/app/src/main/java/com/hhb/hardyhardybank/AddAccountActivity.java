@@ -133,6 +133,14 @@ public class AddAccountActivity extends Activity {
             cancel = true;
         }
 
+        // Check if account number is 6 digits long
+        else if (input_Number.length() != 6)
+        {
+            mNumberView.setError(getString(R.string.incorrect_number_format));
+            focusView = mNumberView;
+            cancel = true;
+        }
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.

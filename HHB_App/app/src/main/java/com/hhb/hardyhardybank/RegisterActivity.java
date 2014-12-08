@@ -166,7 +166,7 @@ public class RegisterActivity extends Activity {
         }
 
         // Check if account number is 6 digits long
-        if (input_Number.length() != 6)
+        else if (input_Number.length() != 6)
         {
             mNumberView.setError(getString(R.string.incorrect_number_format));
             focusView = mNumberView;
@@ -236,10 +236,10 @@ public class RegisterActivity extends Activity {
             user.put("fullname", input_Name);   // set full name
             user.put("address", input_Address); // set address
 
-            if (input_username.startsWith("ADMIN")) { // Check for Admin user Acct# prefix
+            /*if (input_username.startsWith("ADMIN")) { // Check for Admin user Acct# prefix
                 user_Role = "admin";
-            }
-            user.put("role", user_Role);       // label new account as customer/admin
+            }*/
+            user.put("role", user_Role);       // label new account as customer
 
 
             // Check whether registration has succeeded or not
@@ -251,11 +251,7 @@ public class RegisterActivity extends Activity {
                         account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
                         account.put("userEmail", input_Email);                          // set email
                         account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
-                        if (user_Role.contentEquals("admin")) {
-                            account.put("balance", 99999999.0);                         // initialize admin user with a lot of money
-                        } else {
-                            account.put("balance", 0.0);                                // initialize balance to $0
-                        }
+                        account.put("balance", 0.0);                                    // initialize balance to $0
                         account.saveEventually();
 
                         // Show a progress spinner, and kick off a background task to
