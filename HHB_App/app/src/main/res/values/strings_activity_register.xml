@@ -7,6 +7,7 @@
     <string name="prompt_number">Account Number</string>
     <string name="prompt_email">Email</string>
     <string name="action_register">Register</string>
+    <string name="action_to_login">Already have an account? Login here</string>
 
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
