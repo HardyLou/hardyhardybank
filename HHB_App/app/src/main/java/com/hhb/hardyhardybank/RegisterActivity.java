@@ -229,52 +229,77 @@ public class RegisterActivity extends Activity {
         } else {
             ParseUser user = new ParseUser();   // create new User object
 
-            // Enter values into Parse database
-            user.setUsername(input_username);   // set username
-            user.setPassword(input_password);   // set password
-            user.setEmail(input_Email);         // set email
-            user.put("fullname", input_Name);   // set full name
-            user.put("address", input_Address); // set address
+            boolean upper = false;
+            boolean lower = false;
+            boolean number = false;
+            for (char c : input_password.toCharArray()) {
+                if (Character.isUpperCase(c)) {
+                    upper = true;
+                } else if (Character.isLowerCase(c)) {
+                    lower = true;
+                } else if (Character.isDigit(c)) {
+                    number = true;
+                }
+            }
+            if (!upper || !lower || !number) {
+                Toast.makeText(getApplicationContext(), "Password must contain at least one uppercase character, one lowercase character and one number.",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                // Enter values into Parse database
+                user.setUsername(input_username);   // set username
+                user.setPassword(input_password);   // set password
+                user.setEmail(input_Email);         // set email
+                user.put("fullname", input_Name);   // set full name
+                user.put("address", input_Address); // set address
 
             /*if (input_username.startsWith("ADMIN")) { // Check for Admin user Acct# prefix
                 user_Role = "admin";
             }*/
-            user.put("role", user_Role);       // label new account as customer
+                user.put("role", user_Role);       // label new account as customer
 
 
-            // Check whether registration has succeeded or not
-            user.signUpInBackground(new SignUpCallback() {
-                public void done(ParseException e) {
-                    if (e == null) {
-                        ParseObject account = new ParseObject("Account");               // create new Account object
-                        account.put("userID", input_username);                          // joins User table with Account table
-                        account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
-                        account.put("userEmail", input_Email);                          // set email
-                        account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
-                        account.put("balance", 0.0);                                    // initialize balance to $0
-                        account.saveEventually();
+                // Check whether registration has succeeded or not
+                user.signUpInBackground(new SignUpCallback() {
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            ParseObject account = new ParseObject("Account");               // create new Account object
+                            account.put("userID", input_username);                          // joins User table with Account table
+                            account.put("accountnumber", Integer.valueOf(input_Number));    // set account number
+                            account.put("userEmail", input_Email);                          // set email
+                            account.put("accountType", input_AccountType);                  // specifies whether it is a checking or savings account
+                            account.put("balance", 0.0);                                    // initialize balance to $0
+                            account.saveEventually();
 
-                        // Show a progress spinner, and kick off a background task to
-                        // perform the user registration attempt
-                        showProgress(true);
+                            // Show a progress spinner, and kick off a background task to
+                            // perform the user registration attempt
+                            showProgress(true);
 
-                        // Successful Registration, return to LoginActivity
-                        Intent i = new Intent(RegisterActivity.this, DisplayUserInfoActivity.class);
-                        startActivity(i);
+                            // Successful Registration, return to LoginActivity
+                            Intent i = new Intent(RegisterActivity.this, DisplayUserInfoActivity.class);
+                            startActivity(i);
 
-                        // Notify user registration has been successful
-                        Toast.makeText(getApplicationContext(), "Account has been registered.",
-                                Toast.LENGTH_LONG).show();
+                            // Notify user registration has been successful
+                            Toast.makeText(getApplicationContext(), "Account has been registered.",
+                                    Toast.LENGTH_LONG).show();
 
-                        // Close this activity
-                        finish();
-                    } else {
-                        // Sign up failed
-                        Toast.makeText(getApplicationContext(), "Registration has failed.",
-                                Toast.LENGTH_LONG).show();
+                            // Close this activity
+                            finish();
+                        } else {
+                            // Sign up failed
+                            Toast.makeText(getApplicationContext(), "Registration has failed.",
+                                    Toast.LENGTH_LONG).show();
+                        }
                     }
-                }
-            });
+                });
+            }
+
+
+
+
+
+
+            //
+
         }
     }
 

@@ -101,6 +101,7 @@ public class TransferActivity extends Activity {
                                     // Find account associated with input email and assign to targetAccount
                                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
                                     query.whereEqualTo("userEmail", mEmail.getText().toString());
+                                    query.orderByDescending("createdAt");
                                     query.getFirstInBackground(new GetCallback<ParseObject>() {
                                         public void done(ParseObject targetAccount, com.parse.ParseException e) {
                                             // Target account's email is not registered in database
