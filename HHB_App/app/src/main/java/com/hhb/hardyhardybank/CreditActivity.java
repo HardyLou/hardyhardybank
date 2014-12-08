@@ -27,7 +27,7 @@ public class CreditActivity extends ActionBarActivity {
     private TextView mAccountInfoView;
     private TextView mBalanceView;
 
-    private double accountNumber;
+    private int accountNumber;
     private String accountInfo;
     private String accountBalance;
     private String currentBalance;
@@ -44,7 +44,6 @@ public class CreditActivity extends ActionBarActivity {
         // Set up the Credit Account form
         mCreditAmount = (EditText) findViewById(R.id.credit_amount);
         Button mCreditButton = (Button) findViewById(R.id.credit_enter);
-        Button mCreditReturn = (Button) findViewById(R.id.credit_return);
 
         // Set up the account info and account balance before returning the View.
         mAccountInfoView = (TextView)findViewById(R.id.credit_activity_account_info);
@@ -158,6 +157,7 @@ public class CreditActivity extends ActionBarActivity {
 
 
         // Activity when "Return to Main" button is pressed
+        Button mCreditReturn = (Button) findViewById(R.id.credit_return);
         mCreditReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,13 +166,11 @@ public class CreditActivity extends ActionBarActivity {
                 i.putExtra("accountnumber", accountNumber);
                 i.putExtra("accountInfo", accountInfo);
                 i.putExtra("accountBalance", currentBalance);
-
                 startActivity(i);
 
                 // Close this activity
                 finish();
-            }
+           }
          });
-
     }
 }
