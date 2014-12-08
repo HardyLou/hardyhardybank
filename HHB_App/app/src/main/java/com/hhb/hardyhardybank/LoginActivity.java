@@ -120,34 +120,36 @@ public class LoginActivity extends Activity {
         } else {
             ParseUser.logInInBackground(input_username, input_password, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
-                if (user != null) {
-                    // Show a progress spinner, and kick off a background task to
-                    // perform the user login attempt.
-                    showProgress(true);
+                    if (user != null) {
 
-                    ParseObject currentUser = ParseUser.getCurrentUser();
-                    if (currentUser.getString("role").equals("admin")) {
-                        // If user is an admin, send to admin home screen
-                        Intent i = new Intent(LoginActivity.this, MainActivityAdmin.class);
-                        startActivity(i);
 
-                    } else if (currentUser.getString("role").equals("customer")) {
-                        // If user is a regular user, send to user home screen
-                        Intent i = new Intent(LoginActivity.this, MainActivityCustomer.class);
-                        startActivity(i);
+                        // Show a progress spinner, and kick off a background task to
+                        // perform the user login attempt.
+                        showProgress(true);
 
+                        ParseObject currentUser = ParseUser.getCurrentUser();
+                        if (currentUser.getString("role").equals("admin")) {
+                            // If user is an admin, send to admin home screen
+                            Intent i = new Intent(LoginActivity.this, MainActivityAdmin.class);
+                            startActivity(i);
+
+                        } else if (currentUser.getString("role").equals("customer")) {
+                            // If user is a regular user, send to user home screen
+                            Intent i = new Intent(LoginActivity.this, MainActivityCustomer.class);
+                            startActivity(i);
+
+                        } else {
+                            // Account in database does not contain required fields
+                            Toast.makeText(getApplicationContext(), "Account is corrupted",
+                                           Toast.LENGTH_LONG).show();
+                        }
+
+                        // Close this activity
+                        finish();
                     } else {
-                        // Account in database does not contain required fields
-                        Toast.makeText(getApplicationContext(), "Account is corrupted",
-                                       Toast.LENGTH_LONG).show();
-                    }
-
-                // Close this activity
-                finish();
-                } else {
-                        // Notify user that sign in has failed.
-                        Toast.makeText(getApplicationContext(), "Wrong Credentials",
-                                       Toast.LENGTH_LONG).show();
+                            // Notify user that sign in has failed.
+                            Toast.makeText(getApplicationContext(), "Wrong Credentials",
+                                           Toast.LENGTH_LONG).show();
                     }
                 }
             });

@@ -14,7 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
@@ -38,6 +40,7 @@ public class MainActivityCustomer extends Activity {
     private ListView lv;
 
     private String accountType;
+    private String toDelete;
 
     private ParseUser currentUser;
 
@@ -60,6 +63,23 @@ public class MainActivityCustomer extends Activity {
             public ParseQuery<ParseObject> create() {
                 ParseQuery<ParseObject> query = new ParseQuery("Account");
                 query.whereEqualTo("userID", userName);
+                try {
+                    if (query.count() == 0) {
+                        Toast.makeText(getApplicationContext(), "User has been closed.", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(MainActivityCustomer.this, LoginActivity.class);
+
+                        Toast.makeText(getApplicationContext(), userName + "'s all accounts have been closed.",
+                                Toast.LENGTH_LONG).show();
+                        startActivity(i);
+                        finish();
+
+                    }
+
+                } catch (ParseException e2) {
+                    e2.printStackTrace();
+                }
+
+
                 return query;
             }
         };
