@@ -23,7 +23,7 @@
                 android:id="@+id/accounts_label"
                 android:paddingLeft="125dp"
                 android:paddingRight="100dp"
-                android:textSize="35sp"
+                android:textSize="30sp"
                 android:layout_weight="0.001"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_vertical|center_horizontal" />

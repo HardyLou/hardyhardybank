@@ -15,6 +15,7 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -38,6 +39,7 @@ public class TransactionActivity extends Activity {
     private int accountNumber;
     private String accountInfo;
     private String accountBalance;
+    private String accountRole;
     Bundle bundle;
 
     protected void onCreate(Bundle SavedInstanceState) {
@@ -53,6 +55,9 @@ public class TransactionActivity extends Activity {
         accountNumber = bundle.getInt("accountnumber");
         accountBalance = bundle.getString("accountBalance");
         accountInfo = bundle.getString("accountInfo");
+
+        final ParseObject currentUser = ParseUser.getCurrentUser();
+        accountRole = currentUser.getString("role");
 
         // Set up the views
         TextView accountInfoView = (TextView)findViewById(R.id.transactions_account_info);
@@ -87,16 +92,33 @@ public class TransactionActivity extends Activity {
         mReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // go to AddAccountActivity
-                Intent i = new Intent(TransactionActivity.this, AdminActivity.class);
+                // for Admin
+                if (accountRole.equals("admin")) {
+                    // go to AddAccountActivity
+                    Intent i = new Intent(TransactionActivity.this, AdminActivity.class);
 
-                // passes along the bundle
-                i.putExtras(bundle);
+                    // passes along the bundle
+                    i.putExtras(bundle);
 
-                startActivity(i);
+                    startActivity(i);
 
-                // close this activity
-                finish();
+                    // close this activity
+                    finish();
+                }
+
+                // for Customer
+                else if (accountRole.equals("customer")) {
+                    // go to AddAccountActivity
+                    Intent i = new Intent(TransactionActivity.this, MainActivityAccount.class);
+
+                    // passes along the bundle
+                    i.putExtras(bundle);
+
+                    startActivity(i);
+
+                    // close this activity
+                    finish();
+                }
             }
 
         });
