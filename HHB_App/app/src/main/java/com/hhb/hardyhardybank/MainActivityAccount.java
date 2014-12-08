@@ -135,6 +135,11 @@ public class MainActivityAccount extends Activity {
                 // go to TransferActivity
                 Intent i;
                 i = new Intent(MainActivityAccount.this, TransferUserActivity.class);
+                i.putExtra("accountnumber",accountNumber);
+                i.putExtra("accountInfo",accountInfo);
+
+                // Pass the updated accountBalance
+                i.putExtra("accountBalance",currentBalance);
                 startActivity(i);
 
             }

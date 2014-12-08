@@ -56,16 +56,20 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
+        android:focusable="false"
         android:text="@string/enter"
         android:id="@+id/credit_enter"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center"
+        android:width="200dp" />
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
+        android:focusable="false"
         android:text="@string/return_to_prev"
         android:id="@+id/action_return"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center"
+        android:width="200dp" />
 
 </LinearLayout>
