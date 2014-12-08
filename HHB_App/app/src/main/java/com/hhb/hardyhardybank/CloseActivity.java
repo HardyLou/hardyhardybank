@@ -54,9 +54,6 @@ public class CloseActivity extends Activity{
                 // Query Parse for account balance value and user's address
                 final ParseObject currentUser = ParseUser.getCurrentUser();
 
-
-
-
                 accountNumber = mAccountNumber.getText().toString();
                 int accountValue = Integer.parseInt(accountNumber);
                 ParseQuery<ParseObject> queryCurrentUser = ParseQuery.getQuery("Account");
