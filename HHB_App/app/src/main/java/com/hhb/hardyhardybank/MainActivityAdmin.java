@@ -33,10 +33,6 @@ public class MainActivityAdmin extends Activity {
 
         private LayoutInflater inflater;
 
-        /*private Button mDebitButton = (Button) findViewById(R.id.action_debit);
-        private Button mCreditButton = (Button) findViewById(R.id.action_credit);
-        private Button mCloseButton = (Button) findViewById(R.id.action_close);
-*/
         private Button mLogoutButton;
         private ListView lv;
 
@@ -52,12 +48,6 @@ public class MainActivityAdmin extends Activity {
 
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.activity_main_admin);
-
-
-       /* mDebitButton = (Button) findViewById(R.id.action_debit);
-        mCreditButton = (Button) findViewById(R.id.action_credit);
-        mCloseButton = (Button) findViewById(R.id.action_close);
-*/
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         userName = currentUser.getString("username");
@@ -101,7 +91,6 @@ public class MainActivityAdmin extends Activity {
                 i.putExtra("accountnumber", accountNumber);
 
                 startActivity(i);
-
             }
         });
 
@@ -125,8 +114,6 @@ public class MainActivityAdmin extends Activity {
                 finish();
             }
         });
-
-
     }
 
     private class AdminCustomAdapter extends ParseQueryAdapter<ParseObject> {
@@ -173,7 +160,4 @@ public class MainActivityAdmin extends Activity {
             return view;
         }
     }
-
-
-
 }
