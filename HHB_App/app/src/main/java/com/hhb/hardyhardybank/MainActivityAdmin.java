@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -37,6 +39,7 @@ public class MainActivityAdmin extends Activity {
         private ListView lv;
 
         private String accountType;
+        private String fullName;
 
         private int accountNumber;
         private double balance;
@@ -61,7 +64,6 @@ public class MainActivityAdmin extends Activity {
             }
         };
 
-
         inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mainActivityAdminAdapter = new AdminCustomAdapter(this, factory);
@@ -76,6 +78,10 @@ public class MainActivityAdmin extends Activity {
                                     int position, long id) {
                 ParseObject object = mainActivityAdminAdapter.getItem(position);
                 Intent i = new Intent(MainActivityAdmin.this, AdminActivity.class);
+
+
+                String userName = object.getString("userID");
+
                 accountType = object.getString("accountType");
                 accountNumber = object.getInt("accountnumber");
                 balance = object.getDouble("balance");
@@ -83,7 +89,7 @@ public class MainActivityAdmin extends Activity {
                 DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
                 DecimalFormat balanceFormat = new DecimalFormat("#0.00");
 
-                final String accountInfo = "HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
+                final String accountInfo = userName + "'s HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
                 final String accountBalance = "$" + balanceFormat.format(balance);
 
                 i.putExtra("accountInfo", accountInfo);
@@ -91,6 +97,8 @@ public class MainActivityAdmin extends Activity {
                 i.putExtra("accountnumber", accountNumber);
 
                 startActivity(i);
+
+                finish();
             }
         });
 
@@ -129,7 +137,7 @@ public class MainActivityAdmin extends Activity {
 
 
         @Override
-        public View getItemView(ParseObject object, View view, ViewGroup parent) {
+        public View getItemView(final ParseObject object, View view, ViewGroup parent) {
 
             if (view == null) {
                 view = inflater.inflate(R.layout.admin_list_item, parent, false);
@@ -143,6 +151,7 @@ public class MainActivityAdmin extends Activity {
             mAccountInfoView = (TextView) view.findViewById(R.id.admin_item1);
             mBalanceView = (TextView) view.findViewById(R.id.admin_item2);
 
+            String userName = object.getString("userID");
 
             String accountType = object.getString("accountType");
             double accountNumber = object.getDouble("accountnumber");
@@ -151,11 +160,13 @@ public class MainActivityAdmin extends Activity {
             DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
             DecimalFormat balanceFormat = new DecimalFormat("#0.00");
 
-            final String accountInfo = "HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
+            final String accountInfo = userName + "'s HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
             final String accountBalance = "$" + balanceFormat.format(balance);
 
             mAccountInfoView.setText(accountInfo);
             mBalanceView.setText(accountBalance);
+
+
 
             return view;
         }

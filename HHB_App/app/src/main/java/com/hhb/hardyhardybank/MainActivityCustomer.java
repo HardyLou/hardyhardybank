@@ -168,7 +168,6 @@ public class MainActivityCustomer extends Activity {
             mAccountInfoView = (TextView) view.findViewById(R.id.customer_item1);
             mBalanceView = (TextView) view.findViewById(R.id.customer_item2);
 
-
             String accountType = object.getString("accountType");
             int accountNumber = object.getInt("accountnumber");
             double balance = object.getDouble("balance");
@@ -176,7 +175,7 @@ public class MainActivityCustomer extends Activity {
             DecimalFormat accountNumberFormat = new DecimalFormat("#.#");
             DecimalFormat balanceFormat = new DecimalFormat("#0.00");
 
-            final String accountInfo = currentUser.getString("fullname") + "'s HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
+            final String accountInfo = userName + "'s HARDY " + accountType + " (" + accountNumberFormat.format(accountNumber) + ")";
             final String accountBalance = "$" + balanceFormat.format(balance);
 
             mAccountInfoView.setText(accountInfo);
