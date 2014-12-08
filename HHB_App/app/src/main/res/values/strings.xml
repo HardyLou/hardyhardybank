@@ -6,6 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_splash">fragment_splash</string>
     <string name="main_page">Main Page</string>
+    <string name="main_menu">Main Menu</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="error_field_required">This field is required</string>
@@ -28,6 +29,8 @@
     <string name="incorrect_number_format">Account Number must be 6 digits long</string>
     <string name="duplicate_username">Username has already been taken</string>
     <string name="duplicate_email">Email has already been registered</string>
+    <string name="user_account">User Account</string>
+    <string name="transactions">Transaction Log</string>
 
     <string-array name="accounts_array">
         <item>Saving</item>

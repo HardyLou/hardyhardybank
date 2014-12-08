@@ -181,7 +181,6 @@ public class RegisterActivity extends Activity {
 
                 if (exists.size() == 0) {
                     mUsernameView.setError(null);
-                    cancel = false;
                 } else {
                     mUsernameView.setError(getString(R.string.duplicate_username));
                     focusView = mUsernameView;
@@ -197,7 +196,6 @@ public class RegisterActivity extends Activity {
                 List<ParseObject> exists = number_query.find();
                 if (exists.size() == 0) {
                     mNumberView.setError(null);
-                    cancel = false;
                 } else {
                     mNumberView.setError(getString(R.string.duplicate_acct_number));
                     focusView = mNumberView;
@@ -213,7 +211,6 @@ public class RegisterActivity extends Activity {
                 List<ParseObject> exists = email_query.find();
                 if (exists.size() == 0) {
                     mEmailView.setError(null);
-                    cancel = false;
                 } else {
                     mEmailView.setError(getString(R.string.duplicate_email));
                     focusView = mEmailView;
