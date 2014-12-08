@@ -182,9 +182,21 @@ public class RegisterActivity extends Activity {
                 if (exists.size() == 0) {
                     mUsernameView.setError(null);
                 } else {
-                    mUsernameView.setError(getString(R.string.duplicate_username));
-                    focusView = mUsernameView;
-                    cancel = true;
+
+                    // Check whether the user is duplicated.
+ //                   for (ParseObject user: exists) {
+ //                       if (user.getBoolean(("activated"))) {
+                            mUsernameView.setError(getString(R.string.duplicate_username));
+                            focusView = mUsernameView;
+                            cancel = true;
+//                            break;
+  //                      }
+
+                  //  }
+                    //if (cancel) {
+                      //  mUsernameView.setError(null);
+                   // }
+
                 }
             } catch (ParseException e1) {
                 e1.printStackTrace();
@@ -251,6 +263,7 @@ public class RegisterActivity extends Activity {
                 user.setEmail(input_Email);         // set email
                 user.put("fullname", input_Name);   // set full name
                 user.put("address", input_Address); // set address
+                user.put("activated", true);
 
             /*if (input_username.startsWith("ADMIN")) { // Check for Admin user Acct# prefix
                 user_Role = "admin";
@@ -292,13 +305,6 @@ public class RegisterActivity extends Activity {
                     }
                 });
             }
-
-
-
-
-
-
-            //
 
         }
     }

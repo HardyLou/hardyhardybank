@@ -68,8 +68,6 @@ public class MainActivityCustomer extends Activity {
                         Toast.makeText(getApplicationContext(), "User has been closed.", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(MainActivityCustomer.this, LoginActivity.class);
 
-                        Toast.makeText(getApplicationContext(), userName + "'s all accounts have been closed.",
-                                Toast.LENGTH_LONG).show();
                         startActivity(i);
                         finish();
 
