@@ -66,9 +66,6 @@ public class CloseActivity extends Activity{
                     // go to AddAccountActivity
                     Intent i = new Intent(CloseActivity.this, AdminActivity.class);
 
-                accountNumber = Integer.parseInt(mAccountNumberView.getText().toString());
-                ParseQuery<ParseObject> queryCurrentUser = ParseQuery.getQuery("Account");
-                queryCurrentUser.whereEqualTo("accountnumber", accountNumber);
                     // passes along the bundle
                     i.putExtras(bundle);
 
