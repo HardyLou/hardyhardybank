@@ -87,6 +87,19 @@
         android:layout_alignLeft="@+id/action_credit"
         android:layout_alignStart="@+id/action_credit" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:focusable="false"
+        android:text="Return to Main"
+        android:id="@+id/action_return"
+        android:layout_gravity="center"
+        android:width="200dp"
+        android:layout_below="@+id/close_account"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="true" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -50,16 +50,16 @@ public class MainActivityAccount extends Activity {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
         query.whereEqualTo("accountnumber", accountNumber);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
-                                       public void done(ParseObject account, com.parse.ParseException e) {
-                                           balance = account.getDouble("balance");
+            public void done(ParseObject account, com.parse.ParseException e) {
+                balance = account.getDouble("balance");
 
-                                           // Update the balance textview
-                                           DecimalFormat balanceFormat = new DecimalFormat("#0.00");
-                                           currentBalance = "$" + balanceFormat.format(balance);
-                                           accountInfoView.setText(accountInfo);
-                                           accountBalanceView.setText(currentBalance);
-                                       }
-                                   });
+                // Update the balance TextView
+                DecimalFormat balanceFormat = new DecimalFormat("#0.00");
+                currentBalance = "$" + balanceFormat.format(balance);
+                accountInfoView.setText(accountInfo);
+                accountBalanceView.setText(currentBalance);
+            }
+        });
 
 
 
@@ -149,10 +149,14 @@ public class MainActivityAccount extends Activity {
 
                 // go to AddAccountActivity
                 Intent i = new Intent(MainActivityAccount.this, CloseActivity.class);
-                startActivity(i);
 
-                // close this activity
-                finish();
+                i.putExtra("accountnumber",accountNumber);
+                i.putExtra("accountInfo",accountInfo);
+
+                // Pass the updated accountBalance
+                i.putExtra("accountBalance",currentBalance);
+
+                startActivity(i);
             }
         });
 

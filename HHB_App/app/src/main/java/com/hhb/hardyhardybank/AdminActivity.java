@@ -58,22 +58,7 @@ public class AdminActivity extends  ActionBarActivity{
 //        Button mLogoutButton = (Button) findViewById(R.id.action_logout);
 //        Button mBalanceButton = (Button) findViewById(R.id.action_balance);
 
-/*
-        //TODO: SHOW BALANCE
-        // Button to Show Balance activity
-        mBalanceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go to Balance Activity
-                Intent i = new Intent(AdminActivity.this, BalanceActivity.class);
-                startActivity(i);
 
-                // DO NOT close this activity!
-                //finish();
-            }
-        });
-
-*/
         //TODO: ACCOUNT SUMMARY
 
 
@@ -82,13 +67,6 @@ public class AdminActivity extends  ActionBarActivity{
         mDebitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-/*                try {
-                    checkAccount(bundle);
-                } catch (ParseException e2) {
-                    Toast.makeText(getApplicationContext(), "ERROR",
-                            Toast.LENGTH_LONG).show();
-                }
-*/
                 if (cancel) {
                     focusView.requestFocus();
                 } else {
@@ -105,17 +83,12 @@ public class AdminActivity extends  ActionBarActivity{
             }
         });
 
+
+        // Button for Transactions
         Button mTransactionButton = (Button) findViewById(R.id.action_transaction);
         mTransactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-/*                try {
-                    checkAccount(bundle);
-                } catch (ParseException e2) {
-                    Toast.makeText(getApplicationContext(), "ERROR",
-                            Toast.LENGTH_LONG).show();
-                }
-*/
                 if (cancel) {
                     focusView.requestFocus();
                 } else {
@@ -126,7 +99,7 @@ public class AdminActivity extends  ActionBarActivity{
                     i.putExtra("accountBalance", accountBalance);
                     startActivity(i);
 
-
+                    finish();
                 }
             }
         });
@@ -160,7 +133,6 @@ public class AdminActivity extends  ActionBarActivity{
         });
 
 
-        //TODO: CLOSE ACCOUNT
         // Button to close activity
         Button mCloseButton = (Button) findViewById(R.id.action_close);
         mCloseButton.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +140,24 @@ public class AdminActivity extends  ActionBarActivity{
             public void onClick(View view) {
                 // Go to Close Activity
                 Intent i = new Intent(AdminActivity.this, CloseActivity.class);
+                i.putExtra("accountnumber", accountNumber);
+                i.putExtra("accountInfo", accountInfo);
+                i.putExtra("accountBalance", accountBalance);
+                startActivity(i);
+
+                finish();
+            }
+        });
+
+
+        // Button to return to main screen (MainActivityAdmin)
+        Button mReturnButton = (Button) findViewById(R.id.action_return);
+        mReturnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // go to MainActivityAdmin
+                Intent i = new Intent(AdminActivity.this, MainActivityAdmin.class);
                 startActivity(i);
 
             }

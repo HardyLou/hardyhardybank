@@ -47,5 +47,16 @@
         android:layout_weight="0.02" >
     </ListView>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:focusable="false"
+        android:text="@string/return_to_prev"
+        android:id="@+id/action_return"
+        android:layout_gravity="center"
+        android:layout_below="@+id/transactions_list_view"
+        android:layout_centerHorizontal="true"
+        android:width="200dp" />
+
 
 </RelativeLayout>

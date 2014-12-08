@@ -23,6 +23,7 @@
     <string name="confirm_close">\nConfirm\n</string>
     <string name="penalty_interest">\nCalculate Penalty\nor Interest\n</string>
     <string name="current_account">Current Account</string>
+    <string name="return_to_prev">Back</string>
 
     <string-array name="accounts_array">
         <item>Saving</item>

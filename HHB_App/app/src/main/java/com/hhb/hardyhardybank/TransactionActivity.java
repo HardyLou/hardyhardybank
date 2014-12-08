@@ -2,10 +2,12 @@ package com.hhb.hardyhardybank;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,6 +38,7 @@ public class TransactionActivity extends Activity {
     private int accountNumber;
     private String accountInfo;
     private String accountBalance;
+    Bundle bundle;
 
     protected void onCreate(Bundle SavedInstanceState) {
 
@@ -46,7 +49,7 @@ public class TransactionActivity extends Activity {
         setContentView(R.layout.activity_transaction);
 
         // Get the data passed from the previous page
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         accountNumber = bundle.getInt("accountnumber");
         accountBalance = bundle.getString("accountBalance");
         accountInfo = bundle.getString("accountInfo");
@@ -77,6 +80,26 @@ public class TransactionActivity extends Activity {
         // Attach the query adapter to the view
         lv = (ListView)findViewById(R.id.transactions_list_view);
         lv.setAdapter(transactionAdapter);
+
+
+        // Activity once back button is pressed
+        Button mReturnButton = (Button) findViewById(R.id.action_return);
+        mReturnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // go to AddAccountActivity
+                Intent i = new Intent(TransactionActivity.this, AdminActivity.class);
+
+                // passes along the bundle
+                i.putExtras(bundle);
+
+                startActivity(i);
+
+                // close this activity
+                finish();
+            }
+
+        });
 /*
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -152,10 +175,5 @@ public class TransactionActivity extends Activity {
 
             return view;
         }
-
     }
-
-
-
-
 }
