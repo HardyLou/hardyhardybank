@@ -49,7 +49,7 @@
         android:ems="10"
         android:id="@+id/transfer_amount"
         android:layout_gravity="center_horizontal"
-        android:hint="0.00"
+        android:hint="$0.00"
         android:paddingLeft="75dp"
         android:paddingRight="75dp"
         android:gravity="center_horizontal" />
@@ -64,8 +64,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/credit_return_main"
-        android:id="@+id/credit_return_main"
+        android:text="@string/return_to_prev"
+        android:id="@+id/action_return"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
