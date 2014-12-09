@@ -95,14 +95,15 @@
                 android:text="@string/action_register"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/user_login_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+            <TextView android:id="@+id/user_login_button"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textStyle="bold"/>
+                android:layout_marginTop="20dip"
+                android:layout_marginBottom="40dip"
+                android:text="@string/action_to_login"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="#0b84aa"/>
 
         </LinearLayout>
     </ScrollView>

@@ -106,25 +106,31 @@ public class DebitActivity extends ActionBarActivity {
                             } else {
 
                                 balance = account.getDouble("balance") - debit_amount;
-                                account.increment("balance", -debit_amount);
-                                account.saveEventually();
+                                if(balance >= 0) {
+                                    account.increment("balance", -debit_amount);
+                                    account.saveEventually();
 
-                                // Update the balance textview
-                                DecimalFormat balanceFormat = new DecimalFormat("#0.00");
-                                currentBalance = "$" + balanceFormat.format(balance);
-                                mBalanceView.setText(currentBalance);
+                                    // Update the balance textview
+                                    DecimalFormat balanceFormat = new DecimalFormat("#0.00");
+                                    currentBalance = "$" + balanceFormat.format(balance);
+                                    mBalanceView.setText(currentBalance);
 
-                                // documents the transaction
-                                ParseObject transaction = new ParseObject("Transaction");
-                                transaction.put("accountNumber", accountNumber);
-                                transaction.put("action", "debit");
-                                transaction.put("amount", -1*Double.valueOf(mDebitAmount.getText().toString()));
-                                transaction.put("resultingBalance", account.getDouble("balance"));
-                                transaction.saveEventually();
+                                    // documents the transaction
+                                    ParseObject transaction = new ParseObject("Transaction");
+                                    transaction.put("accountNumber", accountNumber);
+                                    transaction.put("action", "debit");
+                                    transaction.put("amount", -1 * Double.valueOf(mDebitAmount.getText().toString()));
+                                    transaction.put("resultingBalance", account.getDouble("balance"));
+                                    transaction.saveEventually();
 
-                                Toast.makeText(getApplicationContext(), "ADMIN has withdrawn $" +
-                                        debit_amount + " from " + account.getString("userID") +
-                                        "'s Account!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "ADMIN has withdrawn $" +
+                                            debit_amount + " from " + account.getString("userID") +
+                                            "'s Account!", Toast.LENGTH_LONG).show();
+                                }
+                                else{
+
+                                    Toast.makeText(getApplicationContext(), "Insufficient funds!", Toast.LENGTH_LONG).show();
+                                }
                             }
 
                         }

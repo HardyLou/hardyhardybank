@@ -74,10 +74,10 @@ public class AddAccountActivity extends Activity {
         // Format displayed balance
 //        DecimalFormat format = new DecimalFormat("#0.00");
 //        final String formatted_balance = format.format(balance);
-        mNameView.setText(UserName);
-        mAddressView.setText(UserAddress);
-        mEmailView.setText(UserEmail);
-        mUsernameView.setText(UserUserName);
+        mNameView.setText("Full name: " + UserName);
+        mAddressView.setText("Address: " + UserAddress);
+        mEmailView.setText("Email: " + UserEmail);
+        mUsernameView.setText("Username: " + UserUserName);
 
 
         // Activity once Add Account button is pressed
@@ -133,12 +133,19 @@ public class AddAccountActivity extends Activity {
             cancel = true;
         }
 
+        // Check if account number is 6 digits long
+        else if (input_Number.length() != 6)
+        {
+            mNumberView.setError(getString(R.string.incorrect_number_format));
+            focusView = mNumberView;
+            cancel = true;
+        }
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
-
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Account");
             query.whereEqualTo("accountnumber", Integer.valueOf(input_Number));
             // Get the first account found for the user
@@ -172,8 +179,9 @@ public class AddAccountActivity extends Activity {
                     } else {
 
                         // Add account failed because of duplicate account number
-                        Toast.makeText(getApplicationContext(), "Registration has failed. The Account Number has been taken. ",
-                                Toast.LENGTH_LONG).show();
+                        mNumberView.setError(getString(R.string.duplicate_acct_number));
+                        View focusView = mNumberView;
+                        focusView.requestFocus();
                     }
                 }
             });
