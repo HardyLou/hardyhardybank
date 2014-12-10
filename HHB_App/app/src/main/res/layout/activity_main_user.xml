@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="@drawable/bg2">
+    android:weightSum="1">
 
     <ScrollView
         android:id="@+id/main_activity_user_scroll"
@@ -22,8 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textIsSelectable="false"
-        android:textSize="@dimen/activity_horizontal_margin"
-        android:textColor="#fffbf9ff"/>
+        android:textSize="@dimen/activity_horizontal_margin" />
 
     <TextView
         android:layout_width="match_parent"
@@ -34,8 +32,7 @@
         android:paddingLeft="100dp"
         android:paddingRight="100dp"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="#fffbf9ff"/>
+        android:gravity="center" />
 
     <Spinner
         android:id="@+id/available_accounts"
@@ -45,58 +42,52 @@
         android:gravity="center" />
 
     <Button
-        android:layout_width="255dp"
-        android:layout_height="50dp"
-        android:background="@drawable/show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_balance"
         android:id="@+id/action_balance"
         android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_margin="10dp"/>
+        android:width="200dp" />
 
     <Button
-        android:layout_width="255dp"
-        android:layout_height="50dp"
-        android:background="@drawable/accsum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account_summary"
         android:id="@+id/action_summary"
         android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_margin="10dp"/>
+        android:width="200dp" />
 
     <Button
-        android:layout_width="255dp"
-        android:layout_height="50dp"
-        android:background="@drawable/transfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/transfer_funds"
         android:id="@+id/action_transfer_to_another"
         android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_margin="10dp"/>
+        android:width="200dp" />
 
     <Button
-        android:layout_width="255dp"
-        android:layout_height="50dp"
-        android:background="@drawable/addacc"
+        android:layout_width="wrap_content"
+        android:layout_height="79dp"
+        android:text="@string/action_add"
         android:id="@+id/action_add_acct_main"
         android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_margin="10dp"/>
+        android:width="200dp" />
 
     <Button
-        android:layout_width="255dp"
-        android:layout_height="50dp"
-        android:background="@drawable/closeacc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/close_account"
         android:id="@+id/action_close"
         android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_margin="10dp"/>
+        android:width="200dp" />
 
     <Button
-        android:layout_width="255dp"
-        android:layout_height="50dp"
-        android:background="@drawable/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout_account"
         android:id="@+id/action_logout"
         android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_margin="10dp"/>
+        android:width="200dp" />
 
         </LinearLayout>
     </ScrollView>

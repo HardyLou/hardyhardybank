@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivityCustomer"
-    android:background="@drawable/bg2">
+    tools:context=".MainActivityCustomer" >
 
             <Button
-                android:layout_width="110dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/logout"
+                android:text="LOG OFF"
                 android:id="@+id/action_logout"
                 android:layout_gravity="right"
                 android:layout_alignParentTop="true"
@@ -27,7 +26,6 @@
                 android:textSize="30sp"
                 android:layout_weight="0.001"
                 android:layout_centerHorizontal="true"
-                android:textColor="#fffbf9ff"
                 android:gravity="center_vertical|center_horizontal" />
 
     <ListView
@@ -63,9 +61,9 @@
                 android:layout_centerHorizontal="true" />
 -->
     <Button
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/addacc"
+        android:text="Add Account"
         android:id="@+id/action_add_acct_main"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

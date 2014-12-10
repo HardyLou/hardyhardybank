@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:shrinkColumns="*"
-    android:stretchColumns="*"
-    android:background="@drawable/bg2">
+    android:stretchColumns="*">
     <TableRow
         android:id="@+id/tableRow_title"
         android:layout_height="wrap_content"
@@ -22,8 +21,7 @@
             android:textSize="40dp"
             android:text="Account Information"
             android:gravity="center"
-            android:layout_span="6"
-            android:textColor="#fffbf9ff"></TextView>
+            android:layout_span="6"></TextView>
     </TableRow>
     <TableRow
         android:id="@+id/tableRow_buffer"
@@ -39,8 +37,7 @@
             android:textSize="40dp"
             android:text=""
             android:gravity="center"
-            android:layout_span="6"
-            android:textColor="#fffbf9ff"></TextView>
+            android:layout_span="6"></TextView>
     </TableRow>
 
     <TableRow
@@ -49,21 +46,18 @@
         android:layout_width="match_parent">
         <TextView
             android:id="@+id/row_name_buffer"
-            android:text=""
-            android:textColor="#fffbf9ff"></TextView>
+            android:text=""></TextView>
         <TextView
             android:id="@+id/name"
             android:text="Name"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
         <TextView
             android:id="@+id/name_retrieved"
             android:text=""
             android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
     </TableRow>
 
     <TableRow
@@ -72,21 +66,18 @@
         android:layout_width="match_parent">
         <TextView
             android:id="@+id/row3"
-            android:text=""
-            android:textColor="#fffbf9ff"></TextView>
+            android:text=""></TextView>
         <TextView
             android:id="@+id/address"
             android:text="Address"
             android:textSize="30dp"
             android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
         <TextView
             android:id="@+id/address_retrieved"
             android:text=""
             android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
     </TableRow>
 
     <TableRow
@@ -95,21 +86,18 @@
         android:layout_width="match_parent">
         <TextView
             android:id="@+id/row4"
-            android:text=""
-            android:textColor="#fffbf9ff"></TextView>
+            android:text=""></TextView>
         <TextView
             android:id="@+id/email"
             android:text="Email"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
         <TextView
             android:id="@+id/email_retrieved"
             android:text=""
             android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
     </TableRow>
 
     <TableRow
@@ -118,21 +106,18 @@
         android:layout_width="match_parent">
         <TextView
             android:id="@+id/user_name_buffer"
-            android:text=""
-            android:textColor="#fffbf9ff"></TextView>
+            android:text=""></TextView>
         <TextView
             android:id="@+id/user_name"
             android:text="User Name"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
         <TextView
             android:id="@+id/user_name_retrieved"
             android:text=""
             android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
     </TableRow>
 
     <TableRow
@@ -141,21 +126,18 @@
         android:layout_width="match_parent">
         <TextView
             android:id="@+id/row5"
-            android:text=""
-            android:textColor="#fffbf9ff"></TextView>
+            android:text=""></TextView>
         <TextView
             android:id="@+id/role"
             android:text="Role"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
         <TextView
             android:id="@+id/role_retrieved"
             android:text=""
             android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
     </TableRow>
 
     <TableRow
@@ -164,21 +146,18 @@
         android:layout_width="match_parent">
         <TextView
             android:id="@+id/row6"
-            android:text=""
-            android:textColor="#fffbf9ff"></TextView>
+            android:text=""></TextView>
         <TextView
             android:id="@+id/account_type"
             android:text="Account Type"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
         <TextView
             android:id="@+id/account_type_retrieved"
             android:text=""
             android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
     </TableRow>
 
     <TableRow
@@ -187,21 +166,18 @@
         android:layout_width="match_parent">
         <TextView
             android:id="@+id/row7"
-            android:text=""
-            android:textColor="#fffbf9ff"></TextView>
+            android:text=""></TextView>
         <TextView
             android:id="@+id/account_number"
             android:text="Account Number"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
         <TextView
             android:id="@+id/account_number_retrieved"
             android:text=""
             android:textStyle="bold"
-            android:typeface="serif"
-            android:textColor="#fffbf9ff"></TextView>
+            android:typeface="serif"></TextView>
     </TableRow>
 
     <TableRow
@@ -223,7 +199,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/cool"
+            android:text="Cool!"
             android:id="@+id/cool_button"
             android:layout_column="4" />
     </TableRow>

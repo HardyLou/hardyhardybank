@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg2">
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,8 +9,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/transfer_funds"
         android:id="@+id/credit_label"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#fffbf9ff"/>
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
@@ -21,8 +19,7 @@
         android:id="@+id/transfer_person_text"
         android:layout_gravity="center"
         android:width="200dp"
-        android:gravity="center"
-        android:textColor="#fffbf9ff"/>
+        android:gravity="center" />
 
     <EditText
         android:layout_width="match_parent"
@@ -33,8 +30,7 @@
         android:hint="@string/prompt_email_or_phone"
         android:paddingLeft="75dp"
         android:paddingRight="75dp"
-        android:gravity="center_horizontal"
-        android:textColor="#fffbf9ff"/>
+        android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
@@ -44,8 +40,7 @@
         android:id="@+id/transfer_amount_text"
         android:layout_gravity="center"
         android:width="200dp"
-        android:gravity="center"
-        android:textColor="#fffbf9ff"/>
+        android:gravity="center" />
 
     <EditText
         android:layout_width="match_parent"
@@ -57,25 +52,9 @@
         android:hint="$0.00"
         android:paddingLeft="75dp"
         android:paddingRight="75dp"
-        android:gravity="center_horizontal"
-        android:textColor="#fffbf9ff"/>
+        android:gravity="center_horizontal" />
 
     <Button
-<<<<<<< HEAD
-        android:layout_width="109dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/enter"
-        android:id="@+id/credit_enter"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"/>
-
-    <Button
-        android:layout_width="206dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/returnto"
-        android:id="@+id/credit_return_main"
-        android:layout_gravity="center_horizontal" />
-=======
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:focusable="false"
@@ -92,6 +71,5 @@
         android:id="@+id/action_return"
         android:layout_gravity="center"
         android:width="200dp" />
->>>>>>> FETCH_HEAD
 
 </LinearLayout>
