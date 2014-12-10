@@ -8,8 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hhb.hardyhardybank.AddAccountActivity"
-    android:background="@drawable/bg2">
+    tools:context="com.hhb.hardyhardybank.AddAccountActivity">
 
 
     <ScrollView
@@ -31,8 +30,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:hint="@string/prompt_name"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#fffbf9ff"/>
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/address"
@@ -41,8 +39,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:hint="@string/prompt_address"
                 android:maxLines="2"
-                android:singleLine="false"
-                android:textColor="#fffbf9ff"/>
+                android:singleLine="false"/>
 
             <TextView
                 android:id="@+id/email"
@@ -51,8 +48,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:hint="@string/prompt_email"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#fffbf9ff"/>
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/username"
@@ -61,8 +57,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:hint="@string/prompt_username"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#fffbf9ff"/>
+                android:singleLine="true"/>
 
             <EditText
                 android:id="@+id/number"
@@ -70,8 +65,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_number"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#fffbf9ff"/>
+                android:singleLine="true"/>
 
             <Spinner
                 android:id="@+id/account_type"
@@ -81,22 +75,20 @@
             <Button
                 android:id="@+id/user_add_acct_button"
                 style="?android:textAppearanceSmall"
-                android:layout_width="248dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/addacc"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal" />
+                android:text="@string/action_add"
+                android:textStyle="bold"/>
 
             <Button
                 android:id="@+id/user_cancel_button"
                 style="?android:textAppearanceSmall"
-                android:layout_width="161dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/cancel"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal" />
+                android:text="@string/action_cancel"
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </ScrollView>

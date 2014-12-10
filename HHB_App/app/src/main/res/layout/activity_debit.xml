@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/bg2">
+    android:layout_height="fill_parent">
 
 
     <TextView
@@ -15,8 +14,7 @@
         android:textSize="40sp"
         android:layout_weight="0.001"
         android:gravity="center|center_vertical|center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:textColor="#fffbf9ff"/>
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,8 +28,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/debit_label"
-        android:textColor="#fffbf9ff"/>
+        android:layout_below="@+id/debit_label" />
 
 
     <TextView
@@ -46,8 +43,7 @@
         android:textSize="25sp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#fffbf9ff"/>
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,8 +57,7 @@
         android:layout_below="@+id/debit_activity_account_balance"
         android:layout_alignRight="@+id/debit_enter"
         android:layout_alignEnd="@+id/debit_enter"
-        android:layout_alignBottom="@+id/debit_amount"
-        android:textColor="#fffbf9ff"/>
+        android:layout_alignBottom="@+id/debit_amount" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -77,29 +72,24 @@
         android:gravity="center_horizontal"
         android:layout_below="@+id/debit_activity_account_balance"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="#fffbf9ff"/>
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/enter"
+        android:text="@string/enter"
         android:id="@+id/debit_enter"
         android:layout_gravity="center"
         android:width="200dp"
         android:layout_below="@+id/enter_amount_debit"
         android:layout_alignLeft="@+id/debit_return"
         android:layout_alignStart="@+id/debit_return"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignRight="@+id/debit_return"
-        android:layout_alignEnd="@+id/debit_return" />
+        android:layout_alignParentEnd="false" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/returnto"
+        android:text="Return"
         android:id="@+id/debit_return"
         android:width="200dp"
         android:layout_gravity="center"

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg2">
+    android:layout_height="match_parent">
 
 
 <TextView
@@ -18,8 +17,7 @@
         android:id="@+id/savings_label"
         android:layout_gravity="center_horizontal"
         android:paddingLeft="100dp"
-        android:paddingRight="100dp"
-        android:textColor="#fffbf9ff"/>
+        android:paddingRight="100dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,8 +25,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/savings_balance"
         android:layout_gravity="center_horizontal"
-        android:text="savings_balance"
-        android:textColor="#fffbf9ff"/>
+        android:text="savings_balance" />
 
     <TextView
         android:layout_width="match_parent"
@@ -38,8 +35,7 @@
         android:id="@+id/checking_label"
         android:layout_gravity="center_horizontal"
         android:paddingLeft="100dp"
-        android:paddingRight="100dp"
-        android:textColor="#fffbf9ff"/>
+        android:paddingRight="100dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,22 +43,20 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/checking_balance"
         android:layout_gravity="center_horizontal"
-        android:text="$0.00\n"
-        android:textColor="#fffbf9ff"/>
+        android:text="$0.00\n" />
 
     <Button
-        android:layout_width="230dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/credit"
+        android:text="@string/credit_account"
         android:id="@+id/action_credit"
         android:layout_gravity="center"
-        android:width="200dp"
-        android:layout_margin="10dp"/>
+        android:width="200dp" />
 
     <Button
-        android:layout_width="230dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/debit"
+        android:text="@string/debit_account"
         android:id="@+id/action_debit"
         android:layout_gravity="center"
         android:width="200dp" />
