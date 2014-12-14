@@ -38,21 +38,21 @@
 
         <!-- Entry for Main Activity Admin Screen -->
         <activity
-            android:name=".MainActivityAdmin"
+            android:name=".MainAdminActivity"
             android:label="@string/main_menu"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
         <!-- Entry for Main Activity Customer Screen -->
         <activity
-            android:name=".MainActivityCustomer"
+            android:name=".MainUserActivity"
             android:label="@string/main_menu"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
         <!-- Entry for Main Activity Account Screen -->
         <activity
-            android:name=".MainActivityAccount"
+            android:name=".AccountUserActivity"
             android:label="@string/accounts"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
@@ -60,7 +60,7 @@
 
         <!-- Entry for Transaction Screen -->
         <activity
-            android:name=".TransactionActivity"
+            android:name=".TransactionLogActivity"
             android:label="@string/transactions"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
@@ -75,14 +75,14 @@
 
         <!-- Entry for Register Information Screen -->
         <activity
-            android:name=".DisplayUserInfoActivity"
+            android:name=".AccountInfoActivity"
             android:label="@string/account_summary"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
 
         <!-- Entry for Main Activity Screen for Tellers -->
         <activity
-            android:name=".AdminActivity"
+            android:name=".AccountAdminActivity"
             android:label="@string/user_account" >
         </activity>
 
@@ -100,13 +100,13 @@
 
         <!-- Entry for Transfer Activity -->
         <activity
-            android:name=".TransferActivity"
+            android:name=".TransferUserActivity"
             android:label="@string/title_transfer_activity">
         </activity>
 
         <!-- Entry for Transfer User Activity -->
         <activity
-            android:name=".TransferUserActivity"
+            android:name=".TransferAccountActivity"
             android:label="@string/title_transfer_activity">
         </activity>
 

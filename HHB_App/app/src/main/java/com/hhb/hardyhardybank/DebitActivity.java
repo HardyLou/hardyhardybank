@@ -19,7 +19,7 @@ import com.parse.ParseUser;
 import java.text.DecimalFormat;
 
 /**
- *   Debit screen for users to debit their account
+ *   Debit screen for admins to debit a user's account
  */
 public class DebitActivity extends ActionBarActivity {
     // UI references.
@@ -117,7 +117,7 @@ public class DebitActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 // Go to ADMIN Main Activity
-                Intent i = new Intent(DebitActivity.this, AdminActivity.class);
+                Intent i = new Intent(DebitActivity.this, AccountAdminActivity.class);
                 i.putExtra("accountnumber", accountNumber);
                 i.putExtra("accountInfo", accountInfo);
                 i.putExtra("accountBalance", currentBalance);

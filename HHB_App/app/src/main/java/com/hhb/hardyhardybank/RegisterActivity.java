@@ -277,7 +277,7 @@ public class RegisterActivity extends Activity {
                             showProgress(true);
 
                             // Successful Registration, return to LoginActivity
-                            Intent i = new Intent(RegisterActivity.this, DisplayUserInfoActivity.class);
+                            Intent i = new Intent(RegisterActivity.this, AccountInfoActivity.class);
                             startActivity(i);
 
                             // Notify user registration has been successful

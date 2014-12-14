@@ -42,7 +42,7 @@ public class AddAccountActivity extends Activity {
         Parse.initialize(this, "G9sNy6cFAc2j1ZnKVGuYKhW5gHRQdUqPV3D3BOAm", "14vOkrgINnOVIS1fSG08tdJgIsvYi7OMlw8zTFuC");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addaccount);
+        setContentView(R.layout.activity_add_account);
 
         // Set up the add account form
         mNameView = (TextView) findViewById(R.id.name);
@@ -79,12 +79,12 @@ public class AddAccountActivity extends Activity {
             }
         });
 
-        // Sends user to MainActivityUser Screen
+        // Sends user to MainUserActivity Screen
         TextView loginButton = (TextView) findViewById(R.id.user_cancel_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AddAccountActivity.this, MainActivityCustomer.class);
+                Intent i = new Intent(AddAccountActivity.this, MainUserActivity.class);
                 startActivity(i);
 
                 // Close this activity
@@ -157,7 +157,7 @@ public class AddAccountActivity extends Activity {
 
 
                         // Successful Registration, return to LoginActivity
-                        Intent i = new Intent(AddAccountActivity.this, MainActivityCustomer.class);
+                        Intent i = new Intent(AddAccountActivity.this, MainUserActivity.class);
                         startActivity(i);
 
                         // Notify user registration has been successful

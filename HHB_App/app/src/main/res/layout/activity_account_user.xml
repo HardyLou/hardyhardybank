@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/accounts_label"
+            android:text="@string/current_account"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:id="@+id/account_activity_customer_item1"
+            android:focusable="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:paddingLeft="50dp"
+            android:layout_below="@+id/action_transfer_to_yourself" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:id="@+id/account_activity_customer_item2"
+            android:focusable="false"
+            android:layout_below="@+id/account_activity_customer_item1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="25sp"
+            android:gravity="center_vertical"
+            android:paddingLeft="60dp" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:focusable="false"
+            android:text="Transaction Log"
+            android:id="@+id/action_transaction_log"
+            android:layout_gravity="center"
+            android:width="200dp"
+            android:layout_below="@+id/account_activity_customer_item2"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:focusable="false"
+            android:text="Close Account"
+            android:id="@+id/action_close_acct"
+            android:layout_gravity="center"
+            android:width="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/action_transaction_log" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:focusable="false"
+            android:text="Return to Main"
+            android:id="@+id/action_return"
+            android:layout_gravity="center"
+            android:width="200dp"
+            android:layout_below="@+id/action_close_acct"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="Transfer Funds To Another User"
+            android:id="@+id/action_transfer_to_another"
+            android:layout_gravity="center"
+            android:width="200dp"
+            android:layout_below="@+id/accounts_label"
+            android:layout_alignRight="@+id/accounts_label"
+            android:layout_alignEnd="@+id/accounts_label"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:textSize="30sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transfer Funds To Your Account"
+            android:id="@+id/action_transfer_to_yourself"
+            android:textSize="30sp"
+            android:layout_below="@+id/action_transfer_to_another"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</ScrollView>

@@ -16,6 +16,10 @@ import com.parse.ParseQuery;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * A splash screen that displays upon startup.
+ * Penalty and interest are calculated in the background.
+ */
 public class SplashActivity extends Activity {
     int daysInPenalty, monthsInPenalty;
     double monthlyAverage, interest;

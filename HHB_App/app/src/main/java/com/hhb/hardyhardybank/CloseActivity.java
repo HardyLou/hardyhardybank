@@ -57,7 +57,7 @@ public class CloseActivity extends Activity{
                 // for Admin
                 if (accountRole.equals("admin")) {
                     // go to AddAccountActivity
-                    Intent i = new Intent(CloseActivity.this, AdminActivity.class);
+                    Intent i = new Intent(CloseActivity.this, AccountAdminActivity.class);
 
                     // passes along the bundle
                     i.putExtras(bundle);
@@ -71,7 +71,7 @@ public class CloseActivity extends Activity{
                 // for Customer
                 else if (accountRole.equals("customer")) {
                     // go to AddAccountActivity
-                    Intent i = new Intent(CloseActivity.this, MainActivityAccount.class);
+                    Intent i = new Intent(CloseActivity.this, AccountUserActivity.class);
 
                     // passes along the bundle
                     i.putExtras(bundle);
@@ -122,7 +122,7 @@ public class CloseActivity extends Activity{
                                                 Toast.LENGTH_LONG).show();
 
                                         // go to AddAccountActivity
-                                        Intent i = new Intent(CloseActivity.this, MainActivityAdmin.class);
+                                        Intent i = new Intent(CloseActivity.this, MainAdminActivity.class);
 
                                         startActivity(i);
 
@@ -143,7 +143,7 @@ public class CloseActivity extends Activity{
                                         ParseObject.createWithoutData("Account", toDelete).delete();
 
                                         // go to AddAccountActivity
-                                        Intent i = new Intent(CloseActivity.this, MainActivityCustomer.class);
+                                        Intent i = new Intent(CloseActivity.this, MainUserActivity.class);
 
                                         startActivity(i);
 

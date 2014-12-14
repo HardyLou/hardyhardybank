@@ -19,7 +19,7 @@ import com.parse.ParseUser;
 import java.text.DecimalFormat;
 
 /**
- *   Credit screen for users to credit their account
+ *   Credit screen for admins to credit a user's account
  */
 public class CreditActivity extends ActionBarActivity {
     // UI references.
@@ -103,7 +103,6 @@ public class CreditActivity extends ActionBarActivity {
 
                     });
                 }
-
             }
         });
 
@@ -114,7 +113,7 @@ public class CreditActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 // Go to ADMIN Main Activity
-                Intent i = new Intent(CreditActivity.this, AdminActivity.class);
+                Intent i = new Intent(CreditActivity.this, AccountAdminActivity.class);
                 i.putExtra("accountnumber", accountNumber);
                 i.putExtra("accountInfo", accountInfo);
                 i.putExtra("accountBalance", currentBalance);
