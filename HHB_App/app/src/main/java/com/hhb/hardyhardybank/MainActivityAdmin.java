@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -24,7 +22,6 @@ import com.parse.ParseUser;
 import java.text.DecimalFormat;
 
 /**
- * Created by Xiaohan on 12/5/14.
  * Landing page from login; menu access to other functionality for Admins
  */
 public class MainActivityAdmin extends Activity {
@@ -58,7 +55,6 @@ public class MainActivityAdmin extends Activity {
         ParseQueryAdapter.QueryFactory<ParseObject> factory = new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery<ParseObject> create() {
                 ParseQuery<ParseObject> query = new ParseQuery("Account");
-                //query.whereEqualTo("userID", userName);
                 query.orderByDescending("CreatedAt");
                 return query;
             }
@@ -165,8 +161,6 @@ public class MainActivityAdmin extends Activity {
 
             mAccountInfoView.setText(accountInfo);
             mBalanceView.setText(accountBalance);
-
-
 
             return view;
         }

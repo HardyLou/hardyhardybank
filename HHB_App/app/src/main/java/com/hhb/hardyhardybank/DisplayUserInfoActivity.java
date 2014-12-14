@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -17,7 +16,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 /**
  * An account summary screen that displays the information registered on record.
@@ -97,8 +95,6 @@ public class DisplayUserInfoActivity extends Activity{
         mCoolButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent i = new Intent(DisplayUserInfoActivity.this, LoginActivity.class);
-                //startActivity(i);
                 if (ParseUser.getCurrentUser() == null) {
                     Intent i = new Intent(DisplayUserInfoActivity.this, LoginActivity.class);
                     startActivity(i);

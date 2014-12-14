@@ -4,16 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -21,17 +17,12 @@ import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.util.List;
-
 
 /**
- * Transfer funds between your accounts
+ * Transfer funds between a User's accounts
  */
 public class TransferUserActivity extends Activity {
 
-//    private EditText mEmail;
     private EditText mTransferAmount;
     private static double cUserBalance = 0;
     private String input_amount;
@@ -51,14 +42,13 @@ public class TransferUserActivity extends Activity {
 
         bundle = getIntent().getExtras();
 
-//        mEmail = (EditText) findViewById(R.id.transfer_amount1);
         mTransferAmount = (EditText) findViewById(R.id.transfer_amount);
         final ParseObject currentUser = ParseUser.getCurrentUser();
 
         // Set up spinners with accounts
         mainAdapter = new ParseQueryAdapter<ParseObject>(this, new ParseQueryAdapter.QueryFactory<ParseObject>() {
                     public ParseQuery<ParseObject> create() {
-                        // Here we can configure a ParseQuery to our heart's desire.
+                        // configure ParseQuery
                         ParseQuery query = new ParseQuery("Account");
                         query.whereEqualTo("userID", currentUser.getString("username"));
                         return query;

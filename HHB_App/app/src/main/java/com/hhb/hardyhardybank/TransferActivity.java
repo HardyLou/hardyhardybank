@@ -4,23 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.util.List;
 
 
 /**
@@ -51,7 +44,6 @@ public class TransferActivity extends Activity {
         mEmail = (EditText) findViewById(R.id.transfer_amount1);
         mTransferAmount = (EditText) findViewById(R.id.transfer_amount);
 
-        //final double accountBalance = 0;
         final ParseObject currentUser = ParseUser.getCurrentUser();
 
         // When Enter button is clicked

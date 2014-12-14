@@ -1,29 +1,23 @@
 package com.hhb.hardyhardybank;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
-import java.text.DecimalFormat;
-import java.util.List;
 
 /**
- * Created by cell on 11/15/2014.
+ * Activity to close user's bank accounts.
  */
 public class CloseActivity extends Activity{
 
@@ -35,7 +29,6 @@ public class CloseActivity extends Activity{
     private String accountBalance;
     private String accountRole;
     private String accountUser;
-    private Spinner mAccounts;
     Bundle bundle;
     View focusView;
 
@@ -103,7 +96,6 @@ public class CloseActivity extends Activity{
 
                 final ParseObject currentUser = ParseUser.getCurrentUser();
                 input_AccountNumber = Integer.parseInt(mAccountNumberView.getText().toString());
-                //int accountValue = Integer.parseInt(input_AccountNumber);
 
                 if (input_AccountNumber == accountNumber) {
                     mAccountNumberView.setError(null);
@@ -181,60 +173,5 @@ public class CloseActivity extends Activity{
         }); // End of OnClickListener
 
     }// End of OnCreateBundle
- 
- 
-    /* IMPLEMENTATION That was in MainActivityUser
-    // String toDelete;
-   // private ParseObject cAccountInfo;
-     // Button to Close Account
-            Button closeUserAccount = (Button) findViewById(R.id.action_close);
-            closeUserAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Intent i = new Intent(MainActivityUser.this, CloseActivity.class);
-                //startActivity(i);
- 
- 
-                try {
-                    attemptCloseAccount();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
- 
-            }
-        });
- 
-    }
- 
-       public void attemptCloseAccount() throws ParseException {
-        ParseObject currentUser = ParseUser.getCurrentUser();
-       // String accountID;
-       // accountID = currentUser.getObjectId();
-           ParseQuery<ParseObject> queryCurrentUser = ParseQuery.getQuery("Account");
-          // queryCurrentUser.whereEqualTo("userID", currentUser.getString("username"));
-           queryCurrentUser.whereEqualTo("objectId", mAccounts.getSelectedItem());
- 
-                queryCurrentUser.getFirstInBackground(new GetCallback<ParseObject>() {
-                    public void done(ParseObject cAccountInfo, com.parse.ParseException e) {
-                        if (cAccountInfo == null) {
-                            Toast.makeText(getApplicationContext(), "Could not find Account!", Toast.LENGTH_LONG).show();
-                        } else {
- 
-                            //cUserBalance = cAccountInfo.getDouble("balance");
-                            toDelete = cAccountInfo.getObjectId();
-                            try {
-                                ParseObject.createWithoutData("Account", toDelete).delete();
-                            } catch (ParseException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-                    }
-                });
-         Toast.makeText(getApplicationContext(), "Account closed. The remaining balance will be mailed to your address",
-                 Toast.LENGTH_LONG).show();
-        //currentUser.createWithoutData("Account", accountID).delete();
- 
-    }
- 
-     */
+
 } //End of CloseActivity class

@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -25,7 +24,6 @@ import com.parse.ParseUser;
 import java.text.DecimalFormat;
 
 /**
- * Created by Xiaohan on 11/30/14.
  * Landing page from login; menu access to other functionality for Users
  */
 public class MainActivityCustomer extends Activity {
@@ -40,7 +38,6 @@ public class MainActivityCustomer extends Activity {
     private ListView lv;
 
     private String accountType;
-    private String toDelete;
 
     private ParseUser currentUser;
 
@@ -57,7 +54,6 @@ public class MainActivityCustomer extends Activity {
 
         currentUser = ParseUser.getCurrentUser();
         userName = currentUser.getString("username");
-
 
         ParseQueryAdapter.QueryFactory<ParseObject> factory = new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery<ParseObject> create() {
@@ -198,40 +194,6 @@ public class MainActivityCustomer extends Activity {
 
             mAccountInfoView.setText(accountInfo);
             mBalanceView.setText(accountBalance);
-
-            /*mAccountInfoView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
-                    TextView textview = (TextView)view;
-
-                    i.putExtra("accountType", accountType);
-                    i.putExtra("accountnumber", accountNumber);
-                    i.putExtra("accountInfo", textview.getText());
-                    i.putExtra("accountBalance", textview.getText());
-
-                    startActivity(i);
-
-                    finish();
-                }
-            });
-*/
-            /*mBalanceView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
-                    i.putExtra("accountType", accountType);
-                    i.putExtra("accountnumber", accountNumber);
-                    i.putExtra("accountInfo", accountInfo);
-                    i.putExtra("accountBalance", accountBalance);
-
-                    startActivity(i);
-
-                    finish();
-                }
-            });&*/
 
             return view;
         }

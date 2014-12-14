@@ -59,20 +59,6 @@ public class CreditActivity extends ActionBarActivity {
         mBalanceView.setText(accountBalance);
 
 
-/*
-        // Button to Show Balance activity
-        mCreditBalance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Go to Balance Activity
-                Intent i = new Intent(CreditActivity.this, BalanceActivity.class);
-                startActivity(i);
-
-                // DO NOT close this activity!
-            }
-        });
-
-*/
         // Activity once Deposit button is pressed
         mCreditButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +68,6 @@ public class CreditActivity extends ActionBarActivity {
 
                 if (currentUser.get("role").toString().contentEquals("admin")) {
 
-                    //Toast.makeText(getApplicationContext(), "ADMIN has Deposited into " + accountNumber + "'s Account!", Toast.LENGTH_LONG).show();
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
                     query.whereEqualTo("accountnumber", accountNumber);
                     query.getFirstInBackground(new GetCallback<ParseObject>() {
@@ -118,40 +103,7 @@ public class CreditActivity extends ActionBarActivity {
 
                     });
                 }
-                
-                // DO NOT NEED FOR REQUIREMENTS OF PROJECT but it works
-//                else {
-//                    balance = currentUser.getDouble("balance");
-//
-//                    // Format displayed balance
-//                    DecimalFormat format = new DecimalFormat("#0.00");
-//                    String formatted_balance = format.format(balance);
-//                    mDisplayBalance.setText("$" + formatted_balance);
-//
-//
-//                    // Query Parse for account balance value
-//                    String username = currentUser.getString("username");
-//                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
-//                    query.whereEqualTo("userID", username);
-//                    query.getFirstInBackground(new GetCallback<ParseObject>() {
-//                        public void done(ParseObject accountInfo, com.parse.ParseException e) {
-//                            if (accountInfo == null) {
-//                                Toast.makeText(getApplicationContext(), "Could not find Account!", Toast.LENGTH_LONG).show();
-//                            } else {
-//                                accountInfo.increment("balance", Double.valueOf(mCreditAmount.getText().toString()));
-//
-//                                accountInfo.saveEventually();
-//
-//                                // Notifies user of successful deposit
-//                                Toast.makeText(getApplicationContext(), "Deposited $" + credit_amount
-//                                                + " into your account.",
-//                                        Toast.LENGTH_LONG).show();
-//                            }
-//
-//                        }
-//
-//                    });
-//                }
+
             }
         });
 

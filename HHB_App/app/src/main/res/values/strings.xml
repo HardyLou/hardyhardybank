@@ -37,9 +37,4 @@
         <item>Checking</item>
     </string-array>
 
-    <!-- temporary array to hardcode account numbers -->
-    <string-array name="account_numbers_array">
-        <item>1234567890</item>
-    </string-array>
-
 </resources>

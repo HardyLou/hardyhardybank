@@ -37,52 +37,11 @@ public class MainActivityUser extends ActionBarActivity {
         setContentView(R.layout.activity_main_user);
 
 
-        // Set up Spinner item for available accounts
-        // temporary code to make spinner work (hardcoded account values)
-        // mAccounts = (Spinner) findViewById(R.id.available_accounts);
-        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.account_numbers_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mAccounts.setAdapter(adapter);*/
-
-        //List<String> account_numbers_array2 = new ArrayList<String>();
-
-        //TODO fix this to dynamically populate accounts
-        //for each entry in accounts table
-        //if username == current user
-        //adapter.add("account number here");
-       /* final ParseObject currentUser = ParseUser.getCurrentUser();
-        ParseQuery<ParseObject> queryCurrentUser = ParseQuery.getQuery("Account");
-        queryCurrentUser.whereEqualTo("userID", currentUser.getString("username"));
-        try {
-            int accountQuantity = queryCurrentUser.count();
-            List<ParseObject> objArray = queryCurrentUser.find();
-            ArrayList<String> accountNameArray = new ArrayList<String>();
-            for(int x = accountQuantity; x < 0; x--)
-            {
-                ParseObject accountObj = objArray.get(x);
-                String accountID = accountObj.getObjectId().toString();
-                accountNameArray.add(accountID);
-            }
-
-
-            mAccounts.setAdapter((android.widget.SpinnerAdapter) accountNameArray);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-
-        //mAccounts = (Spinner) findViewById(R.id.available_accounts);
-        //adapter = new ArrayAdapter<String>(this,
-        //        android.R.layout.simple_spinner_item, account_numbers_array2);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //mAccounts.setAdapter(adapter);
         mainAdapter = new ParseQueryAdapter<ParseObject>(this,"Account");
         mainAdapter.setTextKey("accountnumber");
         mAccounts = (Spinner) findViewById(R.id.available_accounts);
         mAccounts.setAdapter(mainAdapter);
         mainAdapter.loadObjects();
-
-
 
 
         // Button to Show Balance
@@ -96,7 +55,6 @@ public class MainActivityUser extends ActionBarActivity {
                 startActivity(i);
 
                 // DO NOT close this activity!
-                // finish();
             }
         });
 
@@ -106,11 +64,11 @@ public class MainActivityUser extends ActionBarActivity {
             @Override
             public void onClick(View view) {
 
-        // go to SummaryActivity
+                // go to SummaryActivity
                 Intent i = new Intent(MainActivityUser.this, DisplayUserInfoActivity.class);
                 startActivity(i);
 
-        // close this activity
+                // close this activity
                 finish();
             }
         });
@@ -121,9 +79,10 @@ public class MainActivityUser extends ActionBarActivity {
             @Override
             public void onClick(View view) {
 
-        // go to TransferActivity
+                // go to TransferActivity
                 Intent i = new Intent(MainActivityUser.this, TransferActivity.class);
                 startActivity(i);
+
                 // close this activity
                 finish();
             }
@@ -151,10 +110,12 @@ public class MainActivityUser extends ActionBarActivity {
             closeUserAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // go to CloseActivity
                 Intent i = new Intent(MainActivityUser.this, CloseActivity.class);
                 startActivity(i);
-                finish();
 
+                // close this activity
+                finish();
             }
         });
 

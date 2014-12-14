@@ -37,29 +37,7 @@
                 android:focusable="false"
                 android:layout_below="@+id/action_logout">
             </ListView>
-<!--
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add Account"
-                android:id="@+id/action_add_acct_main"
-                android:layout_gravity="center"
-                android:width="200dp"
-                android:layout_below="@+id/listView"
-                android:layout_centerHorizontal="true"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Close Account"
-                android:id="@+id/action_close"
-                android:layout_gravity="center"
-                android:width="200dp"
-                android:layout_below="@+id/action_add_acct_main"
-                android:layout_alignParentTop="false"
-                android:layout_alignParentBottom="false"
-                android:layout_centerHorizontal="true" />
--->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

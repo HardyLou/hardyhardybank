@@ -21,12 +21,9 @@ import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
- * Created by Xiaohan on 12/3/14.
  * List all the transaction history for the specific account of the user
  */
 public class TransactionActivity extends Activity {
-
-    private String userName;
 
     // Adapter for the Todos Parse Query
     private ParseQueryAdapter<ParseObject> transactionAdapter;
@@ -43,7 +40,6 @@ public class TransactionActivity extends Activity {
     Bundle bundle;
 
     protected void onCreate(Bundle SavedInstanceState) {
-
 
         Parse.initialize(this, "G9sNy6cFAc2j1ZnKVGuYKhW5gHRQdUqPV3D3BOAm", "14vOkrgINnOVIS1fSG08tdJgIsvYi7OMlw8zTFuC");
 
@@ -122,29 +118,6 @@ public class TransactionActivity extends Activity {
             }
 
         });
-/*
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                ParseObject object = mainActivityCustomerAdapter.getItem(position);
-                Intent i = new Intent(MainActivityCustomer.this, TransactionActivity.class);
-                accountType = object.getString("accountType");
-                accountNumber = object.getDouble("accountnumber");
-                balance = object.getDouble("balance");
-
-                i.putExtra("accountType", accountType);
-                i.putExtra("accountnumber", accountNumber);
-                i.putExtra("balance", balance);
-
-                startActivity(i);
-
-            }
-        });
-
-
-*/
     }
 
 

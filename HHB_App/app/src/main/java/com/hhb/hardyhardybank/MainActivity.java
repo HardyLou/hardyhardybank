@@ -45,7 +45,6 @@ public class MainActivity extends ActionBarActivity {
 
         // Query Parse for username
         ParseObject currentUser = ParseUser.getCurrentUser();
-        //final ParseObject user_obj_checking = ParseUser.getCurrentUser();
         userName = currentUser.getString("username");
 
         // Query Parse for checking balance
@@ -57,11 +56,10 @@ public class MainActivity extends ActionBarActivity {
                 if (account == null) {
                     Log.d("account", "The getFirst request failed.");
                 } else {
-                    //savings_balance = account.getDouble("balance");
                     checking_balance = account.getDouble("balance");
-                    DecimalFormat format_checkings = new DecimalFormat("#0.00");
-                    final String formatted_balance_checkings = format_checkings.format(checking_balance);
-                    mCheckingBalance.setText("$" + formatted_balance_checkings);
+                    DecimalFormat format_checking = new DecimalFormat("#0.00");
+                    final String formatted_balance_checking = format_checking.format(checking_balance);
+                    mCheckingBalance.setText("$" + formatted_balance_checking);
                 }
             }
         });
@@ -77,33 +75,12 @@ public class MainActivity extends ActionBarActivity {
                     Log.d("account", "The getFirst request failed.");
                 } else {
                     savings_balance = account.getDouble("balance");
-                    //checking_balance = account.getDouble("balance");
                     DecimalFormat format_savings = new DecimalFormat("#0.00");
                     final String formatted_balance_savings = format_savings.format(savings_balance);
                     mSavingsBalance.setText("$" + formatted_balance_savings);
                 }
             }
         });
-
-
-        // TODO separate checking & savings balances by query
-
-        //user_obj_checking.
-        //savings_balance = user_obj_savings.getDouble("balance");
-        //checking_balance = user_obj_checking.getDouble("balance");
-
-        // Format savings balance
-        //DecimalFormat format_savings = new DecimalFormat("#0.00");
-        //final String formatted_balance_savings = format_savings.format(savings_balance);
-        //mSavingsBalance.setText("$" + formatted_balance_savings);
-
-        // TODO Format checking balance
-//        DecimalFormat format_checking = new DecimalFormat("#0.00");
-  //      final String formatted_balance_checking = format_checking.format(checking_balance);
-    //    mCheckingBalance.setText("$" + formatted_balance_checking);
-
-        // TODO button to Savings account activity
-        // TODO button to Checking account activity
 
         // Button to debit activity
         Button mDebitButton = (Button) findViewById(R.id.action_debit);

@@ -47,7 +47,9 @@ public class SplashActivity extends Activity {
             public void run() {
                 Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(i);
-                finish(); // close this activity
+
+                // close this activity
+                finish();
             }
         }, myTimer);
     }

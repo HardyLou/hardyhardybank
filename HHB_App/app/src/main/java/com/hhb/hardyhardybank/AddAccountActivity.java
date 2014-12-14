@@ -1,11 +1,7 @@
 package com.hhb.hardyhardybank;
 
-        import android.animation.Animator;
-        import android.animation.AnimatorListenerAdapter;
-        import android.annotation.TargetApi;
         import android.app.Activity;
         import android.content.Intent;
-        import android.os.Build;
         import android.os.Bundle;
         import android.text.TextUtils;
         import android.view.View;
@@ -19,12 +15,8 @@ package com.hhb.hardyhardybank;
         import com.parse.GetCallback;
         import com.parse.ParseObject;
         import com.parse.ParseQuery;
-        import com.parse.SignUpCallback;
         import com.parse.Parse;
-        import com.parse.ParseException;
         import com.parse.ParseUser;
-
-        import java.text.DecimalFormat;
 
 /**
  * A register screen for users to create an account
@@ -72,8 +64,6 @@ public class AddAccountActivity extends Activity {
         UserUserName = currentUser.getString("username");
 
         // Format displayed balance
-//        DecimalFormat format = new DecimalFormat("#0.00");
-//        final String formatted_balance = format.format(balance);
         mNameView.setText("Full name: " + UserName);
         mAddressView.setText("Address: " + UserAddress);
         mEmailView.setText("Email: " + UserEmail);
@@ -188,40 +178,4 @@ public class AddAccountActivity extends Activity {
         }
 
     }
-
-    /**
-     * Shows the progress UI and hides the login form.
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    public void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mRegisterFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }*/
 }

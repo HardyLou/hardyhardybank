@@ -2,7 +2,6 @@ package com.hhb.hardyhardybank;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
@@ -16,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SignUpCallback;
@@ -129,12 +127,14 @@ public class RegisterActivity extends Activity {
             focusView = mUsernameView;
             cancel = true;
         }
+
         // Check if password has been entered
         if (TextUtils.isEmpty(input_password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
         }
+
         // Check if name has been entered or if it is a duplicate
         if (TextUtils.isEmpty(input_Name))
         {
@@ -150,6 +150,7 @@ public class RegisterActivity extends Activity {
             focusView = mAddressView;
             cancel = true;
         }
+
         // Check if email has been entered
         if (TextUtils.isEmpty(input_Email))
         {
@@ -157,6 +158,7 @@ public class RegisterActivity extends Activity {
             focusView = mEmailView;
             cancel = true;
         }
+
         // Check if account number was entered
         if (TextUtils.isEmpty(input_Number))
         {
@@ -184,19 +186,9 @@ public class RegisterActivity extends Activity {
                 } else {
 
                     // Check whether the user is duplicated.
- //                   for (ParseObject user: exists) {
- //                       if (user.getBoolean(("activated"))) {
-                            mUsernameView.setError(getString(R.string.duplicate_username));
-                            focusView = mUsernameView;
-                            cancel = true;
-//                            break;
-  //                      }
-
-                  //  }
-                    //if (cancel) {
-                      //  mUsernameView.setError(null);
-                   // }
-
+                    mUsernameView.setError(getString(R.string.duplicate_username));
+                    focusView = mUsernameView;
+                    cancel = true;
                 }
             } catch (ParseException e1) {
                 e1.printStackTrace();
@@ -265,9 +257,6 @@ public class RegisterActivity extends Activity {
                 user.put("address", input_Address); // set address
                 user.put("activated", true);
 
-            /*if (input_username.startsWith("ADMIN")) { // Check for Admin user Acct# prefix
-                user_Role = "admin";
-            }*/
                 user.put("role", user_Role);       // label new account as customer
 
 
